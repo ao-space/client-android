@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <include layout="@layout/eulix_space_title" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/permission_list"
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="1"
+        android:layout_marginStart="@dimen/dp_25"
+        android:layout_marginEnd="@dimen/dp_25" />
+
+    <TextView
+        android:id="@+id/go_to_system_settings"
+        android:layout_width="@dimen/dp_192"
+        android:layout_height="@dimen/dp_42"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginBottom="@dimen/dp_26"
+        android:text="@string/go_to_system_settings"
+        android:textColor="@color/blue_ff337aff"
+        android:textSize="@dimen/dp_13"
+        android:textStyle="bold" />
+</LinearLayout>

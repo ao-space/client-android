@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2022 Institute of Software, Chinese Academy of Sciences (ISCAS)
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+-->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="@dimen/dp_259"
+    android:layout_height="wrap_content"
+    android:background="@drawable/background_ffffffff_rectangle_10">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_89">
+
+        <ImageView
+            android:id="@+id/dialog_image"
+            android:layout_width="@dimen/dp_93"
+            android:layout_height="@dimen/dp_70"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:scaleType="fitCenter" />
+
+        <ImageButton
+            android:id="@+id/dialog_exit"
+            android:layout_width="@dimen/dp_53"
+            android:layout_height="@dimen/dp_53"
+            android:background="@android:color/transparent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:padding="@dimen/dp_19"
+            android:src="@drawable/exit"
+            android:scaleType="fitCenter" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/dialog_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_12"
+        android:layout_marginStart="@dimen/dp_29"
+        android:layout_marginEnd="@dimen/dp_29"
+        android:gravity="center_horizontal"
+        android:textColor="@color/black_ff333333"
+        android:textSize="@dimen/dp_17"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/dialog_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_15"
+        android:layout_marginStart="@dimen/dp_29"
+        android:layout_marginEnd="@dimen/dp_29"
+        android:textColor="@color/black_ff333333"
+        android:textSize="@dimen/dp_13"
+        android:textStyle="normal" />
+
+    <Button
+        android:id="@+id/dialog_button_1"
+        android:layout_width="@dimen/dp_192"
+        android:layout_height="@dimen/dp_42"
+        android:layout_marginTop="@dimen/dp_30"
+        android:background="@drawable/background_ff337aff_ff16b9ff_rectangle_10"
+        android:layout_gravity="center_horizontal"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/dp_15"
+        android:textStyle="normal"
+        style="?android:attr/borderlessButtonStyle" />
+
+    <Button
+        android:id="@+id/dialog_button_2"
+        android:layout_width="@dimen/dp_192"
+        android:layout_height="@dimen/dp_42"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginBottom="@dimen/dp_38"
+        android:background="@drawable/background_rectangle_10_stroke_ff337aff_1"
+        android:layout_gravity="center_horizontal"
+        android:textAllCaps="false"
+        android:textColor="@color/blue_ff337aff"
+        android:textSize="@dimen/dp_15"
+        android:textStyle="normal"
+        style="?android:attr/borderlessButtonStyle" />
+</LinearLayout>

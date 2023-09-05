@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2022 Institute of Software, Chinese Academy of Sciences (ISCAS)
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+-->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/layout_empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/dp_100"
+        android:layout_centerInParent="true"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/img_empty"
+            android:layout_width="@dimen/dp_182"
+            android:layout_height="@dimen/dp_123"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/no_data_background"
+            android:paddingLeft="@dimen/dp_58"
+            android:paddingTop="@dimen/dp_31"
+            android:paddingRight="@dimen/dp_58"
+            android:paddingBottom="@dimen/dp_25"
+            android:src="@drawable/icon_no_transfer_task" />
+
+        <TextView
+            style="@style/s_12_ffbcbfcd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/img_empty"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dp_19"
+            android:text="@string/no_transfer_task_text" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_delete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_2"
+            android:background="@color/white_fff7f7f9" />
+
+        <TextView
+            android:id="@+id/btn_delete"
+            style="@style/s_15_ffffffff"
+            android:layout_width="@dimen/dp_192"
+            android:layout_height="@dimen/dp_42"
+            android:layout_marginTop="@dimen/dp_16"
+            android:layout_marginBottom="@dimen/dp_16"
+            android:background="@drawable/background_ff337aff_ff16b9ff_rectangle_10"
+            android:gravity="center"
+            android:text="@string/delete"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollview_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/layout_delete"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/dp_25"
+            android:paddingRight="@dimen/dp_25"
+            android:paddingTop="@dimen/dp_18">
+
+            <RelativeLayout
+                android:id="@+id/layout_transfer_doing"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/layout_title_doing"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_transfer_doing_title"
+                        style="@style/s_13_ff85899c"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/img_transfer_doing_arrow"
+                        android:layout_width="@dimen/dp_8"
+                        android:layout_height="@dimen/dp_8"
+                        android:layout_toRightOf="@id/tv_transfer_doing_title"
+                        android:src="@drawable/icon_transfer_arrow_open" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_transfer_doing_control"
+                    style="@style/s_13_ff337aff"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignBottom="@id/layout_title_doing"
+                    android:textStyle="bold"
+                    android:text=""/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view_doing"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/layout_title_doing"
+                    android:overScrollMode="never" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layout_transfer_done"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/layout_title_done"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_transfer_done_title"
+                        style="@style/s_13_ff85899c"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="下载完成（0）"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/img_transfer_done_arrow"
+                        android:layout_width="@dimen/dp_8"
+                        android:layout_height="@dimen/dp_8"
+                        android:layout_toRightOf="@id/tv_transfer_done_title"
+                        android:src="@drawable/icon_transfer_arrow_open" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_transfer_done_control"
+                    style="@style/s_13_ff337aff"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="@string/clear_transferred_record"
+                    android:textStyle="bold" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view_done"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/layout_title_done"
+                    android:overScrollMode="never" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</RelativeLayout>

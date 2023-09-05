@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/c_000000"
+    tools:context=".ui.ExoPlayerActivity">
+
+    <com.google.android.exoplayer2.ui.StyledPlayerView
+        android:id="@+id/player_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/c_000000"
+        app:player_layout_id="@layout/eulix_exo_styled_player_view"
+        app:show_buffering="always"
+        app:show_timeout="3000" />
+
+    <RelativeLayout
+        android:id="@+id/layout_log"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/black_80000000"
+        android:padding="@dimen/dp_10"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/tv_lan_status_title"
+            style="@style/s_10_ffffffff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_5"
+            android:text="局域网状态：" />
+
+        <TextView
+            android:id="@+id/tv_lan_status"
+            style="@style/s_10_ffffffff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_5"
+            android:layout_toRightOf="@id/tv_lan_status_title" />
+
+        <TextView
+            android:id="@+id/tv_p2p_status_title"
+            style="@style/s_10_ffffffff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_lan_status_title"
+            android:layout_marginBottom="@dimen/dp_5"
+            android:text="P2P状态：" />
+
+        <TextView
+            android:id="@+id/tv_p2p_status"
+            style="@style/s_10_ffffffff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_lan_status_title"
+            android:layout_marginBottom="@dimen/dp_5"
+            android:layout_toRightOf="@id/tv_p2p_status_title" />
+
+        <TextView
+            android:id="@+id/tv_log_http_title"
+            style="@style/s_10_ffffffff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_p2p_status_title"
+            android:text="HTTP片段数：" />
+
+        <TextView
+            android:id="@+id/tv_log_http_count"
+            style="@style/s_10_ffffffff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_p2p_status_title"
+            android:layout_toRightOf="@id/tv_log_http_title" />
+
+    </RelativeLayout>
+</FrameLayout>

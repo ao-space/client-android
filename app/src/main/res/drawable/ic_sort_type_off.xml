@@ -1,0 +1,56 @@
+<!--
+  ~ Copyright (c) 2022 Institute of Software, Chinese Academy of Sciences (ISCAS)
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+-->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+  <path
+      android:pathData="M0,0h24v24h-24z"
+      android:strokeAlpha="0"
+      android:strokeWidth="1"
+      android:fillColor="#000000"
+      android:fillType="nonZero"
+      android:strokeColor="#00000000"
+      android:fillAlpha="0"/>
+  <path
+      android:pathData="M15.019,6.75C14.6403,6.75 14.3333,6.4142 14.3333,6C14.3333,5.5858 14.6403,5.25 15.019,5.25L21.6476,5.25C22.0263,5.25 22.3333,5.5858 22.3333,6C22.3333,6.4142 22.0263,6.75 21.6476,6.75L15.019,6.75ZM15.8819,11.25C15.3987,11.25 15.0069,10.9142 15.0069,10.5C15.0069,10.0858 15.3987,9.75 15.8819,9.75L21.4583,9.75C21.9416,9.75 22.3333,10.0858 22.3333,10.5C22.3333,10.9142 21.9416,11.25 21.4583,11.25L15.8819,11.25ZM14.9579,15.75C14.6129,15.75 14.3333,15.4142 14.3333,15C14.3333,14.5858 14.6129,14.25 14.9579,14.25L21.7088,14.25C22.0537,14.25 22.3333,14.5858 22.3333,15C22.3333,15.4142 22.0537,15.75 21.7088,15.75L14.9579,15.75ZM2.625,20.25C2.1418,20.25 1.75,19.9142 1.75,19.5C1.75,19.0858 2.1418,18.75 2.625,18.75L21.4583,18.75C21.9416,18.75 22.3333,19.0858 22.3333,19.5C22.3333,19.9142 21.9416,20.25 21.4583,20.25L2.625,20.25Z"
+      android:strokeWidth="1"
+      android:fillColor="#333333"
+      android:fillType="nonZero"
+      android:strokeColor="#00000000"/>
+  <path
+      android:pathData="M8.125,5.2269C7.7382,5.0036 7.2618,5.0036 6.875,5.2269L3.2458,7.3222C2.8591,7.5455 2.6208,7.9581 2.6208,8.4047L2.6208,12.5953C2.6208,13.0419 2.8591,13.4545 3.2458,13.6778L6.875,15.7731C7.2618,15.9964 7.7382,15.9964 8.125,15.7731L11.7542,13.6778C12.1409,13.4545 12.3792,13.0419 12.3792,12.5953L12.3792,8.4047C12.3792,7.9581 12.1409,7.5455 11.7542,7.3222L8.125,5.2269Z"
+      android:strokeWidth="1.5"
+      android:fillColor="#00000000"
+      android:strokeColor="#333333"
+      android:fillType="evenOdd"/>
+  <path
+      android:pathData="M5.2566,9l2.2434,1.114l2.3026,-1.114"
+      android:strokeWidth="1.5"
+      android:fillColor="#00000000"
+      android:strokeColor="#333333"
+      android:fillType="evenOdd"
+      android:strokeLineCap="round"/>
+  <path
+      android:pathData="M7.5296,10.114L7.5296,12.8166"
+      android:strokeWidth="1.5"
+      android:fillColor="#00000000"
+      android:strokeColor="#333333"
+      android:fillType="evenOdd"
+      android:strokeLineCap="round"/>
+</vector>

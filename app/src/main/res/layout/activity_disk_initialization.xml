@@ -1,0 +1,1314 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2022 Institute of Software, Chinese Academy of Sciences (ISCAS)
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+-->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="1">
+
+        <ScrollView
+            android:id="@+id/disk_initialization_scroll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <FrameLayout
+                        android:id="@+id/title_blank_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_52" />
+
+                    <LinearLayout
+                        android:id="@+id/title_scroll_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/dp_14"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <include layout="@layout/ao_space_title_header" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/disk_1_and_2_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_173"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/dp_15"
+                    android:layout_marginStart="@dimen/dp_25"
+                    android:layout_marginEnd="@dimen/dp_25">
+
+                    <RelativeLayout
+                        android:id="@+id/disk_1_container"
+                        android:layout_width="0px"
+                        android:layout_height="match_parent"
+                        android:layout_weight="148"
+                        android:background="@drawable/background_fff5f6fa_rectangle_10">
+
+                        <ImageView
+                            android:id="@+id/disk_1_image"
+                            android:layout_width="@dimen/dp_33"
+                            android:layout_height="@dimen/dp_96"
+                            android:layout_marginTop="@dimen/dp_19"
+                            android:layout_centerHorizontal="true"
+                            android:src="@drawable/disk_recognize_off_2x"
+                            android:scaleType="fitCenter" />
+
+                        <ImageView
+                            android:id="@+id/disk_1_exception"
+                            android:layout_width="@dimen/dp_30"
+                            android:layout_height="@dimen/dp_30"
+                            android:layout_alignBottom="@id/disk_1_image"
+                            android:layout_alignStart="@id/disk_1_image"
+                            android:layout_marginStart="@dimen/dp_13"
+                            android:src="@drawable/icon_exception_2x"
+                            android:scaleType="fitCenter"
+                            android:visibility="gone" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/dp_58"
+                            android:layout_below="@id/disk_1_image"
+                            android:layout_centerHorizontal="true"
+                            android:gravity="center_vertical"
+                            android:text="@string/disk_1"
+                            android:textColor="@color/black_ff333333"
+                            android:textSize="@dimen/dp_13"
+                            android:textStyle="bold" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/disk_2_container"
+                        android:layout_width="0px"
+                        android:layout_height="match_parent"
+                        android:layout_weight="148"
+                        android:layout_marginStart="@dimen/dp_14"
+                        android:background="@drawable/background_fff5f6fa_rectangle_10">
+
+                        <ImageView
+                            android:id="@+id/disk_2_image"
+                            android:layout_width="@dimen/dp_33"
+                            android:layout_height="@dimen/dp_96"
+                            android:layout_marginTop="@dimen/dp_19"
+                            android:layout_centerHorizontal="true"
+                            android:src="@drawable/disk_recognize_off_2x"
+                            android:scaleType="fitCenter" />
+
+                        <ImageView
+                            android:id="@+id/disk_2_exception"
+                            android:layout_width="@dimen/dp_30"
+                            android:layout_height="@dimen/dp_30"
+                            android:layout_alignBottom="@id/disk_2_image"
+                            android:layout_alignStart="@id/disk_2_image"
+                            android:layout_marginStart="@dimen/dp_13"
+                            android:src="@drawable/icon_exception_2x"
+                            android:scaleType="fitCenter"
+                            android:visibility="gone" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/dp_58"
+                            android:layout_below="@id/disk_2_image"
+                            android:layout_centerHorizontal="true"
+                            android:gravity="center_vertical"
+                            android:text="@string/disk_2"
+                            android:textColor="@color/black_ff333333"
+                            android:textSize="@dimen/dp_13"
+                            android:textStyle="bold" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:id="@+id/disk_ssd_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_71"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/dp_14"
+                    android:layout_marginStart="@dimen/dp_25"
+                    android:layout_marginEnd="@dimen/dp_25"
+                    android:background="@drawable/background_ffedf3ff_rectangle_10"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:id="@+id/disk_ssd_image"
+                        android:layout_width="@dimen/dp_115"
+                        android:layout_height="@dimen/dp_29"
+                        android:layout_marginStart="@dimen/dp_30"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/m2_ssd_2x"
+                        android:scaleType="fitCenter" />
+
+                    <ImageView
+                        android:id="@+id/disk_ssd_exception"
+                        android:layout_width="@dimen/dp_30"
+                        android:layout_height="@dimen/dp_30"
+                        android:layout_alignTop="@id/disk_ssd_image"
+                        android:layout_alignStart="@id/disk_ssd_image"
+                        android:layout_marginStart="@dimen/dp_96"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:src="@drawable/icon_exception_2x"
+                        android:scaleType="fitCenter"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="@dimen/dp_30"
+                        android:layout_centerVertical="true"
+                        android:text="@string/m2_ssd"
+                        android:textColor="@color/black_ff333333"
+                        android:textSize="@dimen/dp_13"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/disk_expand_1_and_2_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_173"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/dp_15"
+                    android:layout_marginStart="@dimen/dp_25"
+                    android:layout_marginEnd="@dimen/dp_25"
+                    android:visibility="gone">
+
+                    <LinearLayout
+                        android:layout_width="0px"
+                        android:layout_height="match_parent"
+                        android:layout_weight="148"
+                        android:orientation="vertical"
+                        android:background="@drawable/background_fff5f6fa_rectangle_10">
+
+                        <TextView
+                            android:layout_width="@dimen/dp_96"
+                            android:layout_height="@dimen/dp_23"
+                            android:background="@drawable/background_ffdae6ff_rectangle_bottom_6"
+                            android:layout_gravity="center_horizontal"
+                            android:gravity="center"
+                            android:singleLine="true"
+                            android:ellipsize="end"
+                            android:text="@string/expand_before"
+                            android:textColor="@color/blue_ff337aff"
+                            android:textSize="@dimen/dp_12"
+                            android:textStyle="bold" />
+
+                        <LinearLayout
+                            android:layout_width="@dimen/dp_96"
+                            android:layout_height="@dimen/dp_96"
+                            android:orientation="horizontal"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="@dimen/dp_13">
+
+                            <ImageView
+                                android:id="@+id/disk_expand_before_1_image"
+                                android:layout_width="@dimen/dp_33"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/disk_recognize_off_2x"
+                                android:scaleType="fitCenter" />
+
+                            <ImageView
+                                android:id="@+id/disk_expand_before_2_image"
+                                android:layout_width="@dimen/dp_33"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="@dimen/dp_30"
+                                android:src="@drawable/disk_recognize_off_2x"
+                                android:scaleType="fitCenter" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/dp_39"
+                            android:orientation="horizontal">
+
+                            <View
+                                android:layout_width="0px"
+                                android:layout_height="match_parent"
+                                android:layout_weight="17" />
+
+                            <TextView
+                                android:id="@+id/disk_expand_before_1_text"
+                                android:layout_width="0px"
+                                android:layout_height="match_parent"
+                                android:layout_weight="52"
+                                android:gravity="center"
+                                android:text="@string/disk_1"
+                                android:textColor="@color/black_ff333333"
+                                android:textSize="@dimen/dp_13"
+                                android:textStyle="bold"/>
+
+                            <View
+                                android:layout_width="0px"
+                                android:layout_height="match_parent"
+                                android:layout_weight="10" />
+
+                            <TextView
+                                android:id="@+id/disk_expand_before_2_text"
+                                android:layout_width="0px"
+                                android:layout_height="match_parent"
+                                android:layout_weight="52"
+                                android:gravity="center"
+                                android:text="@string/disk_2"
+                                android:textColor="@color/black_ff333333"
+                                android:textSize="@dimen/dp_13"
+                                android:textStyle="bold"/>
+
+                            <View
+                                android:layout_width="0px"
+                                android:layout_height="match_parent"
+                                android:layout_weight="17" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0px"
+                        android:layout_height="match_parent"
+                        android:layout_weight="148"
+                        android:orientation="vertical"
+                        android:layout_marginStart="@dimen/dp_14"
+                        android:background="@drawable/background_ffedf3ff_rectangle_10">
+
+                        <TextView
+                            android:layout_width="@dimen/dp_96"
+                            android:layout_height="@dimen/dp_23"
+                            android:background="@drawable/background_ffdae6ff_rectangle_bottom_6"
+                            android:layout_gravity="center_horizontal"
+                            android:gravity="center"
+                            android:singleLine="true"
+                            android:ellipsize="end"
+                            android:text="@string/expand_after"
+                            android:textColor="@color/blue_ff337aff"
+                            android:textSize="@dimen/dp_12"
+                            android:textStyle="bold" />
+
+                        <LinearLayout
+                            android:layout_width="@dimen/dp_96"
+                            android:layout_height="@dimen/dp_96"
+                            android:orientation="horizontal"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="@dimen/dp_13">
+
+                            <ImageView
+                                android:id="@+id/disk_expand_after_1_image"
+                                android:layout_width="@dimen/dp_33"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/disk_recognize_off_2x"
+                                android:scaleType="fitCenter" />
+
+                            <ImageView
+                                android:id="@+id/disk_expand_after_2_image"
+                                android:layout_width="@dimen/dp_33"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="@dimen/dp_30"
+                                android:src="@drawable/disk_recognize_off_2x"
+                                android:scaleType="fitCenter" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/dp_39"
+                            android:orientation="horizontal">
+
+                            <View
+                                android:layout_width="0px"
+                                android:layout_height="match_parent"
+                                android:layout_weight="17" />
+
+                            <TextView
+                                android:id="@+id/disk_expand_after_1_text"
+                                android:layout_width="0px"
+                                android:layout_height="match_parent"
+                                android:layout_weight="52"
+                                android:gravity="center"
+                                android:text="@string/disk_1"
+                                android:textColor="@color/black_ff333333"
+                                android:textSize="@dimen/dp_13"
+                                android:textStyle="bold"/>
+
+                            <View
+                                android:layout_width="0px"
+                                android:layout_height="match_parent"
+                                android:layout_weight="10" />
+
+                            <TextView
+                                android:id="@+id/disk_expand_after_2_text"
+                                android:layout_width="0px"
+                                android:layout_height="match_parent"
+                                android:layout_weight="52"
+                                android:gravity="center"
+                                android:text="@string/disk_2"
+                                android:textColor="@color/black_ff333333"
+                                android:textSize="@dimen/dp_13"
+                                android:textStyle="bold"/>
+
+                            <View
+                                android:layout_width="0px"
+                                android:layout_height="match_parent"
+                                android:layout_weight="17" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/disk_expand_ssd_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_84"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/dp_4"
+                    android:layout_marginStart="@dimen/dp_25"
+                    android:layout_marginEnd="@dimen/dp_25"
+                    android:visibility="gone">
+
+                    <LinearLayout
+                        android:id="@+id/disk_expand_ssd_before_container"
+                        android:layout_width="0px"
+                        android:layout_height="match_parent"
+                        android:layout_weight="148"
+                        android:orientation="vertical"
+                        android:gravity="center_horizontal"
+                        android:background="@drawable/background_ffffffff_rectangle_10_stroke_1_ffdfe0e5">
+
+                        <ImageView
+                            android:id="@+id/disk_expand_ssd_before_image"
+                            android:layout_width="@dimen/dp_115"
+                            android:layout_height="@dimen/dp_29"
+                            android:layout_marginTop="@dimen/dp_13"
+                            android:src="@drawable/m2_ssd_recognize_off_2x"
+                            android:scaleType="fitCenter" />
+
+                        <TextView
+                            android:id="@+id/disk_expand_ssd_before_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/dp_39"
+                            android:layout_marginStart="@dimen/dp_5"
+                            android:layout_marginEnd="@dimen/dp_5"
+                            android:gravity="center"
+                            android:text="@string/m2_ssd"
+                            android:textColor="@color/black_ff333333"
+                            android:textSize="@dimen/dp_13"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/disk_expand_ssd_after_container"
+                        android:layout_width="0px"
+                        android:layout_height="match_parent"
+                        android:layout_weight="148"
+                        android:orientation="vertical"
+                        android:layout_marginStart="@dimen/dp_14"
+                        android:gravity="center_horizontal"
+                        android:background="@drawable/background_ffedf3ff_rectangle_10">
+
+                        <ImageView
+                            android:id="@+id/disk_expand_ssd_after_image"
+                            android:layout_width="@dimen/dp_115"
+                            android:layout_height="@dimen/dp_29"
+                            android:layout_marginTop="@dimen/dp_13"
+                            android:src="@drawable/m2_ssd_recognize_off_2x"
+                            android:scaleType="fitCenter" />
+
+                        <TextView
+                            android:id="@+id/disk_expand_ssd_after_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/dp_39"
+                            android:layout_marginStart="@dimen/dp_5"
+                            android:layout_marginEnd="@dimen/dp_5"
+                            android:gravity="center"
+                            android:text="@string/m2_ssd"
+                            android:textColor="@color/black_ff333333"
+                            android:textSize="@dimen/dp_13"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:layout_marginStart="@dimen/dp_25"
+                    android:layout_marginEnd="@dimen/dp_25">
+
+                    <!--无主存储-->
+                    <LinearLayout
+                        android:id="@+id/disk_no_main_storage_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginTop="@dimen/dp_28"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/dp_20"
+                            android:layout_marginEnd="@dimen/dp_20"
+                            android:text="@string/no_main_storage_content"
+                            android:textColor="@color/black_ff333333"
+                            android:textSize="@dimen/dp_13"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_19"
+                            android:layout_marginStart="@dimen/dp_20"
+                            android:layout_marginEnd="@dimen/dp_20"
+                            android:text="@string/no_main_storage_hint"
+                            android:textColor="@color/gray_ff85899c"
+                            android:textSize="@dimen/dp_13"
+                            android:textStyle="normal" />
+                    </LinearLayout>
+
+                    <!--无磁盘-->
+                    <TextView
+                        android:id="@+id/no_disk_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_96"
+                        android:gravity="center_horizontal"
+                        android:textColor="@color/black_ff333333"
+                        android:text="@string/no_disk_content"
+                        android:textSize="@dimen/dp_13"
+                        android:textStyle="bold"
+                        android:visibility="gone" />
+
+                    <!--快速设置-->
+                    <LinearLayout
+                        android:id="@+id/fast_disk_initialization_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/dp_46"
+                            android:layout_marginTop="@dimen/dp_9">
+
+                            <ImageView
+                                android:id="@+id/img_storage_mode"
+                                android:layout_width="@dimen/dp_46"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/icon_storage_mode_2x"
+                                android:scaleType="fitCenter" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_toEndOf="@id/img_storage_mode"
+                                android:layout_marginStart="@dimen/dp_15"
+                                android:text="@string/storage_mode"
+                                android:textColor="@color/black_ff333333"
+                                android:textSize="@dimen/dp_15"
+                                android:textStyle="bold"
+                                android:singleLine="true"
+                                android:ellipsize="end" />
+
+                            <TextView
+                                android:id="@+id/fast_storage_mode"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentBottom="true"
+                                android:layout_toEndOf="@id/img_storage_mode"
+                                android:layout_marginStart="@dimen/dp_15"
+                                android:textColor="@color/gray_ff85899c"
+                                android:textSize="@dimen/dp_12"
+                                android:textStyle="bold"
+                                android:singleLine="true"
+                                android:ellipsize="end" />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/dp_46"
+                            android:layout_marginTop="@dimen/dp_29">
+
+                            <ImageView
+                                android:id="@+id/img_main_storage"
+                                android:layout_width="@dimen/dp_46"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/icon_primary_storage_2x"
+                                android:scaleType="fitCenter" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_toEndOf="@id/img_main_storage"
+                                android:layout_marginStart="@dimen/dp_15"
+                                android:text="@string/main_storage"
+                                android:textColor="@color/black_ff333333"
+                                android:textSize="@dimen/dp_15"
+                                android:textStyle="bold"
+                                android:singleLine="true"
+                                android:ellipsize="end" />
+
+                            <TextView
+                                android:id="@+id/fast_main_storage"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentBottom="true"
+                                android:layout_toEndOf="@id/img_main_storage"
+                                android:layout_marginStart="@dimen/dp_15"
+                                android:textColor="@color/gray_ff85899c"
+                                android:textSize="@dimen/dp_12"
+                                android:textStyle="bold"
+                                android:singleLine="true"
+                                android:ellipsize="end" />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/dp_46"
+                            android:layout_marginTop="@dimen/dp_29"
+                            android:layout_marginBottom="@dimen/dp_19">
+
+                            <ImageView
+                                android:id="@+id/img_disk_encryption"
+                                android:layout_width="@dimen/dp_46"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/icon_disk_encryption_2x"
+                                android:scaleType="fitCenter" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_toEndOf="@id/img_disk_encryption"
+                                android:layout_marginStart="@dimen/dp_15"
+                                android:text="@string/disk_encryption"
+                                android:textColor="@color/black_ff333333"
+                                android:textSize="@dimen/dp_15"
+                                android:textStyle="bold"
+                                android:singleLine="true"
+                                android:ellipsize="end" />
+
+                            <TextView
+                                android:id="@+id/fast_disk_encryption"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentBottom="true"
+                                android:layout_toEndOf="@id/img_disk_encryption"
+                                android:layout_marginStart="@dimen/dp_15"
+                                android:textColor="@color/gray_ff85899c"
+                                android:textSize="@dimen/dp_12"
+                                android:textStyle="bold"
+                                android:singleLine="true"
+                                android:ellipsize="end" />
+                        </RelativeLayout>
+                    </LinearLayout>
+
+                    <!--展示磁盘-->
+                    <LinearLayout
+                        android:id="@+id/disk_information_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="@dimen/dp_19"
+                            android:layout_marginBottom="@dimen/dp_19"
+                            android:gravity="center_vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/disk_1"
+                                android:textColor="@color/black_ff333333"
+                                android:textSize="@dimen/dp_15"
+                                android:textStyle="normal" />
+
+                            <TextView
+                                android:id="@+id/disk_1_information"
+                                android:layout_width="0px"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_marginStart="@dimen/dp_10"
+                                android:gravity="end"
+                                android:textColor="@color/gray_ff85899c"
+                                android:textSize="@dimen/dp_15"
+                                android:textStyle="normal" />
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/dp_1"
+                            android:background="@color/white_fff7f7f9" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="@dimen/dp_19"
+                            android:layout_marginBottom="@dimen/dp_19"
+                            android:gravity="center_vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/disk_2"
+                                android:textColor="@color/black_ff333333"
+                                android:textSize="@dimen/dp_15"
+                                android:textStyle="normal" />
+
+                            <TextView
+                                android:id="@+id/disk_2_information"
+                                android:layout_width="0px"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_marginStart="@dimen/dp_10"
+                                android:gravity="end"
+                                android:textColor="@color/gray_ff85899c"
+                                android:textSize="@dimen/dp_15"
+                                android:textStyle="normal" />
+                        </LinearLayout>
+
+                        <View
+                            android:id="@+id/disk_ssd_split"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/dp_1"
+                            android:background="@color/white_fff7f7f9"
+                            android:visibility="gone" />
+
+                        <LinearLayout
+                            android:id="@+id/disk_ssd_information_container"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="@dimen/dp_19"
+                            android:layout_marginBottom="@dimen/dp_19"
+                            android:gravity="center_vertical"
+                            android:visibility="gone">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/m2"
+                                android:textColor="@color/black_ff333333"
+                                android:textSize="@dimen/dp_15"
+                                android:textStyle="normal" />
+
+                            <TextView
+                                android:id="@+id/disk_ssd_information"
+                                android:layout_width="0px"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_marginStart="@dimen/dp_10"
+                                android:gravity="end"
+                                android:textColor="@color/gray_ff85899c"
+                                android:textSize="@dimen/dp_15"
+                                android:textStyle="normal" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <!--选择模式-->
+                    <LinearLayout
+                        android:id="@+id/disk_mode_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                    </LinearLayout>
+
+                    <!--选择主存储-->
+                    <LinearLayout
+                        android:id="@+id/disk_main_storage_choose_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <LinearLayout
+                            android:id="@+id/main_storage_container"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_10"
+                            android:text="@string/main_storage_choose_content"
+                            android:textColor="@color/gray_ff85899c"
+                            android:textSize="@dimen/dp_12"
+                            android:textStyle="normal" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_10"
+                            android:text="@string/only_initialization_setting_hint"
+                            android:textColor="@color/red_fff6222d"
+                            android:textSize="@dimen/dp_12"
+                            android:textStyle="normal" />
+                    </LinearLayout>
+
+                    <!--磁盘加密-->
+                    <LinearLayout
+                        android:id="@+id/disk_encryption_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/dp_60"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical">
+
+                            <TextView
+                                android:layout_width="0px"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/disk_encryption"
+                                android:textColor="@color/black_ff333333"
+                                android:textSize="@dimen/dp_15"
+                                android:textStyle="normal" />
+
+                            <CheckBox
+                                android:id="@+id/disk_encryption_switch"
+                                android:layout_width="@dimen/dp_50"
+                                android:layout_height="@dimen/dp_30"
+                                android:layout_marginStart="@dimen/dp_10"
+                                android:background="@drawable/background_bth_switch_state"
+                                android:button="@null"
+                                android:checked="true" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_10"
+                            android:text="@string/disk_encryption_content"
+                            android:textColor="@color/gray_ff85899c"
+                            android:textSize="@dimen/dp_12"
+                            android:textStyle="normal" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_10"
+                            android:text="@string/only_initialization_setting_hint"
+                            android:textColor="@color/red_fff6222d"
+                            android:textSize="@dimen/dp_12"
+                            android:textStyle="normal" />
+                    </LinearLayout>
+
+                    <!--格式化-->
+                    <TextView
+                        android:id="@+id/disk_format_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_19"
+                        android:text="@string/disk_format_hint"
+                        android:textColor="@color/red_fff6222d"
+                        android:textSize="@dimen/dp_12"
+                        android:textStyle="normal"
+                        android:visibility="gone" />
+
+                    <!--初始化流程-->
+                    <LinearLayout
+                        android:id="@+id/disk_initialization_progress_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center_horizontal"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:id="@+id/disk_initialization_progress_number"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_57"
+                            android:text="0%"
+                            android:textColor="@color/black_ff333333"
+                            android:textSize="@dimen/dp_25"
+                            android:textStyle="bold" />
+
+                        <ProgressBar
+                            android:id="@+id/disk_initialization_progress"
+                            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                            android:layout_width="@dimen/dp_192"
+                            android:layout_height="@dimen/dp_10"
+                            android:layout_marginTop="@dimen/dp_19"
+                            android:max="100"
+                            android:progress="0"
+                            android:progressDrawable="@drawable/transfer_progress_dialog_bg" />
+
+                        <TextView
+                            android:id="@+id/disk_initialization_progress_hint"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_19"
+                            android:textSize="@dimen/dp_13"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <!--初始化失败-->
+                    <LinearLayout
+                        android:id="@+id/disk_initialization_fail_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center_horizontal"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:id="@+id/disk_initialization_fail_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_28"
+                            android:textColor="@color/black_ff333333"
+                            android:textSize="@dimen/dp_17"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/disk_initialization_fail_content"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_19"
+                            android:textColor="@color/gray_ff85899c"
+                            android:textSize="@dimen/dp_13"
+                            android:textStyle="normal" />
+                    </LinearLayout>
+
+                    <!--初始化完成-->
+                    <RelativeLayout
+                        android:id="@+id/disk_initialization_success_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_238"
+                        android:background="@drawable/background_fff9f9f9_rectangle_10_stroke_2_00000000"
+                        android:layout_marginTop="@dimen/dp_19"
+                        android:visibility="gone">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/dp_77"
+                            android:orientation="horizontal"
+                            android:layout_marginStart="@dimen/dp_29"
+                            android:layout_marginEnd="@dimen/dp_86"
+                            android:gravity="center_vertical">
+
+                            <ImageView
+                                android:layout_width="@dimen/dp_16"
+                                android:layout_height="@dimen/dp_16"
+                                android:src="@drawable/icon_complete_2x"
+                                android:scaleType="fitCenter" />
+
+                            <TextView
+                                android:id="@+id/disk_initialization_success_title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/dp_10"
+                                android:textColor="@color/black_ff333333"
+                                android:textSize="@dimen/dp_15"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <ImageView
+                            android:id="@+id/disk_initialization_success_encryption_indicator"
+                            android:layout_width="@dimen/dp_86"
+                            android:layout_height="@dimen/dp_86"
+                            android:layout_alignParentEnd="true"
+                            android:src="@drawable/indicator_disk_encryption_2x"
+                            android:scaleType="fitCenter"
+                            android:visibility="gone" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_marginTop="@dimen/dp_80">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/dp_31"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical">
+
+                                <LinearLayout
+                                    android:layout_width="0px"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal">
+
+                                    <!--动态设置最大宽度-->
+                                    <TextView
+                                        android:id="@+id/disk_initialization_success_1_title"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="@dimen/dp_29"
+                                        android:text="@string/disk_1"
+                                        android:textColor="@color/gray_ff85899c"
+                                        android:textSize="@dimen/dp_13"
+                                        android:textStyle="normal" />
+
+                                    <ImageView
+                                        android:id="@+id/disk_initialization_success_1_main"
+                                        android:layout_width="@dimen/dp_38"
+                                        android:layout_height="@dimen/dp_19"
+                                        android:layout_marginStart="@dimen/dp_10"
+                                        android:src="@drawable/icon_main_2x"
+                                        android:scaleType="fitCenter"
+                                        android:visibility="gone" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="0px"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal">
+
+                                    <!--动态设置最大宽度-->
+                                    <TextView
+                                        android:id="@+id/disk_initialization_success_2_title"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="@dimen/dp_24"
+                                        android:text="@string/disk_2"
+                                        android:textColor="@color/gray_ff85899c"
+                                        android:textSize="@dimen/dp_13"
+                                        android:textStyle="normal" />
+
+                                    <ImageView
+                                        android:id="@+id/disk_initialization_success_2_main"
+                                        android:layout_width="@dimen/dp_38"
+                                        android:layout_height="@dimen/dp_19"
+                                        android:layout_marginStart="@dimen/dp_10"
+                                        android:src="@drawable/icon_main_2x"
+                                        android:scaleType="fitCenter"
+                                        android:visibility="gone" />
+                                </LinearLayout>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/dp_28"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/disk_initialization_success_1_content"
+                                    android:layout_width="0px"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:paddingStart="@dimen/dp_29"
+                                    android:textColor="@color/black_ff333333"
+                                    android:textSize="@dimen/dp_13"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/disk_initialization_success_2_content"
+                                    android:layout_width="0px"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:paddingStart="@dimen/dp_24"
+                                    android:textColor="@color/black_ff333333"
+                                    android:textSize="@dimen/dp_13"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/dp_31"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical">
+
+                                <LinearLayout
+                                    android:layout_width="0px"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal">
+
+                                    <!--动态设置最大宽度-->
+                                    <TextView
+                                        android:id="@+id/disk_initialization_success_mode_title"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="@dimen/dp_29"
+                                        android:text="@string/mode"
+                                        android:textColor="@color/gray_ff85899c"
+                                        android:textSize="@dimen/dp_13"
+                                        android:textStyle="normal" />
+
+                                    <ImageView
+                                        android:layout_width="@dimen/dp_38"
+                                        android:layout_height="@dimen/dp_19"
+                                        android:layout_marginStart="@dimen/dp_10"
+                                        android:scaleType="fitCenter"
+                                        android:visibility="gone" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="0px"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal">
+
+                                    <!--动态设置最大宽度-->
+                                    <TextView
+                                        android:id="@+id/disk_initialization_success_m2_title"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="@dimen/dp_24"
+                                        android:text="@string/m2"
+                                        android:textColor="@color/gray_ff85899c"
+                                        android:textSize="@dimen/dp_13"
+                                        android:textStyle="normal"
+                                        android:visibility="gone" />
+
+                                    <ImageView
+                                        android:id="@+id/disk_initialization_success_m2_main"
+                                        android:layout_width="@dimen/dp_38"
+                                        android:layout_height="@dimen/dp_19"
+                                        android:layout_marginStart="@dimen/dp_10"
+                                        android:src="@drawable/icon_main_2x"
+                                        android:scaleType="fitCenter"
+                                        android:visibility="gone" />
+                                </LinearLayout>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/dp_21"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/disk_initialization_success_mode_content"
+                                    android:layout_width="0px"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:paddingStart="@dimen/dp_29"
+                                    android:textColor="@color/black_ff333333"
+                                    android:textSize="@dimen/dp_13"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/disk_initialization_success_m2_content"
+                                    android:layout_width="0px"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:paddingStart="@dimen/dp_24"
+                                    android:textColor="@color/black_ff333333"
+                                    android:textSize="@dimen/dp_13"
+                                    android:textStyle="bold"
+                                    android:visibility="gone" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/disk_initialization_success_mode_hint"
+                                    android:layout_width="0px"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:paddingStart="@dimen/dp_29"
+                                    android:textColor="@color/black_ff333333"
+                                    android:textSize="@dimen/dp_13"
+                                    android:textStyle="bold"
+                                    android:visibility="gone" />
+
+                                <View
+                                    android:layout_width="0px"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </RelativeLayout>
+
+                    <!--选择扩容-->
+                    <LinearLayout
+                        android:id="@+id/disk_expand_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                    </LinearLayout>
+                </RelativeLayout>
+            </LinearLayout>
+        </ScrollView>
+
+        <include layout="@layout/eulix_space_title_extension" />
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_121">
+
+        <LinearLayout
+            android:id="@+id/one_button_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_31"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <View
+                android:layout_width="0px"
+                android:layout_height="@dimen/dp_42"
+                android:layout_weight="84" />
+
+            <include layout="@layout/eulix_space_common_loading_button_container"
+                android:layout_width="0px"
+                android:layout_height="@dimen/dp_42"
+                android:layout_weight="192" />
+
+            <View
+                android:layout_width="0px"
+                android:layout_height="@dimen/dp_42"
+                android:layout_weight="84" />
+        </LinearLayout>
+
+<!--        <LinearLayout-->
+<!--            android:id="@+id/one_button_container"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:layout_centerVertical="true"-->
+<!--            android:visibility="gone">-->
+
+<!--            <View-->
+<!--                android:layout_width="0px"-->
+<!--                android:layout_height="@dimen/dp_42"-->
+<!--                android:layout_weight="84" />-->
+
+<!--            <Button-->
+<!--                android:id="@+id/one_button"-->
+<!--                android:layout_width="0px"-->
+<!--                android:layout_height="@dimen/dp_42"-->
+<!--                android:layout_weight="192"-->
+<!--                android:layout_centerInParent="true"-->
+<!--                android:background="@drawable/background_ff337aff_ff16b9ff_rectangle_10"-->
+<!--                android:textAllCaps="false"-->
+<!--                android:textColor="@android:color/white"-->
+<!--                android:textSize="@dimen/dp_15"-->
+<!--                android:textStyle="normal"-->
+<!--                style="?android:attr/borderlessButtonStyle" />-->
+
+<!--            <View-->
+<!--                android:layout_width="0px"-->
+<!--                android:layout_height="@dimen/dp_42"-->
+<!--                android:layout_weight="84" />-->
+<!--        </LinearLayout>-->
+
+        <LinearLayout
+            android:id="@+id/two_buttons_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_31"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <View
+                android:layout_width="0px"
+                android:layout_height="@dimen/dp_42"
+                android:layout_weight="36" />
+
+            <Button
+                android:id="@+id/two_buttons_1"
+                android:layout_width="0px"
+                android:layout_height="@dimen/dp_42"
+                android:layout_weight="134"
+                android:background="@drawable/background_fff5f6fa_rectangle_10"
+                android:textAllCaps="false"
+                android:textColor="@color/blue_ff337aff"
+                android:textSize="@dimen/dp_15"
+                android:textStyle="normal"
+                style="?android:attr/borderlessButtonStyle" />
+
+            <View
+                android:layout_width="0px"
+                android:layout_height="@dimen/dp_42"
+                android:layout_weight="19" />
+
+            <Button
+                android:id="@+id/two_buttons_2"
+                android:layout_width="0px"
+                android:layout_height="@dimen/dp_42"
+                android:layout_weight="134"
+                android:background="@drawable/background_ff337aff_ff16b9ff_rectangle_10"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/dp_15"
+                android:textStyle="normal"
+                style="?android:attr/borderlessButtonStyle" />
+
+            <View
+                android:layout_width="0px"
+                android:layout_height="@dimen/dp_42"
+                android:layout_weight="36" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/two_buttons_vertical_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:visibility="gone">
+
+            <Button
+                android:id="@+id/two_buttons_vertical_1"
+                android:layout_width="@dimen/dp_192"
+                android:layout_height="@dimen/dp_42"
+                android:layout_marginTop="@dimen/dp_10"
+                android:background="@drawable/background_ff337aff_ff16b9ff_rectangle_10"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/dp_15"
+                android:textStyle="normal"
+                style="?android:attr/borderlessButtonStyle" />
+
+            <Button
+                android:id="@+id/two_buttons_vertical_2"
+                android:layout_width="@dimen/dp_192"
+                android:layout_height="@dimen/dp_42"
+                android:layout_marginTop="@dimen/dp_9"
+                android:background="@android:color/transparent"
+                android:textAllCaps="false"
+                android:textColor="@color/gray_ff85899c"
+                android:textSize="@dimen/dp_15"
+                android:textStyle="normal"
+                style="?android:attr/borderlessButtonStyle" />
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

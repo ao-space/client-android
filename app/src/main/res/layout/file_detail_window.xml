@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2022 Institute of Software, Chinese Academy of Sciences (ISCAS)
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+-->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/background_ffffffff_rectangle_top_10">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_62">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/detail"
+            android:textColor="@color/black_ff333333"
+            android:textSize="@dimen/dp_17"
+            android:textStyle="normal" />
+
+        <ImageButton
+            android:id="@+id/detail_exit"
+            android:layout_width="@dimen/dp_55"
+            android:layout_height="@dimen/dp_55"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:background="@android:color/transparent"
+            android:paddingStart="@dimen/dp_19"
+            android:paddingEnd="@dimen/dp_19"
+            android:paddingTop="@dimen/dp_19"
+            android:paddingBottom="@dimen/dp_19"
+            android:src="@drawable/exit"
+            android:scaleType="fitCenter" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_20"
+        android:layout_marginStart="@dimen/dp_14"
+        android:layout_marginEnd="@dimen/dp_19"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="@dimen/dp_79"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/file_name"
+            android:textColor="@color/gray_ff85899c"
+            android:textSize="@dimen/dp_15"
+            android:textStyle="normal" />
+
+        <TextView
+            android:id="@+id/detail_name"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="@dimen/dp_10"
+            android:textColor="@color/black_ff333333"
+            android:textSize="@dimen/dp_15"
+            android:textStyle="normal" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_19"
+        android:layout_marginStart="@dimen/dp_14"
+        android:layout_marginEnd="@dimen/dp_19"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="@dimen/dp_79"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/modify_date"
+            android:textColor="@color/gray_ff85899c"
+            android:textSize="@dimen/dp_15"
+            android:textStyle="normal" />
+
+        <TextView
+            android:id="@+id/detail_time"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="@dimen/dp_10"
+            android:textColor="@color/black_ff333333"
+            android:textSize="@dimen/dp_15"
+            android:textStyle="normal" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_19"
+        android:layout_marginStart="@dimen/dp_14"
+        android:layout_marginEnd="@dimen/dp_19"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="@dimen/dp_79"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/file_size"
+            android:textColor="@color/gray_ff85899c"
+            android:textSize="@dimen/dp_15"
+            android:textStyle="normal" />
+
+        <TextView
+            android:id="@+id/detail_size"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="@dimen/dp_10"
+            android:textColor="@color/black_ff333333"
+            android:textSize="@dimen/dp_15"
+            android:textStyle="normal" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_19"
+        android:layout_marginStart="@dimen/dp_14"
+        android:layout_marginEnd="@dimen/dp_19"
+        android:layout_marginBottom="@dimen/dp_78"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="@dimen/dp_79"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/file_path"
+            android:textColor="@color/gray_ff85899c"
+            android:textSize="@dimen/dp_15"
+            android:textStyle="normal" />
+
+        <TextView
+            android:id="@+id/detail_path"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="@dimen/dp_10"
+            android:maxLines="3"
+            android:ellipsize="end"
+            android:textColor="@color/black_ff333333"
+            android:textSize="@dimen/dp_15"
+            android:textStyle="normal" />
+    </LinearLayout>
+</LinearLayout>

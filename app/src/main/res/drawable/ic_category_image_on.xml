@@ -1,0 +1,36 @@
+<!--
+  ~ Copyright (c) 2022 Institute of Software, Chinese Academy of Sciences (ISCAS)
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+-->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="16dp"
+    android:height="16dp"
+    android:viewportWidth="16"
+    android:viewportHeight="16">
+  <path
+      android:pathData="M0,0h16v16h-16z"
+      android:strokeAlpha="0"
+      android:strokeWidth="1"
+      android:fillColor="#000000"
+      android:fillType="nonZero"
+      android:strokeColor="#00000000"
+      android:fillAlpha="0"/>
+  <path
+      android:pathData="M14.9231,1.5L1.0769,1.5C0.7584,1.5 0.5,1.7584 0.5,2.0769L0.5,13.6154C0.5,13.934 0.7584,14.1923 1.0769,14.1923L14.9231,14.1923C15.2416,14.1923 15.5,13.934 15.5,13.6154L15.5,2.0769C15.5,1.7584 15.2416,1.5 14.9231,1.5ZM14.3462,2.6538L14.3462,11.1636L10.25,8.0915C9.9441,7.8622 9.5177,7.8622 9.2117,8.0915L7.4344,9.4242L5.0649,7.5287C4.768,7.2909 4.3569,7.2728 4.0407,7.4856L1.6538,9.0905L1.6538,2.6538L14.3462,2.6538ZM1.6538,13.0385L1.6538,10.4812L4.5089,8.5615L7.4119,10.8837L9.7308,9.1442L14.3462,12.6058L14.3462,13.0385L1.6538,13.0385ZM11.4615,7.2692C12.416,7.2692 13.1923,6.4929 13.1923,5.5385C13.1923,4.584 12.416,3.8077 11.4615,3.8077C10.5071,3.8077 9.7308,4.584 9.7308,5.5385C9.7308,6.4929 10.5071,7.2692 11.4615,7.2692ZM11.4615,4.9615C11.7796,4.9615 12.0385,5.2204 12.0385,5.5385C12.0385,5.8565 11.7796,6.1154 11.4615,6.1154C11.1435,6.1154 10.8846,5.8565 10.8846,5.5385C10.8846,5.2204 11.1435,4.9615 11.4615,4.9615Z"
+      android:strokeWidth="1"
+      android:fillColor="#337AFF"
+      android:fillType="nonZero"
+      android:strokeColor="#00000000"/>
+</vector>

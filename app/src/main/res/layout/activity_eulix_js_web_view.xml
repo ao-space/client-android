@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/white">
+
+    <include layout="@layout/eulix_space_title_extension" />
+
+    <RelativeLayout
+        android:id="@+id/web_view_container"
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="1">
+
+        <ImageButton
+            android:id="@+id/back_fullscreen"
+            android:layout_width="@dimen/dp_67"
+            android:layout_height="@dimen/dp_52"
+            android:paddingStart="@dimen/dp_25"
+            android:paddingEnd="@dimen/dp_25"
+            android:paddingTop="@dimen/dp_17"
+            android:paddingBottom="@dimen/dp_17"
+            android:src="@drawable/back_2x"
+            android:scaleType="fitCenter"
+            android:background="@android:color/transparent"
+            android:elevation="@dimen/dp_8"
+            android:visibility="gone" />
+
+        <ProgressBar
+            android:id="@+id/loading_progress"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_6"
+            android:max="100"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:elevation="@dimen/dp_8"
+            android:visibility="visible" />
+    </RelativeLayout>
+</LinearLayout>

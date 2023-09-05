@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2022 Institute of Software, Chinese Academy of Sciences (ISCAS)
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+-->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="79dp">
+
+    <ImageView
+        android:id="@+id/image_item"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="25dp"/>
+
+    <TextView
+        android:id="@+id/tv_file_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/image_item"
+        android:layout_marginTop="18dp"
+        android:layout_marginStart="19dp"
+        android:layout_marginEnd="54dp"
+        android:gravity="start"
+        android:lines="1"
+        android:ellipsize="end"
+        android:textColor="@color/black_ff333333"
+        android:textSize="15sp"/>
+
+    <TextView
+        android:id="@+id/tv_create_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_file_name"
+        android:layout_marginTop="6dp"
+        android:layout_alignStart="@id/tv_file_name"
+        android:layout_alignEnd="@id/tv_file_name"
+        android:gravity="start"
+        android:lines="1"
+        android:ellipsize="end"
+        android:textColor="@color/gray_ff85899c"
+        android:textSize="12sp" />
+
+
+    <ImageView
+        android:id="@+id/image_mark"
+        android:layout_width="21dp"
+        android:layout_height="21dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="25dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/background_fff5f6fa_oval_13"/>
+
+    <ImageView
+        android:id="@+id/image_line"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_2"
+        android:background="@color/white_fff7f7f9"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"/>
+
+</RelativeLayout>

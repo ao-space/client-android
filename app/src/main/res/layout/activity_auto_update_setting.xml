@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2022 Institute of Software, Chinese Academy of Sciences (ISCAS)
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+-->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white_ffffffff">
+
+    <xyz.eulix.space.view.TitleBarWithSelect
+        android:id="@+id/title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tv_download_update"
+        style="@style/s_17_ff333333"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title_bar"
+        android:layout_marginLeft="@dimen/dp_25"
+        android:layout_marginTop="@dimen/dp_24"
+        android:text="@string/download_update" />
+
+    <CheckBox
+        android:id="@+id/checkbox_download"
+        android:layout_width="@dimen/dp_48"
+        android:layout_height="@dimen/dp_29"
+        android:layout_below="@id/title_bar"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="@dimen/dp_24"
+        android:layout_marginRight="@dimen/dp_25"
+        android:background="@drawable/background_bth_switch_state"
+        android:button="@null" />
+
+    <View
+        android:id="@+id/mask_check_download"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/checkbox_download"
+        android:layout_alignRight="@id/checkbox_download"
+        android:layout_alignTop="@id/checkbox_download"
+        android:layout_alignBottom="@id/checkbox_download"/>
+
+    <TextView
+        android:id="@+id/tv_download_desc"
+        style="@style/s_12_ff85899c"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_download_update"
+        android:layout_marginTop="@dimen/dp_20"
+        android:background="@color/white_fff5f6fa"
+        android:paddingLeft="@dimen/dp_25"
+        android:paddingTop="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_25"
+        android:paddingBottom="@dimen/dp_10"
+        android:text="@string/download_update_desc" />
+
+    <TextView
+        android:id="@+id/tv_install_update"
+        style="@style/s_17_ff333333"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_download_desc"
+        android:layout_marginLeft="@dimen/dp_25"
+        android:layout_marginTop="@dimen/dp_19"
+        android:text="@string/install_update" />
+
+    <CheckBox
+        android:id="@+id/checkbox_install"
+        android:layout_width="@dimen/dp_48"
+        android:layout_height="@dimen/dp_29"
+        android:layout_below="@id/tv_download_desc"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="@dimen/dp_19"
+        android:layout_marginRight="@dimen/dp_25"
+        android:background="@drawable/background_bth_switch_state"
+        android:button="@null" />
+
+    <View
+        android:id="@+id/mask_check_install"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/checkbox_install"
+        android:layout_alignRight="@id/checkbox_install"
+        android:layout_alignTop="@id/checkbox_install"
+        android:layout_alignBottom="@id/checkbox_install"/>
+
+    <TextView
+        android:id="@+id/tv_install_desc"
+        style="@style/s_12_ff85899c"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_install_update"
+        android:layout_marginTop="@dimen/dp_20"
+        android:background="@color/white_fff5f6fa"
+        android:paddingLeft="@dimen/dp_25"
+        android:paddingTop="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_25"
+        android:paddingBottom="@dimen/dp_10"
+        android:text="@string/install_update_desc" />
+
+</RelativeLayout>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2022 Institute of Software, Chinese Academy of Sciences (ISCAS)
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+-->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="@dimen/dp_259"
+    android:layout_height="@dimen/dp_133"
+    android:background="@drawable/background_ffffffff_rectangle_10">
+
+    <TextView
+        android:id="@+id/dialog_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_44"
+        android:layout_marginTop="@dimen/dp_3"
+        android:layout_marginStart="@dimen/dp_12"
+        android:layout_marginEnd="@dimen/dp_12"
+        android:gravity="center"
+        android:ellipsize="middle"
+        android:singleLine="true"
+        android:textColor="@color/black_ff333333"
+        android:textSize="@dimen/dp_17"
+        android:textStyle="normal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_33"
+        android:background="@drawable/background_fff5f6fa_rectangle_6"
+        android:layout_marginStart="@dimen/dp_19"
+        android:layout_marginEnd="@dimen/dp_19"
+        android:layout_marginBottom="@dimen/dp_11"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/dialog_input"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/background_fff5f6fa_rectangle_6"
+            android:paddingStart="@dimen/dp_10"
+            android:textColorHint="@color/white_ffdfe0e5"
+            android:inputType="text"
+            android:singleLine="true"
+            android:gravity="start|center_vertical"
+            android:textColor="@color/black_ff333333"
+            android:textSize="@dimen/dp_13"
+            android:textStyle="normal"
+            android:password="true"/>
+
+        <ImageButton
+            android:id="@+id/dialog_private"
+            android:layout_width="@dimen/dp_37"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:paddingStart="@dimen/dp_6"
+            android:paddingEnd="@dimen/dp_6"
+            android:paddingTop="@dimen/dp_4"
+            android:paddingBottom="@dimen/dp_4"
+            android:scaleType="fitCenter" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:background="@color/white_fff7f7f9" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_41"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/dialog_cancel"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:text="@string/cancel"
+            android:textAllCaps="false"
+            android:textColor="@color/blue_ff337aff"
+            android:textSize="@dimen/dp_15"
+            android:textStyle="normal" />
+
+        <View
+            android:layout_width="@dimen/dp_1"
+            android:layout_height="match_parent"
+            android:background="@color/white_fff7f7f9" />
+
+        <Button
+            android:id="@+id/dialog_confirm"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:textAllCaps="false"
+            android:textColor="@color/blue_ff337aff"
+            android:textSize="@dimen/dp_15"
+            android:textStyle="bold" />
+    </LinearLayout>
+</LinearLayout>

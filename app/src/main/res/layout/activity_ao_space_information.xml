@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <include layout="@layout/ao_space_title_header" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/background_fff8faff_rectangle_10"
+        android:layout_marginTop="@dimen/dp_29"
+        android:layout_marginStart="@dimen/dp_25"
+        android:layout_marginEnd="@dimen/dp_25"
+        android:paddingStart="@dimen/dp_20"
+        android:paddingEnd="@dimen/dp_20"
+        android:paddingTop="@dimen/dp_20"
+        android:paddingBottom="@dimen/dp_20">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/your_space_name"
+            android:textColor="@color/black_ff333333"
+            android:textSize="@dimen/dp_13"
+            android:textStyle="bold" />
+        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_49"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/space_name_input"
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:imeOptions="actionDone"
+                android:background="@android:color/transparent"
+                android:paddingStart="@dimen/dp_0"
+                android:inputType="text"
+                android:singleLine="true"
+                android:gravity="start|center_vertical"
+                android:textColor="@color/black_ff333333"
+                android:textSize="@dimen/dp_23"
+                android:textStyle="bold" />
+
+            <ImageButton
+                android:id="@+id/space_name_clear"
+                android:layout_width="@dimen/dp_25"
+                android:layout_height="match_parent"
+                android:paddingTop="@dimen/dp_12"
+                android:paddingBottom="@dimen/dp_12"
+                android:src="@drawable/icon_edit_clear_2x"
+                android:scaleType="fitCenter"
+                android:background="@android:color/transparent"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_1"
+            android:background="@color/white_ffe5e6ec" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:text="@string/space_name_rules"
+            android:textColor="@color/gray_ff85899c"
+            android:textSize="@dimen/dp_12"
+            android:textStyle="normal" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="263" />
+
+    <include layout="@layout/eulix_space_common_loading_button_container"
+        android:layout_width="@dimen/dp_192"
+        android:layout_height="@dimen/dp_42"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginBottom="@dimen/dp_38" />
+</LinearLayout>

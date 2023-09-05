@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <ImageButton
+        android:id="@+id/back_no_title"
+        android:layout_width="@dimen/dp_67"
+        android:layout_height="@dimen/dp_52"
+        android:paddingStart="@dimen/dp_25"
+        android:paddingEnd="@dimen/dp_25"
+        android:paddingTop="@dimen/dp_17"
+        android:paddingBottom="@dimen/dp_17"
+        android:src="@drawable/back_2x"
+        android:scaleType="fitCenter"
+        android:background="@android:color/transparent"
+        android:elevation="@dimen/dp_8" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="@dimen/dp_63"
+            android:layout_height="@dimen/dp_63"
+            android:layout_marginTop="@dimen/dp_52"
+            android:src="@drawable/image_locale_2x"
+            android:scaleType="fitCenter"
+            android:layout_gravity="center_horizontal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_29"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="@dimen/dp_16"
+            android:text="@string/country_and_language"
+            android:textColor="@color/black_ff333333"
+            android:textSize="@dimen/dp_21"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_57"
+            android:layout_marginTop="@dimen/dp_30"
+            android:layout_marginStart="@dimen/dp_25"
+            android:layout_marginEnd="@dimen/dp_25"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="@string/respective_country"
+                android:textColor="@color/black_ff333333"
+                android:textSize="@dimen/dp_15"
+                android:textStyle="normal" />
+
+            <TextView
+                android:id="@+id/init_country"
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="@dimen/dp_25"
+                android:layout_gravity="center_vertical"
+                android:gravity="end"
+                android:ellipsize="middle"
+                android:singleLine="true"
+                android:text="中国"
+                android:textColor="@color/gray_ff85899c"
+                android:textSize="@dimen/dp_15"
+                android:textStyle="normal" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_1"
+            android:layout_marginStart="@dimen/dp_25"
+            android:layout_marginEnd="@dimen/dp_25"
+            android:background="@color/white_fff7f7f9" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_57"
+            android:layout_marginStart="@dimen/dp_25"
+            android:layout_marginEnd="@dimen/dp_25"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="@string/choose_language"
+                android:textColor="@color/black_ff333333"
+                android:textSize="@dimen/dp_15"
+                android:textStyle="normal" />
+
+            <TextView
+                android:id="@+id/init_language"
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="@dimen/dp_25"
+                android:layout_gravity="center_vertical"
+                android:gravity="end"
+                android:ellipsize="middle"
+                android:singleLine="true"
+                android:text="简体中文"
+                android:textColor="@color/gray_ff85899c"
+                android:textSize="@dimen/dp_15"
+                android:textStyle="normal" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0px"
+            android:layout_weight="1" />
+
+        <include layout="@layout/eulix_space_common_loading_button_container"
+            android:layout_width="@dimen/dp_192"
+            android:layout_height="@dimen/dp_42"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginBottom="@dimen/dp_38"
+            android:layout_gravity="center_horizontal" />
+    </LinearLayout>
+</RelativeLayout>

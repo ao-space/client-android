@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2022 Institute of Software, Chinese Academy of Sciences (ISCAS)
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_ffedf3ff_rectangle_10">
+
+        <ImageView
+            android:layout_width="@dimen/dp_205"
+            android:layout_height="@dimen/dp_102"
+            android:layout_alignParentEnd="true"
+            android:adjustViewBounds="true"
+            android:src="@drawable/image_device_manage" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_device_name"
+                style="@style/s_17_ff333333"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_20"
+                android:layout_marginTop="@dimen/dp_29"
+                android:layout_marginEnd="@dimen/dp_20"
+                android:gravity="center_horizontal"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_device_sn"
+                style="@style/s_13_ff333333"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_20"
+                android:layout_marginTop="@dimen/dp_19"
+                android:layout_marginEnd="@dimen/dp_20"
+                android:gravity="center_horizontal" />
+
+            <ImageView
+                android:id="@+id/iv_device"
+                android:layout_width="@dimen/dp_125"
+                android:layout_height="@dimen/dp_106"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/dp_19" />
+
+            <TextView
+                android:id="@+id/tv_device_hint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_39"
+                android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginEnd="@dimen/dp_39"
+                android:textColor="@color/blue_ff337aff"
+                android:textSize="@dimen/dp_12"
+                android:textStyle="normal"
+                android:visibility="gone" />
+
+            <include
+                layout="@layout/eulix_space_common_loading_button_container"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_42"
+                android:layout_marginStart="@dimen/dp_39"
+                android:layout_marginTop="@dimen/dp_19"
+                android:layout_marginEnd="@dimen/dp_39"
+                android:layout_marginBottom="@dimen/dp_29" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_incompatible"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_20"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <TextView
+            style="@style/s_13_ff333333"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/introduce"
+            android:textStyle="bold" />
+
+        <TextView
+            style="@style/s_13_ff333333"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_6"
+            android:text="@string/bind_incompatible_notice_pc" />
+
+        <TextView
+            android:id="@+id/tv_download_address"
+            style="@style/s_13_ff333333"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:text="@string/download_address" />
+
+    </LinearLayout>
+</LinearLayout>

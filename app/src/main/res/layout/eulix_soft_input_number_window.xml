@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white_fff5f6fa">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:background="@color/white_fff7f7f9" />
+
+    <ImageButton
+        android:id="@+id/key_hide"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_29"
+        android:background="@android:color/white"
+        android:paddingTop="@dimen/dp_7"
+        android:paddingBottom="@dimen/dp_7"
+        android:src="@drawable/icon_bottom_arrow_2x"
+        android:scaleType="fitCenter" />
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_5"
+        android:layout_marginStart="@dimen/dp_5"
+        android:layout_marginEnd="@dimen/dp_5"
+        android:layout_marginBottom="@dimen/dp_5"
+        android:columnCount="3">
+
+        <Button
+            android:id="@+id/key_1"
+            android:layout_columnWeight="1"
+            android:layout_height="@dimen/dp_40"
+            android:layout_gravity="fill"
+            android:background="@drawable/background_ffffffff_rectangle_2"
+            android:text="@string/number_one"
+            android:textColor="@color/black_ff333333"
+            android:textSize="@dimen/dp_19"
+            android:textStyle="bold"
+            style="?android:attr/borderlessButtonStyle" />
+
+        <Button
+            android:id="@+id/key_2"
+            android:layout_columnWeight="1"
+            android:layout_height="@dimen/dp_40"
+            android:layout_marginStart="@dimen/dp_5"
+            android:layout_gravity="fill"
+            android:background="@drawable/background_ffffffff_rectangle_2"
+            android:text="@string/number_two"
+            android:textColor="@color/black_ff333333"
+            android:textSize="@dimen/dp_19"
+            android:textStyle="bold"
+            style="?android:attr/borderlessButtonStyle" />
+
+        <Button
+            android:id="@+id/key_3"
+            android:layout_columnWeight="1"
+            android:layout_height="@dimen/dp_40"
+            android:layout_marginStart="@dimen/dp_5"
+            android:layout_gravity="fill"
+            android:background="@drawable/background_ffffffff_rectangle_2"
+            android:text="@string/number_three"
+            android:textColor="@color/black_ff333333"
+            android:textSize="@dimen/dp_19"
+            android:textStyle="bold"
+            style="?android:attr/borderlessButtonStyle" />
+
+        <Button
+            android:id="@+id/key_4"
+            android:layout_columnWeight="1"
+            android:layout_height="@dimen/dp_40"
+            android:layout_marginTop="@dimen/dp_5"
+            android:layout_gravity="fill"
+            android:background="@drawable/background_ffffffff_rectangle_2"
+            android:text="@string/number_four"
+            android:textColor="@color/black_ff333333"
+            android:textSize="@dimen/dp_19"
+            android:textStyle="bold"
+            style="?android:attr/borderlessButtonStyle" />
+
+        <Button
+            android:id="@+id/key_5"
+            android:layout_columnWeight="1"
+            android:layout_height="@dimen/dp_40"
+            android:layout_marginTop="@dimen/dp_5"
+            android:layout_marginStart="@dimen/dp_5"
+            android:layout_gravity="fill"
+            android:background="@drawable/background_ffffffff_rectangle_2"
+            android:text="@string/number_five"
+            android:textColor="@color/black_ff333333"
+            android:textSize="@dimen/dp_19"
+            android:textStyle="bold"
+            style="?android:attr/borderlessButtonStyle" />
+
+        <Button
+            android:id="@+id/key_6"
+            android:layout_columnWeight="1"
+            android:layout_height="@dimen/dp_40"
+            android:layout_marginTop="@dimen/dp_5"
+            android:layout_marginStart="@dimen/dp_5"
+            android:layout_gravity="fill"
+            android:background="@drawable/background_ffffffff_rectangle_2"
+            android:text="@string/number_six"
+            android:textColor="@color/black_ff333333"
+            android:textSize="@dimen/dp_19"
+            android:textStyle="bold"
+            style="?android:attr/borderlessButtonStyle" />
+
+        <Button
+            android:id="@+id/key_7"
+            android:layout_columnWeight="1"
+            android:layout_height="@dimen/dp_40"
+            android:layout_marginTop="@dimen/dp_5"
+            android:layout_gravity="fill"
+            android:background="@drawable/background_ffffffff_rectangle_2"
+            android:text="@string/number_seven"
+            android:textColor="@color/black_ff333333"
+            android:textSize="@dimen/dp_19"
+            android:textStyle="bold"
+            style="?android:attr/borderlessButtonStyle" />
+
+        <Button
+            android:id="@+id/key_8"
+            android:layout_columnWeight="1"
+            android:layout_height="@dimen/dp_40"
+            android:layout_marginTop="@dimen/dp_5"
+            android:layout_marginStart="@dimen/dp_5"
+            android:layout_gravity="fill"
+            android:background="@drawable/background_ffffffff_rectangle_2"
+            android:text="@string/number_eight"
+            android:textColor="@color/black_ff333333"
+            android:textSize="@dimen/dp_19"
+            android:textStyle="bold"
+            style="?android:attr/borderlessButtonStyle" />
+
+        <Button
+            android:id="@+id/key_9"
+            android:layout_columnWeight="1"
+            android:layout_height="@dimen/dp_40"
+            android:layout_marginTop="@dimen/dp_5"
+            android:layout_marginStart="@dimen/dp_5"
+            android:layout_gravity="fill"
+            android:background="@drawable/background_ffffffff_rectangle_2"
+            android:text="@string/number_nine"
+            android:textColor="@color/black_ff333333"
+            android:textSize="@dimen/dp_19"
+            android:textStyle="bold"
+            style="?android:attr/borderlessButtonStyle" />
+
+        <ImageButton
+            android:layout_columnWeight="1"
+            android:layout_height="@dimen/dp_40"
+            android:layout_marginTop="@dimen/dp_5"
+            android:layout_gravity="fill"
+            android:background="@android:color/transparent"
+            android:visibility="invisible" />
+
+        <Button
+            android:id="@+id/key_0"
+            android:layout_columnWeight="1"
+            android:layout_height="@dimen/dp_40"
+            android:layout_marginTop="@dimen/dp_5"
+            android:layout_marginStart="@dimen/dp_5"
+            android:layout_gravity="fill"
+            android:background="@drawable/background_ffffffff_rectangle_2"
+            android:text="@string/number_zero"
+            android:textColor="@color/black_ff333333"
+            android:textSize="@dimen/dp_19"
+            android:textStyle="bold"
+            style="?android:attr/borderlessButtonStyle" />
+
+        <ImageButton
+            android:id="@+id/key_backspace"
+            android:layout_columnWeight="1"
+            android:layout_height="@dimen/dp_40"
+            android:layout_marginTop="@dimen/dp_5"
+            android:layout_marginStart="@dimen/dp_5"
+            android:layout_gravity="fill"
+            android:background="@android:color/transparent"
+            android:paddingTop="@dimen/dp_10"
+            android:paddingBottom="@dimen/dp_10"
+            android:src="@drawable/icon_input_backspace_2x"
+            android:scaleType="fitCenter" />
+    </GridLayout>
+</LinearLayout>

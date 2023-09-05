@@ -1,0 +1,221 @@
+/*
+ * Copyright (c) 2022 Institute of Software, Chinese Academy of Sciences (ISCAS)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-parcelize'
+apply plugin: 'kotlin-kapt'
+
+import com.android.build.OutputFile
+
+android {
+    signingConfigs {
+        def appStoreFile = System.getenv("EULIX_ANDROID_STORE_FILE")
+        def appStorePassword = System.getenv("EULIX_ANDROID_STORE_PASSWORD")
+        def appKeyAlias = System.getenv("EULIX_ANDROID_KEY_ALIAS")
+        def appKeyPassword = System.getenv("EULIX_ANDROID_KEY_PASSWORD")
+
+        if (!appStoreFile || !appStorePassword || !appKeyAlias || !appKeyPassword) {
+            appStoreFile = "../keystore/debug.keystore"
+            appStorePassword = "android"
+            appKeyAlias = "androiddebugkey"
+            appKeyPassword = "android"
+        }
+
+        release {
+            storeFile file(appStoreFile)
+            storePassword appStorePassword
+            keyAlias appKeyAlias
+            keyPassword appKeyPassword
+        }
+    }
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
+
+    splits {
+        abi {
+            enable true
+            reset()
+            include 'armeabi-v7a', 'arm64-v8a'
+            universalApk false
+        }
+    }
+
+    defaultConfig {
+        applicationId "space.ao.client"
+        minSdkVersion 21
+        targetSdkVersion 30
+        versionCode 10000
+        versionName "1.0.0"
+        flavorDimensions "versionCode"
+
+//        ndk {
+//            abiFilters 'armeabi-v7a'
+//        }
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        kapt {
+            arguments {
+                arg("room.schemaLocation", "$projectDir/schemas")
+            }
+        }
+    }
+
+
+    buildTypes {
+        release {
+            minifyEnabled true
+//            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+            debuggable true
+            buildConfigField("boolean", "LOG_SWITCH", "false")
+        }
+
+        debug {
+            buildConfigField("boolean", "LOG_SWITCH", "true")
+        }
+
+    }
+
+    productFlavors {
+        //本平台
+        eulix {
+            manifestPlaceholders = [EULIX_CHANNEL: "\\001"]
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    android.applicationVariants.all {
+        variant ->
+            variant.outputs.all { output ->
+                def fileName = "aospace-android_open_v${defaultConfig.versionName}_${variant.buildType.name}_${releaseTime()}_${variant.productFlavors[0].name}_${output.getFilter(OutputFile.ABI)}.apk"
+                outputFileName = fileName
+            }
+    }
+
+    lintOptions {
+        // 设置为 true 后，release 构建都会以 Fatal 的设置来运行 Lint。
+        // 如果构建时发现了致命（Fatal）的问题，会中止构建（具体由 abortOnError 控制）
+        checkReleaseBuilds true
+        // 设置为 true，则当 Lint 发现错误时停止 Gradle 构建
+        abortOnError true
+
+        // 重新指定 Lint 规则配置文件
+        lintConfig file("lint.xml")
+
+        // 仅检查指定的问题（根据规则的 id 指定）
+        check 'NewApi', 'InlinedApi'
+        // 设置为 true 则检查所有的问题，包括默认不检查问题
+        checkAllWarnings true
+        // 检查指定的问题（根据规则的 id 指定）
+        enable 'RtlHardcoded', 'RtlCompat', 'RtlEnabled'
+
+        // 在报告中是否返回对应的 Lint 说明
+        explainIssues true
+        // 设置为 true 则错误报告中不包括源代码的行号
+        noLines true
+        // 设置为 true 时 Lint 将不报告分析的进度
+        quiet true
+        // 设置为 true 则显示一个问题所在的所有地方，而不会截短列表
+        showAll true
+        // 设置为 true 则只报告错误
+        ignoreWarnings true
+        // 设置为 true，则当有错误时会显示文件的全路径或绝对路径 (默认情况下为true)
+        absolutePaths true
+
+        // 写入报告的路径，默认为构建目录下的 lint-results.html
+        htmlOutput file("lint-results.html")
+        // 设置为 true 则会生成一个 HTML 格式的报告
+        htmlReport true
+        // 写入检查报告的文件（不指定默认为 lint-results.xml）
+        xmlOutput file("lint-results.xml")
+        // 设置为 true 则会生成一个 XML 报告
+        xmlReport false
+        // 配置写入输出结果的位置，格式可以是文件或 stdout
+        textOutput 'stdout'
+        // 设置为 true，则生成纯文本报告（默认为 false）
+        textReport false
+    }
+}
+
+def releaseTime() {
+    return new Date().format("MMddHHmm", TimeZone.getTimeZone("GMT+8"))
+}
+
+configurations.all {
+    resolutionStrategy {
+        force 'androidx.core:core:1.6.0'
+        force 'androidx.core:core-ktx:1.6.0'
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation 'androidx.appcompat:appcompat:1.3.1'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation fileTree(dir: 'libs', include: ['*.aar', '*.jar'], exclude: [])
+    implementation project(path: ':zxinglibs')
+    implementation 'com.google.android.material:material:1.2.1'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
+    implementation 'androidx.biometric:biometric:1.1.0'
+    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.21'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.okhttp3:okhttp:4.9.1'
+    implementation 'org.java-websocket:Java-WebSocket:1.5.1'
+    implementation 'org.bouncycastle:bcprov-jdk15to18:1.69'
+    //Glide图片加载
+    implementation 'com.github.bumptech.glide:glide:4.15.1'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.15.1'
+    implementation ("com.github.bumptech.glide:okhttp3-integration:4.15.1") {
+        exclude group: 'glide-parent'
+    }
+
+    //Lottie动画加载
+    implementation 'com.airbnb.android:lottie:4.1.0'
+    implementation 'com.alibaba:fastjson:1.1.70.android'
+
+    //eventbus
+    implementation 'org.greenrobot:eventbus:3.2.0'
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    //pdf-viewer
+    implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'
+
+    implementation  'com.scwang.smart:refresh-layout-kernel:2.0.3'      //核心必须依赖
+    implementation  'com.scwang.smart:refresh-header-classics:2.0.3'    //经典刷新头
+
+    implementation project(path: ':office')
+
+    implementation 'com.google.android.material:material:1.2.0'
+    
+    //ExoPlayer2 播放器
+    implementation 'com.google.android.exoplayer:exoplayer:2.18.2'
+
+}

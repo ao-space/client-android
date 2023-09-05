@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2022 Institute of Software, Chinese Academy of Sciences (ISCAS)
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+-->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white_ffffffff"
+    android:id="@+id/layout_root">
+
+    <RelativeLayout
+        android:id="@+id/layout_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+        <xyz.eulix.space.view.photoview.PhotoView
+            android:id="@+id/image_picture"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:layout_centerInParent="true"
+            android:scaleType="fitCenter"/>
+
+        <LinearLayout
+            android:id="@+id/layout_thumb_default"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:background="@color/white_fff5f6fa"
+            android:visibility="gone">
+            <ImageView
+                android:layout_width="@dimen/dp_134"
+                android:layout_height="@dimen/dp_134"
+                android:src="@drawable/img_preview_default"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/img_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
+
+    <ScrollView
+        android:id="@+id/scroll_view_txt"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/dp_69"
+        android:layout_marginBottom="@dimen/dp_80"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/tv_txt_content"
+            style="@style/s_13_ff333333"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_25"
+            android:layout_marginRight="@dimen/dp_25"
+            android:textIsSelectable="true"/>
+    </ScrollView>
+
+    <com.github.barteksc.pdfviewer.PDFView
+        android:id="@+id/pdf_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/dp_69"
+        android:layout_marginBottom="@dimen/dp_80"
+        android:visibility="gone"/>
+
+    <RelativeLayout
+        android:id="@+id/layout_office"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/dp_69"
+        android:layout_marginBottom="@dimen/dp_80"
+        android:visibility="gone"/>
+
+    <RelativeLayout
+        android:id="@+id/layout_preview_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/dp_100"
+        android:layout_centerInParent="true"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/img_empty"
+            android:layout_width="@dimen/dp_182"
+            android:layout_height="@dimen/dp_123"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/no_data_background"
+            android:paddingLeft="@dimen/dp_58"
+            android:paddingTop="@dimen/dp_31"
+            android:paddingRight="@dimen/dp_58"
+            android:paddingBottom="@dimen/dp_25"
+            android:src="@drawable/icon_preview_error" />
+
+        <TextView
+            style="@style/s_12_ffbcbfcd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/img_empty"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dp_19"
+            android:text="@string/preview_loading_failed" />
+
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/tv_show_original_image"
+        style="@style/s_10_ffffffff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dp_88"
+        android:paddingTop="@dimen/dp_7"
+        android:paddingBottom="@dimen/dp_7"
+        android:paddingLeft="@dimen/dp_14"
+        android:paddingRight="@dimen/dp_14"
+        android:background="@drawable/background_80000000_rectangle_10"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone"/>
+
+    <RelativeLayout
+        android:id="@+id/layout_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_52">
+        
+        <xyz.eulix.space.view.TitleBarWithSelect
+            android:id="@+id/title_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white_ffffffff"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_cache"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layout_title"
+        android:layout_marginTop="@dimen/dp_100"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/img_sync_icon"
+            android:layout_width="@dimen/dp_38"
+            android:layout_height="@dimen/dp_38"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:id="@+id/tv_file_name"
+            style="@style/s_15_ff333333"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_65"
+            android:layout_marginTop="@dimen/dp_19"
+            android:layout_marginRight="@dimen/dp_65"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/tv_file_size"
+            style="@style/s_12_ff85899c"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_6"
+            android:layout_marginLeft="@dimen/dp_65"
+            android:layout_marginTop="@dimen/dp_29"
+            android:layout_marginRight="@dimen/dp_65"
+            android:layout_toLeftOf="@id/img_control_state"
+            android:max="100"
+            android:progressDrawable="@drawable/transfer_progress_dialog_bg"/>
+
+        <TextView
+            android:id="@+id/tv_not_support"
+            style="@style/s_12_fff6222d"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_19"
+            android:text="@string/preview_not_support"
+            android:visibility="gone"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/file_edit_container"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_64"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white_ffffffff"
+        android:orientation="horizontal"
+        android:visibility="gone" />
+
+    <xyz.eulix.space.view.SectorProgressView
+        android:id="@+id/circle_progress_view"
+        android:layout_width="@dimen/dp_20"
+        android:layout_height="@dimen/dp_20"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="@dimen/dp_20"
+        android:layout_marginBottom="@dimen/dp_88"
+        android:visibility="gone"/>
+
+</RelativeLayout>

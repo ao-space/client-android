@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2022 Institute of Software, Chinese Academy of Sciences (ISCAS)
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+-->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white_ffffffff"
+    tools:context=".ui.authorization.LanIpInputActivity">
+
+    <xyz.eulix.space.view.TitleBarWithSelect
+        android:id="@+id/title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tv_tip"
+        style="@style/s_13_ff333333"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title_bar"
+        android:layout_marginLeft="@dimen/dp_25"
+        android:layout_marginTop="@dimen/dp_15"
+        android:layout_marginRight="@dimen/dp_25"
+        android:text="@string/input_lan_ip_tip"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tv_pre"
+        style="@style/s_15_ff333333"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dp_57"
+        android:layout_below="@id/tv_tip"
+        android:layout_marginLeft="@dimen/dp_25"
+        android:gravity="center"
+        android:text="https://" />
+
+    <xyz.eulix.space.view.NormalEditInputView
+        android:id="@+id/input_view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_57"
+        android:layout_below="@id/tv_tip"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_25"
+        android:layout_toRightOf="@id/tv_pre"
+        app:inputHint="@string/ip_input_hint"
+        app:isPwdStyle="false" />
+
+    <ImageView
+        android:id="@+id/img_split"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:layout_below="@id/tv_pre"
+        android:layout_marginLeft="@dimen/dp_25"
+        android:layout_marginRight="@dimen/dp_25"
+        android:background="@color/white_fff7f7f9" />
+
+    <LinearLayout
+        android:id="@+id/layout_confirm"
+        android:layout_width="@dimen/dp_192"
+        android:layout_height="@dimen/dp_42"
+        android:layout_below="@id/img_split"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/dp_47"
+        android:background="@drawable/background_ffdfe0e5_rectangle_10"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/loading_animation"
+            android:layout_width="@dimen/dp_15"
+            android:layout_height="@dimen/dp_15"
+            android:layout_marginRight="@dimen/dp_9"
+            android:visibility="gone" />
+
+        <TextView
+            style="@style/s_15_ffffffff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/next_step"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</RelativeLayout>

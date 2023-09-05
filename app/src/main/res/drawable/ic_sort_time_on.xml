@@ -1,0 +1,50 @@
+<!--
+  ~ Copyright (c) 2022 Institute of Software, Chinese Academy of Sciences (ISCAS)
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+-->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+  <path
+      android:pathData="M0,0h24v24h-24z"
+      android:strokeAlpha="0"
+      android:strokeWidth="1"
+      android:fillColor="#000000"
+      android:fillType="nonZero"
+      android:strokeColor="#00000000"
+      android:fillAlpha="0"/>
+  <path
+      android:pathData="M14.1048,6.75C13.6787,6.75 13.3333,6.4142 13.3333,6C13.3333,5.5858 13.6787,5.25 14.1048,5.25L21.5619,5.25C21.988,5.25 22.3333,5.5858 22.3333,6C22.3333,6.4142 21.988,6.75 21.5619,6.75L14.1048,6.75ZM15.8819,11.25C15.3987,11.25 15.0069,10.9142 15.0069,10.5C15.0069,10.0858 15.3987,9.75 15.8819,9.75L21.4583,9.75C21.9416,9.75 22.3333,10.0858 22.3333,10.5C22.3333,10.9142 21.9416,11.25 21.4583,11.25L15.8819,11.25ZM14.0359,15.75C13.6479,15.75 13.3333,15.4142 13.3333,15C13.3333,14.5858 13.6479,14.25 14.0359,14.25L21.6307,14.25C22.0188,14.25 22.3333,14.5858 22.3333,15C22.3333,15.4142 22.0188,15.75 21.6307,15.75L14.0359,15.75ZM2.625,20.25C2.1418,20.25 1.75,19.9142 1.75,19.5C1.75,19.0858 2.1418,18.75 2.625,18.75L21.4583,18.75C21.9416,18.75 22.3333,19.0858 22.3333,19.5C22.3333,19.9142 21.9416,20.25 21.4583,20.25L2.625,20.25Z"
+      android:strokeWidth="1"
+      android:fillColor="#337AFF"
+      android:fillType="nonZero"
+      android:strokeColor="#00000000"/>
+  <path
+      android:pathData="M7.5,10.5m-4.75,0a4.75,4.75 0,1 1,9.5 0a4.75,4.75 0,1 1,-9.5 0"
+      android:strokeWidth="1.5"
+      android:fillColor="#00000000"
+      android:strokeColor="#337AFF"
+      android:fillType="evenOdd"/>
+  <path
+      android:pathData="M7.5,8.0488l0,2.4512l2.3026,0"
+      android:strokeLineJoin="round"
+      android:strokeWidth="1.5"
+      android:fillColor="#00000000"
+      android:strokeColor="#337AFF"
+      android:fillType="evenOdd"
+      android:strokeLineCap="round"/>
+</vector>

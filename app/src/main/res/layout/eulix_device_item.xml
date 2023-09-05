@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2022 Institute of Software, Chinese Academy of Sciences (ISCAS)
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+-->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_71">
+
+        <TextView
+            android:id="@+id/eulix_device_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:textColor="@color/black_ff333333"
+            android:textSize="@dimen/dp_17"
+            android:textStyle="normal" />
+
+        <TextView
+            android:id="@+id/eulix_device_state"
+            android:layout_width="@dimen/dp_38"
+            android:layout_height="@dimen/dp_21"
+            android:layout_toEndOf="@id/eulix_device_name"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:textSize="@dimen/dp_10"
+            android:textStyle="normal" />
+
+        <Button
+            android:id="@+id/eulix_device_function"
+            android:layout_width="@dimen/dp_77"
+            android:layout_height="@dimen/dp_35"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/dp_0"
+            android:textSize="@dimen/dp_13"
+            android:textStyle="normal" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/eulix_device_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_56"
+        android:layout_marginBottom="@dimen/dp_18"
+        android:visibility="gone"
+        android:gravity="center_vertical"
+        android:textColor="@color/gray_ff85899c"
+        android:textSize="@dimen/dp_12"
+        android:textStyle="normal"
+        style="?android:attr/borderlessButtonStyle" />
+</RelativeLayout>

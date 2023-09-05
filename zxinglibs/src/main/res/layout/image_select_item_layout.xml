@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2022 Institute of Software, Chinese Academy of Sciences (ISCAS)
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+-->
+
+<com.google.zxing.client.android.widget.ScaleHeightRelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:width_ratio = "1"
+    app:height_ratio = "1"
+    android:padding="1dp">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/image_item"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        app:shapeAppearance="@style/shapeImageStyleRound"
+        android:src="@drawable/icon_smart_album_photo_default"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/video_duration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@id/image_item"
+        android:layout_alignBottom="@id/image_item"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="4dp"
+        android:textColor="@android:color/white"
+        android:textSize="12sp"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/img_mask"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@id/image_item"
+        android:layout_alignTop="@id/image_item"
+        android:layout_alignEnd="@id/image_item"
+        android:layout_alignBottom="@id/image_item"
+        android:background="@drawable/background_30000000_rectangle_4"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/layout_check"
+        android:layout_width="@dimen/dp_40"
+        android:layout_height="@dimen/dp_40"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/checkbox_select"
+            android:layout_width="21dp"
+            android:layout_height="21dp"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/background_checkbox_image_select_state"
+            android:button="@null"
+            android:checked="false" />
+    </LinearLayout>
+
+
+</com.google.zxing.client.android.widget.ScaleHeightRelativeLayout>

@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2022 Institute of Software, Chinese Academy of Sciences (ISCAS)
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+-->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <include layout="@layout/eulix_space_title" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/bind_result_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0px"
+                android:layout_weight="63" />
+
+            <ImageView
+                android:id="@+id/bind_result_image"
+                android:layout_width="@dimen/dp_86"
+                android:layout_height="@dimen/dp_84"
+                android:layout_gravity="center_horizontal"
+                android:scaleType="fitCenter" />
+
+            <TextView
+                android:id="@+id/bind_result_text"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_62"
+                android:layout_marginStart="@dimen/dp_25"
+                android:layout_marginEnd="@dimen/dp_25"
+                android:gravity="center_horizontal|bottom"
+                android:textColor="@color/black_ff333333"
+                android:textSize="@dimen/dp_17"
+                android:textStyle="normal" />
+
+            <TextView
+                android:id="@+id/bind_result_hint"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_39"
+                android:layout_marginStart="@dimen/dp_25"
+                android:layout_marginEnd="@dimen/dp_25"
+                android:gravity="center"
+                android:textColor="@color/c_ff85899c"
+                android:textSize="@dimen/dp_12"
+                android:textStyle="normal" />
+
+            <Button
+                android:id="@+id/bind_return"
+                android:layout_width="@dimen/dp_86"
+                android:layout_height="@dimen/dp_37"
+                android:layout_gravity="center_horizontal"
+                android:background="@android:color/transparent"
+                android:autoLink="all"
+                android:text="@string/return_back"
+                android:textAllCaps="false"
+                android:textColor="@color/blue_ff337aff"
+                android:textSize="@dimen/dp_12"
+                android:textStyle="normal" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0px"
+                android:layout_weight="259" />
+
+            <include layout="@layout/eulix_space_common_loading_button_container"
+                android:layout_width="@dimen/dp_192"
+                android:layout_height="@dimen/dp_42"
+                android:layout_gravity="center_horizontal" />
+
+            <Button
+                android:id="@+id/bind_function_cancel"
+                android:layout_width="@dimen/dp_192"
+                android:layout_height="@dimen/dp_42"
+                android:layout_marginTop="@dimen/dp_9"
+                android:layout_gravity="center_horizontal"
+                android:background="@android:color/transparent"
+                android:textAllCaps="false"
+                android:textColor="@color/gray_ff85899c"
+                android:textSize="@dimen/dp_15"
+                android:textStyle="normal"
+                android:visibility="invisible"
+                style="?android:attr/borderlessButtonStyle" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0px"
+                android:layout_weight="34" />
+        </LinearLayout>
+
+        <!--todo 未初始化页面-->
+        <LinearLayout
+            android:id="@+id/uninitialized_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0px"
+                android:layout_weight="63" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_45"
+                android:layout_marginEnd="@dimen/dp_45"
+                android:gravity="center_horizontal"
+                android:text="@string/incomplete_disk_initialization"
+                android:textColor="@color/black_ff333333"
+                android:textSize="@dimen/dp_17"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0px"
+                android:layout_weight="19" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_45"
+                android:layout_marginEnd="@dimen/dp_45"
+                android:text="@string/incomplete_disk_initialization_content"
+                android:textColor="@color/gray_ff85899c"
+                android:textSize="@dimen/dp_13"
+                android:textStyle="normal" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0px"
+                android:layout_weight="20" />
+
+            <ImageView
+                android:id="@+id/uninitialized_indicator"
+                android:layout_width="@dimen/dp_29"
+                android:layout_height="@dimen/dp_29"
+                android:layout_gravity="center_horizontal"
+                android:scaleType="fitCenter" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0px"
+                android:layout_weight="18" />
+
+            <TextView
+                android:id="@+id/uninitialized_hint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_45"
+                android:layout_marginEnd="@dimen/dp_45"
+                android:gravity="center_horizontal"
+                android:textColor="@color/gray_ff85899c"
+                android:textSize="@dimen/dp_12"
+                android:textStyle="normal" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0px"
+                android:layout_weight="48" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_45"
+                android:layout_marginEnd="@dimen/dp_45"
+                android:text="@string/connection_status_colon"
+                android:textColor="@color/gray_ff85899c"
+                android:textSize="@dimen/dp_13"
+                android:textStyle="normal" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0px"
+                android:layout_weight="10" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginStart="@dimen/dp_45"
+                android:layout_marginEnd="@dimen/dp_45"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/wifi_state_ssid"
+                    android:layout_width="0px"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ellipsize="middle"
+                    android:singleLine="true"
+                    android:textColor="@color/black_ff333333"
+                    android:textSize="@dimen/dp_15"
+                    android:textStyle="normal" />
+
+                <ImageView
+                    android:id="@+id/wifi_state_signal"
+                    android:layout_width="@dimen/dp_25"
+                    android:layout_height="@dimen/dp_25"
+                    android:layout_marginStart="@dimen/dp_10"
+                    android:scaleType="fitCenter" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0px"
+                android:layout_weight="17" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_1"
+                android:layout_marginStart="@dimen/dp_45"
+                android:layout_marginEnd="@dimen/dp_45"
+                android:background="@color/white_fff7f7f9" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0px"
+                android:layout_weight="82" />
+
+            <Button
+                android:id="@+id/disk_initialize_button"
+                android:layout_width="@dimen/dp_192"
+                android:layout_height="@dimen/dp_42"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/background_ff337aff_ff16b9ff_rectangle_10"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/dp_15"
+                android:textStyle="normal"
+                style="?android:attr/borderlessButtonStyle" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0px"
+                android:layout_weight="171" />
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

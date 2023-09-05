@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2022 Institute of Software, Chinese Academy of Sciences (ISCAS)
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+-->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_52">
+
+        <include layout="@layout/eulix_space_title_extension"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <LinearLayout
+            android:id="@+id/select_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <Button
+                android:id="@+id/cancel"
+                android:layout_width="@dimen/dp_84"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:background="@android:color/transparent"
+                android:text="@string/cancel"
+                android:textAllCaps="false"
+                android:textColor="@color/blue_ff337aff"
+                android:textSize="@dimen/dp_17"
+                android:textStyle="normal" />
+
+            <TextView
+                android:id="@+id/file_select"
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_horizontal"
+                android:ellipsize="start"
+                android:singleLine="true"
+                android:textColor="@color/black_ff333333"
+                android:textSize="@dimen/dp_17"
+                android:textStyle="normal" />
+
+            <Button
+                android:id="@+id/select"
+                android:layout_width="@dimen/dp_84"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:background="@android:color/transparent"
+                android:textAllCaps="false"
+                android:textColor="@color/blue_ff337aff"
+                android:textSize="@dimen/dp_17"
+                android:textStyle="normal" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh_container"
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="1">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/exception_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:visibility="gone">
+
+                <include layout="@layout/network_exception_view" />
+
+                <include layout="@layout/status_404_view" />
+
+                <include layout="@layout/empty_recycle_bin_view" />
+            </RelativeLayout>
+
+            <FrameLayout
+                android:id="@+id/file_sub_view_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </FrameLayout>
+        </RelativeLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <LinearLayout
+        android:id="@+id/file_edit_container"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_64"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        android:background="@android:color/white">
+
+    </LinearLayout>
+</LinearLayout>

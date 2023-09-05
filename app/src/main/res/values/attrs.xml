@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2022 Institute of Software, Chinese Academy of Sciences (ISCAS)
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+-->
+
+<resources>
+    <declare-styleable name="ScaleHeightLayout">
+        <attr name="width_ratio" format="integer" />
+        <attr name="height_ratio" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="VerificationCodeInput">
+        <attr name="input_count" format="integer" />
+        <attr name="show_soft" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="AutoScrollBanner">
+        <attr name="banner_type" format="integer"/>
+    </declare-styleable>
+
+    <!--密码输入layout-->
+    <declare-styleable name="PassWordLayoutStyle">
+        <attr name="box_input_color" format="reference" />//输入框输入状态颜色
+        <attr name="box_no_input_color" format="reference" />//输入框未输入状态颜色
+        <attr name="input_line_color" format="reference" />//输入线颜色
+        <attr name="text_input_color" format="reference" />//文本颜色
+        <attr name="interval_width" format="dimension" />//间隔
+        <attr name="item_width" format="dimension" />//子View宽
+        <attr name="item_height" format="dimension" />//子View高
+        <attr name="draw_txt_size" format="dimension" />//文本大小
+        <attr name="draw_box_line_size" format="dimension" />//输入线条大小
+        <attr name="is_show_input_line" format="boolean" />//是否显示输入线
+        <attr name="pass_inputed_type">//密码输入显示内容
+            <flag name="circle" value="0" />
+            <flag name="stars" value="1" />
+            <flag name="text" value="2" />
+        </attr>
+        <attr name="box_draw_type">//密码框形状
+            <flag name="rect" value="0" />
+            <flag name="circle" value="1" />
+            <flag name="line" value="2" />
+        </attr>
+        <attr name="pass_leng">//密码长度 只考虑4 6 8
+            <flag name="four" value="4" />
+            <flag name="six" value="6" />
+            <flag name="eight" value="8" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="TasksCompletedView">
+        <attr name="radius" format="dimension" />
+        <attr name="strokeWidthT" format="dimension" />
+        <attr name="circleColor" format="color" />
+        <attr name="ringColor" format="color" />
+        <attr name="ringBgColor" format="color" />
+    </declare-styleable>
+
+    <!--圆环进度条-->
+    <declare-styleable name="RingProgressBar">
+        <attr name="ringNormalColor" format="color" />
+        <attr name="ringProgressColor" format="color" />
+        <attr name="ringWidth" format="dimension" />
+        <attr name="textColor" format="color" />
+        <attr name="textSize" format="dimension" />
+        <attr name="max" format="integer" />
+        <attr name="textIsDisplayable" format="boolean" />
+        <attr name="style">
+            <enum name="STROKE" value="0" />
+            <enum name="FILL" value="1" />
+        </attr>
+    </declare-styleable>
+
+    <!--圆弧进度条-->
+    <declare-styleable name="CircleProgressView">
+        <attr name="radiusCircle" format="dimension"/>
+        <attr name="strokeWidthCircle" format="dimension"/>
+        <attr name="circleColorCircle" format="color"/>
+        <attr name="ringColorCircle" format="color"/>
+        <attr name="ringBgColorCircle" format="color"/>
+    </declare-styleable>
+
+    <declare-styleable name="EraseProgressView">
+        <attr name="radiusE" format="dimension"/>
+        <attr name="strokeWidthE" format="dimension"/>
+    </declare-styleable>
+
+    <declare-styleable name="NormalPasswordInputView">
+        <!--文本输入框hint提示-->
+        <attr name="inputHint" format="string"/>
+        <!--是否为密码样式-->
+        <attr name="isPwdStyle" format="boolean"/>
+        <!--最大长度-->
+        <attr name="inputMaxLength" format="integer"/>
+    </declare-styleable>
+
+    <declare-styleable name="SimpleScrollbar">
+        <attr name="trackBackground" format="reference" />
+        <attr name="thumbBackground" format="reference" />
+    </declare-styleable>
+
+    <!--圆弧进度条-->
+    <declare-styleable name="CirclePgBarTasksCompletedView">
+        <attr name="circleWidth" format="dimension" />
+        <attr name="cPringColor" format="color" />
+        <attr name="cPringBgColor" format="color" />
+        <attr name="text" format="string" />
+        <attr name="progress" format="integer" />
+        <attr name="cPmax" format="integer" />
+        <attr name="cPtextSize" format="float" />
+    </declare-styleable>
+</resources>

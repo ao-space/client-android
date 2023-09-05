@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2022 Institute of Software, Chinese Academy of Sciences (ISCAS)
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+-->
+
+<resources>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="cyan_caf7">#FF96CAF7</color>
+
+    <color name="black_ff333333">#FF333333</color>
+    <color name="black_cc000000">#CC000000</color>
+    <color name="black_80000000">#80000000</color>
+    <color name="black_24000000">#24000000</color>
+    <color name="gray_ff85899c">#FF85899C</color>
+    <color name="gray_ffbcbfcd">#FFBCBFCD</color>
+    <color name="gray_ffcecece">#FFCECECE</color>
+    <color name="white_ffffffff">#FFFFFFFF</color>
+    <color name="white_4dffffff">#4DFFFFFF</color>
+    <color name="white_fff9f9f9">#FFF9F9F9</color>
+    <color name="white_fff7f7f9">#FFF7F7F9</color>
+    <color name="white_fff5f6fa">#FFF5F6FA</color>
+    <color name="white_ffedf3ff">#FFEDF3FF</color>
+    <color name="white_ffdfe0e5">#FFDFE0E5</color>
+    <color name="white_ffebecf0">#FFEBECF0</color>
+    <color name="white_ffe5e6ec">#FFE5E6EC</color>
+    <color name="white_ffe4e7ed">#FFE4E7ED</color>
+    <color name="red_fff6222d">#FFF6222D</color>
+    <color name="red_ffffe3e4">#FFFFE3E4</color>
+    <color name="green_ff43d9af">#FF43D9AF</color>
+    <color name="blue_ff337aff">#FF337AFF</color>
+    <color name="blue_b3337aff">#B3337AFF</color>
+    <color name="blue_26337aff">#26337Aff</color>
+    <color name="blue_4d337aff">#4D337AFF</color>
+    <color name="blue_ffdfeaff">#FFDFEAFF</color>
+    <color name="cyan_ff16b9ff">#FF16B9FF</color>
+    <color name="cyan_ffe8f0ff">#FFE8F0FF</color>
+    <color name="cyan_ffdcfef4">#FFDCFEF4</color>
+    <color name="gray_ffd3d5df">#FFD3D5DF</color>
+    <color name="blue_ffb6cfff">#FFB6CFFF</color>
+    <color name="blue_ffdae6ff">#FFDAE6FF</color>
+    <color name="white_fff2f7ff">#FFF2F7FF</color>
+    <color name="c_ffd2dcef">#FFD2DCEF</color>
+
+    <color name="c_ff337aff">#FF337AFF</color>
+    <color name="c_ff85899c">#FF85899C</color>
+    <color name="c_ffbcbfcd">#FFBCBFCD</color>
+    <color name="c_30000000">#30000000</color>
+    <color name="c_000000">#000000</color>
+    <color name="c_ff00c991">#FF00C991</color>
+    <color name="c_ffe3eaf8">#FFE3EAF8</color>
+    <color name="c_ffe6e8ed">#FFE6E8ED</color>
+    <color name="c_fff8faff">#FFF8FAFF</color>
+    <color name="c_ffaeb2c9">#FFAEB2C9</color>
+    <color name="c_eeeff5">#FFEEEFF5</color>
+    <color name="c_e5e6ec">#FFE5E6EC</color>
+    <color name="c_c3d8ff">#FFC3D8FF</color>
+    <color name="c_baebff">#FFBAEBFF</color>
+
+    <color name="pass_view_rect_input">#FFF5F6FA</color>
+    <color name="regi_line_color">#FFF5F6FA</color>
+</resources>
