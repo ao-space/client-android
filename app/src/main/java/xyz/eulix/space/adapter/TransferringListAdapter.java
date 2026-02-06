@@ -141,7 +141,7 @@ public class TransferringListAdapter extends RecyclerView.Adapter<TransferringLi
 
         holder.itemView.setOnClickListener(v -> {
             if (isSelectMode) {
-                Logger.d("zfy", "isSelectMode");
+                Logger.d("isSelectMode");
                 boolean selectedState = (boolean) holder.itemView.getTag();
                 boolean isSelected = !selectedState;
                 holder.itemView.setTag(isSelected);
@@ -386,10 +386,10 @@ public class TransferringListAdapter extends RecyclerView.Adapter<TransferringLi
             int lastProgress = holder.progressBar.getProgress();
             if (progress <= lastProgress) {
                 //防止进度条回退
-                Logger.d("zfy", "currentProgress less than last");
+                Logger.d("currentProgress less than last");
                 return;
             }
-            Logger.d("zfy", "set progress:" + progress);
+            Logger.d("set progress:" + progress);
             if (progress < 3) {
                 //圆角进度进度太少时会变形，需要切割
                 holder.progressBar.setProgressDrawable(context.getDrawable(R.drawable.transfer_progress_dialog_bg_less));

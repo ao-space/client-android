@@ -89,7 +89,7 @@ public class ThumbManager {
             return;
         }
         if (downloadingZipList.contains(uuid)) {
-            Logger.d("zfy", "current thumb is downloading by zip " + uuid);
+            Logger.d("current thumb is downloading by zip " + uuid);
             return;
         }
         if (queueList.contains(uuid)) {
@@ -106,7 +106,7 @@ public class ThumbManager {
 
     public void start() {
         if (isCaching) {
-            Logger.d("zfy", "thumbs is caching");
+            Logger.d("thumbs is caching");
         } else {
             isCaching = true;
             startCore();
@@ -120,7 +120,7 @@ public class ThumbManager {
         }
         //限制数量
         if (queueList.size() > 0) {
-            Logger.d("zfy", "0 thumb currentSize=" + currentList.size() + ",queueSize=" + queueList.size());
+            Logger.d("0 thumb currentSize=" + currentList.size() + ",queueSize=" + queueList.size());
             int realLimitCount = Math.min(LIMIT_COUNT, queueList.size());
             while (currentList.size() < realLimitCount) {
                 String tempUuidStr = "";
@@ -134,7 +134,7 @@ public class ThumbManager {
                 if (TextUtils.isEmpty(tempUuidStr)) {
                     break;
                 }
-                Logger.d("zfy", "1 thumb currentSize=" + currentList.size() + ",queueSize=" + queueList.size());
+                Logger.d("1 thumb currentSize=" + currentList.size() + ",queueSize=" + queueList.size());
                 final String uuidStr = tempUuidStr;
                 executor.execute(() -> {
                     if (localPathMap.contains(uuidStr)) {
@@ -156,7 +156,7 @@ public class ThumbManager {
                     }
 
                     //发起缓存
-                    Logger.d("zfy", "thumb cache start!current uuid:" + uuidStr);
+                    Logger.d("thumb cache start!current uuid:" + uuidStr);
                     GatewayCommunicationBase gatewayCommunicationBase = GatewayUtils.generateGatewayCommunication(EulixSpaceApplication.getContext());
                     if (gatewayCommunicationBase != null) {
                         String from = fromMap.get(uuidStr);
@@ -169,7 +169,7 @@ public class ThumbManager {
                                 ConstantField.BoxVersionName.VERSION_0_1_0, EulixSpaceApplication.getContext(), from, new ThumbCacheCallback() {
                                     @Override
                                     public void onResult(String uuid, String absolutePath) {
-                                        Logger.d("zfy", "thumb cache success!uuid=" + uuid + ",path=" + absolutePath);
+                                        Logger.d("thumb cache success!uuid=" + uuid + ",path=" + absolutePath);
                                         currentList.remove(uuid);
                                         queueList.remove(uuid);
                                         fromMap.remove(uuid);
@@ -187,20 +187,20 @@ public class ThumbManager {
 
                                     @Override
                                     public void onError(String msg) {
-                                        Logger.d("zfy", "thumb cache failed:" + msg);
+                                        Logger.d("thumb cache failed:" + msg);
                                         //单项最多重试次数限制
                                         int thisItemFailedTime = 0;
                                         if (itemFailedTimes.containsKey(uuidStr)) {
                                             thisItemFailedTime = itemFailedTimes.get(uuidStr);
                                         }
                                         if (thisItemFailedTime < RETRY_TIME) {
-                                            Logger.d("zfy", "item " + uuidStr + " failed time is:" + thisItemFailedTime + ",retry!");
+                                            Logger.d("item " + uuidStr + " failed time is:" + thisItemFailedTime + ",retry!");
                                             currentList.remove(uuidStr);
                                             thisItemFailedTime++;
                                             itemFailedTimes.put(uuidStr, thisItemFailedTime);
                                         } else {
                                             //超过重试次数
-                                            Logger.d("zfy", "item failed too many time,give up " + uuidStr);
+                                            Logger.d("item failed too many time,give up " + uuidStr);
                                             if (currentList.contains(uuidStr)) {
                                                 currentList.remove(uuidStr);
                                                 queueList.remove(uuidStr);
@@ -222,13 +222,13 @@ public class ThumbManager {
 
         } else if (isCaching) {
             isCaching = false;
-            Logger.d("zfy", "thumb cache stop! currentSize=" + currentList.size() + ",queueSize=" + queueList.size());
+            Logger.d("thumb cache stop! currentSize=" + currentList.size() + ",queueSize=" + queueList.size());
         }
     }
 
     //取消缓存
     public void cancelCache() {
-        Logger.d("zfy", "thumb cache cancel");
+        Logger.d("thumb cache cancel");
         if (executor != null) {
             executor.shutdown();
             executor = null;

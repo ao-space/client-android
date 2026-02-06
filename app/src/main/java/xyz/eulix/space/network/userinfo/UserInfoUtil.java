@@ -139,7 +139,7 @@ public class UserInfoUtil {
                                         }
                                     }
                                     if (isFind) {
-                                        Logger.d("zfy", "getUserInfo success, name:" + name + ",sign:" + sign);
+                                        Logger.d("getUserInfo success, name:" + name + ",sign:" + sign);
                                         Map<String, String> userMap = new HashMap<>();
                                         userMap.put(NICKNAME, name);
                                         userMap.put(SIGNATURE, sign);
@@ -163,7 +163,7 @@ public class UserInfoUtil {
 
                                 @Override
                                 public void onError(String msg) {
-                                    Logger.d("zfy", "get user info error:" + msg);
+                                    Logger.d("get user info error:" + msg);
                                 }
                             });
                 });
@@ -969,8 +969,8 @@ public class UserInfoUtil {
 
                 if (isFindSpace && !TextUtils.isEmpty(clientUuid)) {
 
-                    Logger.d("zfy", "authKey=" + authKey);
-                    Logger.d("zfy", "clientUuid=" + clientUuid);
+                    Logger.d("authKey=" + authKey);
+                    Logger.d("clientUuid=" + clientUuid);
 
                     CreateTokenInfo createTokenInfo = new CreateTokenInfo();
                     createTokenInfo.setEncryptedAuthKey(EncryptionUtil.encrypt(ConstantField.Algorithm.Transformation.RSA_ECB_PKCS1
@@ -980,7 +980,7 @@ public class UserInfoUtil {
                     if (isAdmin) {
                         String encryptPwd = EncryptionUtil.encrypt(ConstantField.Algorithm.Transformation.RSA_ECB_PKCS1
                                 , null, password, boxPublicKeyValue, null, null);
-                        Logger.d("zfy", "pwd=" + password + ";encryptPwd=" + encryptPwd);
+                        Logger.d("pwd=" + password + ";encryptPwd=" + encryptPwd);
                         createTokenInfo.setEncryptedPasscode(encryptPwd);
                     }
                     String baseUrl = Urls.getBaseUrl();

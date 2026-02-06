@@ -90,32 +90,10 @@ public class SpacePlatformEnvironmentPresenter extends AbsPresenter<SpacePlatfor
                         }
                     }
                     if (subHost != null && !TextUtils.isEmpty(subHost)) {
-                        boolean isOfficialSpaceDomain = true;
-                        String serverUrl = null;
-                        switch (subHost) {
-                            case ConstantField.URL.PROD_SPACE_API:
-                                serverUrl = ConstantField.URL.PROD_WEB_BASE_URL;
-                                break;
-                            case ConstantField.URL.RC_SPACE_API:
-                                serverUrl = ConstantField.URL.RC_WEB_BASE_URL;
-                                break;
-                            case ConstantField.URL.DEV_SPACE_API:
-                                serverUrl = ConstantField.URL.DEV_WEB_BASE_URL;
-                                break;
-                            case ConstantField.URL.TEST_SPACE_API:
-                                serverUrl = ConstantField.URL.TEST_WEB_BASE_URL;
-                                break;
-                            case ConstantField.URL.QA_SPACE_API:
-                                serverUrl = ConstantField.URL.QA_WEB_BASE_URL;
-                                break;
-                            case ConstantField.URL.SIT_SPACE_API:
-                                serverUrl = ConstantField.URL.SIT_WEB_BASE_URL;
-                                break;
-                            default:
-                                isOfficialSpaceDomain = false;
-                                serverUrl = "https://" + subHost;
-                                break;
-                        }
+                        boolean isOfficialSpaceDomain = ConstantField.URL.PROD_SPACE_API.equals(subHost);
+                        String serverUrl = isOfficialSpaceDomain
+                                ? ConstantField.URL.PROD_WEB_BASE_URL
+                                : "https://" + subHost;
                         spacePlatformInfo = new SpacePlatformInfo();
                         spacePlatformInfo.setPrivateSpacePlatform(!isOfficialSpaceDomain);
                         spacePlatformInfo.setPlatformServerUrl(serverUrl);

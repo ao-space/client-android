@@ -29,6 +29,7 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import xyz.eulix.space.util.ConstantField;
+import xyz.eulix.space.util.DeploymentModeUtil;
 import xyz.eulix.space.util.Logger;
 
 /**
@@ -40,6 +41,18 @@ public class RegisterDeviceManager {
     private static Retrofit retrofit;
 
     public static void registerDevice(RegisterDeviceRequestBody requestBody, final IRegisterDeviceCallback callback) {
+        Logger.i(TAG, "registerDevice start, noPlatformMode=" + DeploymentModeUtil.isNoPlatformMode()
+                + ", baseUrl=" + Logger.safeUrl(ConstantField.URL.BASE_SERVER_URL_RELEASE));
+        if (DeploymentModeUtil.isNoPlatformMode()) {
+            Logger.d(TAG, "skip register-device request in no-platform mode");
+            if (callback != null) {
+                RegisterDeviceResponseBody result = new RegisterDeviceResponseBody();
+                result.setCode(200);
+                result.setData("skip register in no-platform mode");
+                callback.onResult(result);
+            }
+            return;
+        }
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
                     .baseUrl(ConstantField.URL.BASE_SERVER_URL_RELEASE)

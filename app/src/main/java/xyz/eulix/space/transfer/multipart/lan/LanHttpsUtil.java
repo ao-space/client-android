@@ -90,7 +90,7 @@ public class LanHttpsUtil {
         @Override
         public void checkServerTrusted(X509Certificate[] chain, String authType)
                 throws CertificateException {
-            Logger.d("zfy", "checkServerTrusted");
+            Logger.d("checkServerTrusted");
             if (chain == null || chain.length == 0) {
                 throw new CertificateException("checkServerTrusted: X509Certificate array is null");
             }
@@ -125,13 +125,13 @@ public class LanHttpsUtil {
 
             if (!clientEncoded.equals(serverEncoded)) {
                 //证书验证失败，重新下载
-                Logger.d("zfy", "verify cert failed!");
+                Logger.d("verify cert failed!");
                 LanManager.getInstance().resetHttpsCertInfo();
-                Logger.d("zfy", "clientPublicKeyEncode=" + clientPublicKeyEncode);
-                Logger.d("zfy", "serverPublicKeyEncode=" + serverPublicKeyEncode);
+                Logger.d("clientPublicKeyEncode=" + clientPublicKeyEncode);
+                Logger.d("serverPublicKeyEncode=" + serverPublicKeyEncode);
                 throw new CertificateException("server's PublicKey is not equals to client's PublicKey");
             }
-            Logger.d("zfy", "verify cert pass");
+            Logger.d("verify cert pass");
         }
 
         @Override

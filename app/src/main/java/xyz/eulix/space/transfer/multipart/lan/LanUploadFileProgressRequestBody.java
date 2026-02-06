@@ -93,7 +93,7 @@ public class LanUploadFileProgressRequestBody extends RequestBody {
                 } else {
                     isPercentChange = false;
                 }
-//                Logger.d("zfy", "LanUploadFileProgressRequestBody progress:" + currentPercent);
+//                Logger.d("LanUploadFileProgressRequestBody progress:" + currentPercent);
                 progressListener.onProgress(bytesWritten, length, byteCount, isPercentChange, false);
             }
         }

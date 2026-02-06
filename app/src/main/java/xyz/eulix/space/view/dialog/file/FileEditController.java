@@ -628,7 +628,7 @@ public class FileEditController {
             File sourceFile = new File(currentPath, filename);
             boolean copyResult = FileUtil.copyFile(sourceFile.getAbsolutePath(), targetFilepath);
             if (copyResult) {
-                Logger.d("zfy", "copy file success");
+                Logger.d("copy file success");
 //                boolean result = sourceFile.delete();
 //                Logger.d("source file delete: " + result);
             }

@@ -22,7 +22,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -84,6 +83,7 @@ import xyz.eulix.space.network.push.SecurityApplyBean;
 import xyz.eulix.space.network.security.SecurityTokenResult;
 import xyz.eulix.space.util.ConstantField;
 import xyz.eulix.space.util.DataUtil;
+import xyz.eulix.space.util.DeploymentModeUtil;
 import xyz.eulix.space.util.DebugUtil;
 import xyz.eulix.space.util.EncryptionUtil;
 import xyz.eulix.space.util.EventBusUtil;
@@ -267,7 +267,7 @@ public class EulixPushManager {
                         .get()
                         .build();
                 // 日志驻点
-                Log.d(TAG, "eulix push request: " + httpParseUrl.toString() + ", request id: " + requestId);
+                Logger.d(TAG, "[PUSH] request: " + Logger.safeUrl(httpUrl.toString()) + ", requestId=" + requestId);
                 mCall = mOkHttpClient.newCall(request);
                 isLocked = true;
                 isCancel = false;
@@ -276,8 +276,8 @@ public class EulixPushManager {
                         @Override
                         public void onFailure(@NotNull Call call, @NotNull IOException e) {
                             // 日志驻点
-                            Log.d(TAG, "eulix push response on failure");
-                            Logger.e(TAG, "on failure: " + e.getMessage());
+                            Logger.d(TAG, "[PUSH] response failure");
+                            Logger.e(TAG, "[PUSH] onFailure, requestId=" + requestId, e);
                             mHandler.post(() -> {
                                 isLocked = false;
                                 if (isCancel) {
@@ -291,10 +291,10 @@ public class EulixPushManager {
 
                         @Override
                         public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                            Logger.i(TAG, "on response: " + response.toString());
+                            Logger.i(TAG, "[PUSH] onResponse: " + response);
                             int code = response.code();
                             // 日志驻点
-                            Log.d(TAG, "eulix push response on response: " + code);
+                            Logger.d(TAG, "[PUSH] response code: " + code);
                             int delay = 15000;
                             if (code < 300) {
                                 delay = 0;
@@ -500,6 +500,11 @@ public class EulixPushManager {
                     }
                     break;
                 case ConstantField.PushType.ABILITY_CHANGE:
+                    if (DeploymentModeUtil.isNoPlatformMode()) {
+                        Logger.d(TAG, "skip push ability-change platform request in no-platform mode");
+                        hasConsumed = true;
+                        break;
+                    }
                     String platformServerUrl = DebugUtil.getEnvironmentServices();
                     if (platformServerUrl != null) {
                         Logger.d(TAG, "push ability change request platform ability: " + platformServerUrl);
@@ -508,7 +513,7 @@ public class EulixPushManager {
                     hasConsumed = true;
                     break;
                 case ConstantField.PushType.BOX_SYSTEM_RESTART:
-                    Logger.d("zfy", "manageBoxSystemRestartPush:" + data);
+                    Logger.d(TAG, "[PUSH] manageBoxSystemRestartPush: " + data);
                     EventBusUtil.post(new BoxSystemRestartEvent());
                     hasConsumed = true;
                     break;

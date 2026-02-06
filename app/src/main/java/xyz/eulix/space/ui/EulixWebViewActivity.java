@@ -209,7 +209,7 @@ public class EulixWebViewActivity extends AbsActivity<WebViewPresenter.IWebView,
                     mUploadCallbackAboveL = valueCallback;
                     String[] acceptTypes = fileChooserParams.getAcceptTypes();
                     if (acceptTypes.length > 0) {
-                        Logger.e("zfy", "类型:" + acceptTypes[0]);
+                        Logger.e("类型:" + acceptTypes[0]);
                         showChoosePictureDialog();
                     }
                     return true;
@@ -297,11 +297,11 @@ public class EulixWebViewActivity extends AbsActivity<WebViewPresenter.IWebView,
                     break;
                 }
                 path = data.getStringExtra("path");
-                Logger.d("zfy", "图片地址：" + path);
+                Logger.d("图片地址：" + path);
                 break;
             case CameraUtil.REQUEST_CAMERA_CODE:
                 path = CameraUtil.getCameraBack();
-                Logger.d("zfy", "照片地址：" + path);
+                Logger.d("照片地址：" + path);
                 break;
             default:
                 break;
@@ -348,10 +348,10 @@ public class EulixWebViewActivity extends AbsActivity<WebViewPresenter.IWebView,
         if (!TextUtils.isEmpty(intent.getStringExtra("jsObjName"))){
             jsObjName = intent.getStringExtra("jsObjName");
         }
-        Logger.d("zfy", "webview url=" + url);
+        Logger.d("webview url=" + url);
 
         if (!TextUtils.isEmpty(url)) {
-            Logger.d("zfy", "webview url=" + url);
+            Logger.d("webview url=" + url);
         } else if (imgResId != -1) {
             //展示本地图片
         } else {
@@ -419,13 +419,13 @@ public class EulixWebViewActivity extends AbsActivity<WebViewPresenter.IWebView,
          */
         @JavascriptInterface
         public void onClickExit() {
-            Logger.d("zfy", "web click exit");
+            Logger.d("web click exit");
             finish();
         }
 
         @JavascriptInterface
         public void jsCallNativeMethod(String message) {
-            Logger.d("zfy", "js call native method: " + message);
+            Logger.d("js call native method: " + message);
             JSONObject jsonObject = null;
             JSONObject params = null;
             String method = null;

@@ -803,7 +803,7 @@ public class FileEditView implements FileEditController.IFileEditCallback, Folde
     }
 
     private void callDownload(List<CustomizeFile> customizeFiles, ResultCallback callback) {
-        Logger.d("zfy", "callDownload method");
+        Logger.d("callDownload method");
         ThreadPool.getInstance().execute(() -> {
             for (CustomizeFile customizeFile : customizeFiles) {
                 if (customizeFile != null) {
@@ -814,7 +814,7 @@ public class FileEditView implements FileEditController.IFileEditCallback, Folde
                         e.printStackTrace();
                     }
                     if (uuid != null) {
-                        Logger.d("zfy", "selected file:" + customizeFile.getName());
+                        Logger.d("selected file:" + customizeFile.getName());
                         downloadFile(uuid, customizeFile.getPath(), customizeFile.getName(), customizeFile.getSize(), customizeFile.getMd5());
                     }
                 }

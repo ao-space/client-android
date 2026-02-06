@@ -157,7 +157,7 @@ public class UnbindDevicePresenter extends AbsPresenter<UnbindDevicePresenter.IU
             public void onSuccess(String source, int code, String boxUuidValue, String boxBindValue, String extraMsg, boolean isSuccess) {
                 if (isSuccess) {
                     //解绑成功
-                    Logger.d("zfy","revoke member success, box uuid: "+ boxUuidValue + ", bind: " + boxBindValue);
+                    Logger.d("revoke member success, box uuid: "+ boxUuidValue + ", bind: " + boxBindValue);
                     //删除盒子数据
                     if (boxUuidValue != null && boxBindValue != null) {
                         DataUtil.boxUnavailable(boxUuidValue, boxBindValue);
@@ -173,7 +173,7 @@ public class UnbindDevicePresenter extends AbsPresenter<UnbindDevicePresenter.IU
                     }
                 } else {
                     //解绑失败
-                    Logger.d("zfy","revoke member failed:" + extraMsg + ", code: " + code + ", source: " + source);
+                    Logger.d("revoke member failed:" + extraMsg + ", code: " + code + ", source: " + source);
                     handleRevokeResult(boxUuidValue, boxBindValue, code, source);
                 }
             }
@@ -181,7 +181,7 @@ public class UnbindDevicePresenter extends AbsPresenter<UnbindDevicePresenter.IU
             @Override
             public void onFailed(String source, int code, String boxUuidValue, String boxBindValue, String extraMsg) {
                 //解绑失败
-                Logger.d("zfy","revoke member failed:" + extraMsg + ", code: " + code + ", source: " + source);
+                Logger.d("revoke member failed:" + extraMsg + ", code: " + code + ", source: " + source);
                 if (iView != null) {
                     iView.onRevokeResult(false, code, source, null);
                 }
@@ -190,7 +190,7 @@ public class UnbindDevicePresenter extends AbsPresenter<UnbindDevicePresenter.IU
             @Override
             public void onError(String errMsg) {
                 //解绑失败
-                Logger.d("zfy", "revoke member failed:" + errMsg);
+                Logger.d("revoke member failed:" + errMsg);
                 int errorCode = ConstantField.SERVER_EXCEPTION_CODE;
                 if (!TextUtils.isEmpty(errMsg)) {
                     try {

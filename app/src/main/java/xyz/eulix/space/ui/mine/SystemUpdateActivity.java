@@ -271,13 +271,13 @@ public class SystemUpdateActivity extends AbsActivity<SystemUpdatePresenter.ISys
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(BoxSystemRestartEvent event) {
         //接受到系统重启
-        Logger.d("zfy", "receive BoxSystemRestartEvent");
+        Logger.d("receive BoxSystemRestartEvent");
         if (SystemUpdatePresenter.sUpgradeState > SystemUpdatePresenter.STATE_NORMAL) {
-            Logger.d("zfy", "system upgrade task is progress");
+            Logger.d("system upgrade task is progress");
             closeLoading();
             showLoading(getResources().getString(R.string.restarting_device));
         } else {
-            Logger.d("zfy", "system upgrade task is finish");
+            Logger.d("system upgrade task is finish");
         }
     }
 

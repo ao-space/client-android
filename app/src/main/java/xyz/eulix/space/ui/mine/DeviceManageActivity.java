@@ -429,7 +429,7 @@ public class DeviceManageActivity extends AbsActivity<DeviceManagePresenter.IDev
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(BoxVersionCheckEvent event) {
-        Logger.d("zfy", "device manager BoxVersionCheckEvent");
+        Logger.d("device manager BoxVersionCheckEvent");
         if (ConstantField.boxVersionCheckBody != null) {
             tvDeviceUpdateFlag.setVisibility(View.VISIBLE);
         } else {

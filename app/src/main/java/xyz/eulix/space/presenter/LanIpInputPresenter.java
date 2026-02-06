@@ -47,7 +47,7 @@ public class LanIpInputPresenter extends AbsPresenter<LanIpInputPresenter.ILanIp
         ThreadPool.getInstance().execute(() -> gatewayManager.getSpaceStatus(new ISpaceStatusCallback() {
             @Override
             public void onResult(SpaceStatusResult result) {
-                Logger.d("zfy", "checkConnectStates on result: " + result);
+                Logger.d("checkConnectStates on result: " + result);
                 if (result != null) {
                     iView.onCheckDomainResult(true);
                 } else {
@@ -57,7 +57,7 @@ public class LanIpInputPresenter extends AbsPresenter<LanIpInputPresenter.ILanIp
 
             @Override
             public void onError(String errMsg) {
-                Logger.d("zfy", "checkConnectStates on error: " + errMsg);
+                Logger.d("checkConnectStates on error: " + errMsg);
                 iView.onCheckDomainResult(false);
             }
         }));

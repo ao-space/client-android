@@ -68,6 +68,7 @@ import xyz.eulix.space.util.AOSpaceUtil;
 import xyz.eulix.space.util.AlarmUtil;
 import xyz.eulix.space.util.ConstantField;
 import xyz.eulix.space.util.DataUtil;
+import xyz.eulix.space.util.DeploymentModeUtil;
 import xyz.eulix.space.util.EventBusUtil;
 import xyz.eulix.space.util.FormatUtil;
 import xyz.eulix.space.util.GatewayUtils;
@@ -384,7 +385,8 @@ public class BoxNetworkCheckManager {
                                     spacePlatformInfo.setPrivateSpacePlatform(isPrivateSpacePlatform);
                                     spacePlatformInfo.setPlatformServerUrl(platformServerUrl);
                                     String platformServerHost = StringUtil.urlToHost(platformServerUrl);
-                                    if ((finalStatus == ConstantField.EulixDeviceStatus.ACTIVE || finalStatus == ConstantField.EulixDeviceStatus.OFFLINE_USE)
+                                    if (!DeploymentModeUtil.isNoPlatformMode()
+                                            && (finalStatus == ConstantField.EulixDeviceStatus.ACTIVE || finalStatus == ConstantField.EulixDeviceStatus.OFFLINE_USE)
                                             && platformServerUrl != null && !StringUtil.compare(platformServerHost, DataUtil.getCurrentPlatformServerHost())) {
                                         Logger.d(TAG, "space status platform change request platform ability: " + platformServerUrl);
                                         if (currentSpacePlatformInfo == null) {

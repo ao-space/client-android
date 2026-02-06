@@ -90,7 +90,7 @@ public class TransferListActivity extends AbsActivity<TransferListPresenter.ITra
 
     @Override
     public void initData() {
-        Logger.d("zfy", "initData");
+        Logger.d("initData");
     }
 
     @Override
@@ -126,7 +126,7 @@ public class TransferListActivity extends AbsActivity<TransferListPresenter.ITra
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                Logger.d("zfy", "onPageScrolled");
+                Logger.d("onPageScrolled");
             }
 
             @Override
@@ -140,7 +140,7 @@ public class TransferListActivity extends AbsActivity<TransferListPresenter.ITra
 
             @Override
             public void onPageScrollStateChanged(int state) {
-                Logger.d("zfy", "onPageScrollStateChanged");
+                Logger.d("onPageScrollStateChanged");
             }
         });
 
@@ -184,14 +184,14 @@ public class TransferListActivity extends AbsActivity<TransferListPresenter.ITra
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(LanStatusEvent event) {
-        Logger.d("zfy", "receive LanStatusEvent " + event.isLanEnable);
+        Logger.d("receive LanStatusEvent " + event.isLanEnable);
         refreshNetChannelStateView();
         super.onEvent(event);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(SpaceOnlineCallbackEvent event) {
-        Logger.d("zfy", "receive SpaceOnlineCallbackEvent " + event.isOnline());
+        Logger.d("receive SpaceOnlineCallbackEvent " + event.isOnline());
         refreshNetChannelStateView();
     }
 

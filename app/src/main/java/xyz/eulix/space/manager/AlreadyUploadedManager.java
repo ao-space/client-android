@@ -105,13 +105,13 @@ public class AlreadyUploadedManager {
                 String line = null;
                 mUploadedMap.clear();
                 while ((line = br.readLine()) != null) {
-                    Logger.d("zfy", "line=" + line);
+                    Logger.d("line=" + line);
                     //解析数据
                     line = line.replace("\r\n", "");
                     String[] paramsArray = line.split(SPLIT_CHARS);
                     if (paramsArray.length > 1) {
                         String absolutePath = new String(paramsArray[0].getBytes(StandardCharsets.UTF_8), StandardCharsets.UTF_8);
-                        Logger.d("zfy", "uploaded file path:" + absolutePath);
+                        Logger.d("uploaded file path:" + absolutePath);
                         String md5 = paramsArray[1];
                         mUploadedMap.put(absolutePath, md5);
                     }
@@ -125,12 +125,12 @@ public class AlreadyUploadedManager {
     //插入一条已上传数据
     public synchronized void insertItem(String absolutePath, String md5) {
         if (TextUtils.isEmpty(mFolderPath) || TextUtils.isEmpty(mFileName)) {
-            Logger.d("zfy", "UploadedManager not init");
+            Logger.d("UploadedManager not init");
             return;
         }
         FileUtil.mkFile(mFolderPath);
         if (mUploadedMap.containsKey(absolutePath)) {
-            Logger.d("zfy", "uploaded map already has " + absolutePath);
+            Logger.d("uploaded map already has " + absolutePath);
             return;
         }
         ThreadPool.getInstance().execute(() -> {
@@ -150,7 +150,7 @@ public class AlreadyUploadedManager {
 
     public synchronized void removeItemByAbsolutePath(String absolutePath) {
         if (mUploadedMap.containsKey(absolutePath)) {
-            Logger.d("zfy", "uploaded map remove:" + absolutePath);
+            Logger.d("uploaded map remove:" + absolutePath);
             mUploadedMap.remove(absolutePath);
         }
     }
@@ -162,7 +162,7 @@ public class AlreadyUploadedManager {
         File uploadedFile = new File(folderPath, mFileName);
         if (uploadedFile.exists()) {
             boolean result = uploadedFile.delete();
-            Logger.d("zfy", "uploaded file delete result: " + result);
+            Logger.d("uploaded file delete result: " + result);
         }
         ThreadPool.getInstance().execute(() -> {
             try (RandomAccessFile randomFile = new RandomAccessFile(mFolderPath + mFileName, "rw")) {
@@ -187,7 +187,7 @@ public class AlreadyUploadedManager {
         File uploadedFile = new File(folderPath, mFileName);
         if (uploadedFile.exists()) {
             boolean result = uploadedFile.delete();
-            Logger.d("zfy", "uploaded file delete: " + result);
+            Logger.d("uploaded file delete: " + result);
         }
     }
 

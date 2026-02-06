@@ -373,10 +373,10 @@ public class FileUtil {
         File targetFolder = new File(targetPath);
         if (!targetFolder.exists()) {
             boolean result = targetFolder.mkdir();
-            Logger.d("zfy", "target folder mkdir: " + result);
+            Logger.d("target folder mkdir: " + result);
         }
         String targetFileName = targetPath + sourceFile.getName();
-        Logger.d("zfy", "targetFileName = " + targetFileName);
+        Logger.d("targetFileName = " + targetFileName);
         File targetFile = new File(targetPath, sourceFile.getName());
         if (targetFile.exists()) {
             boolean result = targetFile.delete();
@@ -472,7 +472,7 @@ public class FileUtil {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Logger.d("zfy", "txt charset:" + charset);
+        Logger.d("txt charset:" + charset);
         return charset;
     }
 

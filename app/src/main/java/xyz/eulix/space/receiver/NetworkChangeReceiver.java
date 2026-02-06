@@ -40,25 +40,26 @@ import xyz.eulix.space.util.NetUtils;
  * History:     2021/10/9
  */
 public class NetworkChangeReceiver extends BroadcastReceiver {
+    private static final String TAG = NetworkChangeReceiver.class.getSimpleName();
     private int changeTime = 0;
     private String lastNetworkType;
 
     @Override
     public void onReceive(Context context, Intent intent) {
         if (ConnectivityManager.CONNECTIVITY_ACTION.equals(intent.getAction())) {
-            Logger.d("zfy", "network change action:" + intent.getAction());
+            Logger.d(TAG, "[NET] network change action: " + intent.getAction());
             String currentNetworkType = NetUtils.getNetworkType(EulixSpaceApplication.getContext());
             if (currentNetworkType.equals(lastNetworkType)) {
-                Logger.d("zfy", "network type not change");
+                Logger.d(TAG, "[NET] network type not change");
                 return;
             }
             lastNetworkType = currentNetworkType;
             changeTime++;
-            Logger.d("zfy", "networkChangeTime = " + changeTime);
+            Logger.d(TAG, "[NET] networkChangeTime = " + changeTime);
             if (changeTime <= 1) {
                 return;
             }
-            Logger.d("zfy", "network change:" + NetUtils.getNetworkType(context));
+            Logger.d(TAG, "[NET] network change: " + NetUtils.getNetworkType(context));
 
             if (!NetUtils.isNetAvailable(context)) {
                 new Handler(Looper.getMainLooper()).postDelayed(() -> {
@@ -67,7 +68,7 @@ public class NetworkChangeReceiver extends BroadcastReceiver {
             }
 
             if (NetUtils.isWifiConnected(context)) {
-                Logger.d("zfy", "wifi connect");
+                Logger.d(TAG, "[NET] wifi connected");
                 EventBusUtil.post(new NetworkStateEvent());
                 EventBusUtil.post(new TransferListNetworkEvent());
                 //wifi连接，刷新局域网状态

@@ -111,7 +111,7 @@ public class CustomRefreshHeader extends LinearLayout implements RefreshHeader {
 
     @Override
     public void onStartAnimator(@NonNull @NotNull RefreshLayout refreshLayout, int height, int maxDragHeight) {
-        Logger.d("zfy", "onStartAnimator");
+        Logger.d("onStartAnimator");
         changeViewsVisible(true);
         mAnimationView.setProgress(0);
         mAnimationView.setRepeatCount(-1);
@@ -120,7 +120,7 @@ public class CustomRefreshHeader extends LinearLayout implements RefreshHeader {
 
     @Override
     public int onFinish(@NonNull @NotNull RefreshLayout refreshLayout, boolean success) {
-        Logger.d("zfy", "onAnimatorFinish");
+        Logger.d("onAnimatorFinish");
         mAnimationView.cancelAnimation();
         changeViewsVisible(false);
         //重置动画，恢复位置

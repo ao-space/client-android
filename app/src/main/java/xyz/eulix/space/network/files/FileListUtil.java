@@ -850,7 +850,7 @@ public class FileListUtil {
             TransferThreadPool.getInstance().execute(() -> {
                 File file = new File(filepath, filename);
                 if (!file.exists()) {
-                    Logger.d("zfy", "file to upload not exist");
+                    Logger.d("file to upload not exist");
                     if (callback != null) {
                         callback.onResult(false, FailCodeUtil.ERROR_UPLOAD_LOCAL_SOURCE_DELETE + "");
                     }
@@ -919,7 +919,7 @@ public class FileListUtil {
                     @Override
                     public void onProgress(long currentSize, long totalSize, long appendSize, boolean isPercentChange, boolean isResume) {
                         if (isPercentChange) {
-//                        Logger.d("zfy", "onProgressResult:currentSize=" + currentSize + ",totalSize=" + totalSize);
+//                        Logger.d("onProgressResult:currentSize=" + currentSize + ",totalSize=" + totalSize);
                             TransferDBManager.getInstance(context).updateTransferSize(finalTransferItem.keyName, transferType, currentSize, totalSize, true, uniqueTag);
                         }
                     }
@@ -935,7 +935,7 @@ public class FileListUtil {
                         if (result && extraObj != null) {
                             FileListItem fileListItem = (FileListItem) extraObj;
                             String fileUuid = fileListItem.getUuid();
-                            Logger.d("zfy", "file upload success:" + filename + ";uuid=" + fileUuid);
+                            Logger.d("file upload success:" + filename + ";uuid=" + fileUuid);
                             if (!TextUtils.isEmpty(albumId)) {
                                 TransferDBManager.getInstance(context).updateTransferRemotePath(uniqueTag, fileListItem.getPath());
                                 //相簿更新路径
@@ -1019,7 +1019,7 @@ public class FileListUtil {
                     for (TransferItem item : finishedList) {
                         File finishedFile = new File(item.localPath, item.keyName);
                         if (finishedFile.exists()) {
-                            Logger.d("zfy", "has exist same md5 file,copy!");
+                            Logger.d("has exist same md5 file,copy!");
                             //复制文件
                             try {
 
@@ -1064,7 +1064,7 @@ public class FileListUtil {
                     @Override
                     public void onProgress(long currentSize, long totalSize, long appendSize, boolean isPercentChange, boolean isResume) {
                         if (isPercentChange) {
-//                        Logger.d("zfy", "onProgressResult:currentSize=" + currentSize + ",totalSize=" + totalSize);
+//                        Logger.d("onProgressResult:currentSize=" + currentSize + ",totalSize=" + totalSize);
                             TransferDBManager.getInstance(context).updateTransferSize(filename, transferType, currentSize, totalSize, true, uniqueTag);
                         }
                         //统计传输速度
@@ -1080,7 +1080,7 @@ public class FileListUtil {
                     TaskSpeed.getInstance().removeTask(uniqueTag);
                     //更改数据库状态
                     if (result) {
-                        Logger.d("zfy", "file download success:" + filename + ";uuid=" + uuidStr);
+                        Logger.d("file download success:" + filename + ";uuid=" + uuidStr);
                         TransferDBManager.getInstance(context).updateTransferState(filename, transferType, TransferHelper.STATE_FINISH, 0, uuidStr, true, uniqueTag);
                         //加入媒体库
                         if (!isCache) {

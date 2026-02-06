@@ -138,7 +138,7 @@ public class AboutUsPresenter extends AbsPresenter<AboutUsPresenter.IAboutUs> {
         UpgradeUtils.getDeviceVersionDetailInfo(context, new ResultCallbackObj() {
             @Override
             public void onResult(boolean result, Object extraObj) {
-                Logger.d("zfy", "getDeviceVersionDetailInfo onResult:" + result + ",extraObj:" + extraObj.toString());
+                Logger.d("getDeviceVersionDetailInfo onResult:" + result + ",extraObj:" + extraObj.toString());
                 if (result) {
                     deviceVersionInfoBean = (DeviceVersionInfoBean) extraObj;
                     Gson gson = new Gson();
@@ -156,7 +156,7 @@ public class AboutUsPresenter extends AbsPresenter<AboutUsPresenter.IAboutUs> {
 
             @Override
             public void onError(String msg) {
-                Logger.d("zfy", "getDeviceVersionDetailInfo onError " + msg);
+                Logger.d("getDeviceVersionDetailInfo onError " + msg);
                 iView.refreshDeviceInfoViews(null);
             }
         });

@@ -117,7 +117,7 @@ public class BKeyUtil {
     }
 
     public static void obtainAuthResult(@NonNull Context context, String boxDomain, String boxUUID, String boxKey, boolean isAutoLogin, boolean isLAN, BKeyPollCallback callback) {
-        Logger.d("zfy", "#obtainAuthResult bKey=" + boxKey);
+        Logger.d("#obtainAuthResult bKey=" + boxKey);
 
         String finalBoxDomain = Urls.getBaseUrl();
         if (finalBoxDomain != null) {

@@ -194,15 +194,15 @@ public class MultipartNetworkManger {
                 .subscribe(new Observer<UploadCreateResponseBody>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-                        Logger.d("zfy", "create upload on subscribe");
+                        Logger.d("create upload on subscribe");
                     }
 
                     @Override
                     public void onNext(UploadCreateResponseBody result) {
-                        Logger.d("zfy", "create upload on next: " + (result == null ? "null" : result.toString()));
+                        Logger.d("create upload on next: " + (result == null ? "null" : result.toString()));
                         if (result != null && result.getCodeInt() == 1036) {
                             //盒子空间不足
-                            Logger.d("zfy", "空间不足，上传失败，请清理空间后再重试~");
+                            Logger.d("空间不足，上传失败，请清理空间后再重试~");
                             ToastUtil.showToast(context.getString(R.string.transfer_upload_failed));
                             if (callback != null) {
                                 callback.onResult(false, String.valueOf(result.getCodeInt()));
@@ -213,7 +213,7 @@ public class MultipartNetworkManger {
                         if (!TextUtils.isEmpty(albumId)) {
                             //相簿更新文件上传路径
                             if (result != null && result.getResults().completeInfo != null) {
-                                Logger.d("zfy", "update album upload target path");
+                                Logger.d("update album upload target path");
                                 String uniqueTag = TransferItemFactory.getUniqueTagWithAlbumId(TransferHelper.TYPE_UPLOAD, file.getName(), fileLocalPath, targetPath, null, albumId);
                                 TransferDBManager.getInstance(context).updateTransferRemotePath(uniqueTag, result.getResults().completeInfo.getPath());
                             }
@@ -226,7 +226,7 @@ public class MultipartNetworkManger {
                     @Override
                     public void onError(Throwable e) {
                         String errMsg = (e == null ? "null" : (e.getMessage() == null ? "" : e.getMessage()));
-                        Logger.e("zfy", "create upload on error: " + errMsg);
+                        Logger.e("create upload on error: " + errMsg);
                         if (callback != null) {
                             callback.onError(errMsg);
                         }
@@ -237,7 +237,7 @@ public class MultipartNetworkManger {
 
                     @Override
                     public void onComplete() {
-                        Logger.d("zfy", "create upload on complete");
+                        Logger.d("create upload on complete");
                     }
                 });
     }
@@ -270,12 +270,12 @@ public class MultipartNetworkManger {
                 .subscribe(new Observer<UploadListResponseBody>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-                        Logger.d("zfy", "list upload on subscribe");
+                        Logger.d("list upload on subscribe");
                     }
 
                     @Override
                     public void onNext(UploadListResponseBody result) {
-                        Logger.d("zfy", "list upload on next: " + (result == null ? "null" : result.toString()));
+                        Logger.d("list upload on next: " + (result == null ? "null" : result.toString()));
                         if (callback != null) {
                             callback.onResult(true, result);
                         }
@@ -284,7 +284,7 @@ public class MultipartNetworkManger {
                     @Override
                     public void onError(Throwable e) {
                         String errMsg = (e == null ? "null" : (e.getMessage() == null ? "" : e.getMessage()));
-                        Logger.e("zfy", "list upload on error: " + errMsg);
+                        Logger.e("list upload on error: " + errMsg);
                         if (callback != null) {
                             callback.onError(errMsg);
                         }
@@ -295,7 +295,7 @@ public class MultipartNetworkManger {
 
                     @Override
                     public void onComplete() {
-                        Logger.d("zfy", "list upload on complete");
+                        Logger.d("list upload on complete");
                     }
                 });
     }
@@ -321,7 +321,7 @@ public class MultipartNetworkManger {
             callback.onResult(false, "local file is not exist");
             return;
         }
-        Logger.d("zfy", "filePath=" + file.getAbsolutePath());
+        Logger.d("filePath=" + file.getAbsolutePath());
 
         String transformation = gatewayCommunicationBase.getTransformation();
         String secret = gatewayCommunicationBase.getSecretKey();
@@ -347,7 +347,7 @@ public class MultipartNetworkManger {
                 queryJsonObject.put("md5sum", uploadChunk.md5);
                 entityJsonObject.put("businessId", isSync ? 1 : 0);
                 queryJsonObject.put("mediaType", "application/octet-stream");
-                Logger.d("zfy", "entity:" + entityJsonObject.toString());
+                Logger.d("entity:" + entityJsonObject.toString());
 
                 headerJsonObject.put("Request-Id", requestId.toString());
                 headerJsonObject.put("Accept", "*/*");
@@ -360,7 +360,7 @@ public class MultipartNetworkManger {
                 callRequestJson.put("headers", headerJsonObject);
                 callRequestJson.put("entity", entityJsonObject);
                 callRequestJson.put("serviceName", ConstantField.ServiceName.EULIXSPACE_FILE_SERVICE);
-                Logger.d("zfy", "callJson=" + callRequestJson.toString());
+                Logger.d("callJson=" + callRequestJson.toString());
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -369,7 +369,7 @@ public class MultipartNetworkManger {
             //加密callRequest
             String encryptCallJsonStr = EncryptionUtil.encrypt(transformation, null,
                     callRequestJson.toString(), secret, StandardCharsets.UTF_8, ivParams);
-            Logger.d("zfy", "encryptCallJsonStr=" + encryptCallJsonStr);
+            Logger.d("encryptCallJsonStr=" + encryptCallJsonStr);
 
             CallRequest callRequest = new CallRequest();
             callRequest.setAccessToken(accessToken);
@@ -379,44 +379,44 @@ public class MultipartNetworkManger {
 
             HttpUrl httpUrl = httpParseUrl.newBuilder()
                     .build();
-            Logger.d("zfy", "multipart upload url: " + httpUrl);
+            Logger.d("multipart upload url: " + httpUrl);
 
             String responseBodyStr = TransferNetUtil.postFile(httpUrl.toString(), file.getName(), file, accessToken, callRequestStr,
                     requestId.toString(), secret, transformation, ivParams, progressListener);
 
             //删除加密缓存文件
             if (file.exists()) {
-                Logger.d("zfy", "delete chunk cache file");
+                Logger.d("delete chunk cache file");
                 boolean result = file.delete();
-                Logger.d("zfy", "chunk file delete: " + result);
+                Logger.d("chunk file delete: " + result);
             }
 
             if (!TextUtils.isEmpty(responseBodyStr)) {
                 UploadResponseBodyResult uploadResponseBody = new Gson().fromJson(responseBodyStr, UploadResponseBodyResult.class);
                 int code = uploadResponseBody.getCodeInt();
-                Logger.d("zfy", "upload chunk response code=" + code);
+                Logger.d("upload chunk response code=" + code);
 //                CodeMultipartRangeUploaded CodeType = 1037 //分片范围已上传
                 if (code == 200 || code == 1037) {
-                    Logger.d("zfy", "片段上传成功：" + file.getName());
+                    Logger.d("片段上传成功：" + file.getName());
                     if (callback != null) {
                         callback.onResult(true, null);
                     }
                 } else if (code == 1036) {
                     //盒子空间不足
-                    Logger.d("zfy", "空间不足，上传失败，请清理空间后再重试~");
+                    Logger.d("空间不足，上传失败，请清理空间后再重试~");
                     ToastUtil.showToast(context.getString(R.string.transfer_upload_failed));
                     if (callback != null) {
                         callback.onResult(false, String.valueOf(code));
                     }
                 } else {
                     String message = uploadResponseBody.getMessage();
-                    Logger.d("zfy", "上传失败" + code + "\n" + message);
+                    Logger.d("上传失败" + code + "\n" + message);
                     if (callback != null) {
                         callback.onResult(false, String.valueOf(code));
                     }
                 }
             } else {
-                Logger.d("zfy", "片段上传失败：" + file.getName());
+                Logger.d("片段上传失败：" + file.getName());
                 if (callback != null) {
                     callback.onResult(false, "上传失败");
                 }
@@ -453,20 +453,20 @@ public class MultipartNetworkManger {
                 .subscribe(new Observer<UploadCompleteResponseBody>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-                        Logger.d("zfy", "complete upload on subscribe");
+                        Logger.d("complete upload on subscribe");
                     }
 
                     @Override
                     public void onNext(UploadCompleteResponseBody result) {
-                        Logger.d("zfy", "complete upload on next: " + (result == null ? "null" : result.toString()));
+                        Logger.d("complete upload on next: " + (result == null ? "null" : result.toString()));
                         if (result != null) {
                             int code = result.getCodeInt();
                             if (code == 200) {
-                                Logger.d("zfy", "complete chunks success!");
+                                Logger.d("complete chunks success!");
                                 callback.onResult(true, result.Results);
                             } else {
                                 String message = result.getMessage();
-                                Logger.d("zfy", "complete chunks failed!!" + message);
+                                Logger.d("complete chunks failed!!" + message);
                                 callback.onResult(false, String.valueOf(code));
                             }
                         } else {
@@ -478,7 +478,7 @@ public class MultipartNetworkManger {
                     @Override
                     public void onError(Throwable e) {
                         String errMsg = (e == null ? "null" : (e.getMessage() == null ? "" : e.getMessage()));
-                        Logger.e("zfy", "complete upload on error: " + errMsg);
+                        Logger.e("complete upload on error: " + errMsg);
                         if (callback != null) {
                             callback.onError(errMsg);
                         }
@@ -489,7 +489,7 @@ public class MultipartNetworkManger {
 
                     @Override
                     public void onComplete() {
-                        Logger.d("zfy", "complete upload on complete");
+                        Logger.d("complete upload on complete");
                     }
                 });
     }
@@ -527,12 +527,12 @@ public class MultipartNetworkManger {
                 .subscribe(new Observer<BaseResponseBody>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-                        Logger.d("zfy", "delete upload on subscribe");
+                        Logger.d("delete upload on subscribe");
                     }
 
                     @Override
                     public void onNext(BaseResponseBody result) {
-                        Logger.d("zfy", "delete upload on next: " + (result == null ? "null" : result.toString()));
+                        Logger.d("delete upload on next: " + (result == null ? "null" : result.toString()));
                         if (callback != null) {
                             if (result != null && result.getCodeInt() == 200) {
                                 callback.onResult(true, result);
@@ -545,7 +545,7 @@ public class MultipartNetworkManger {
                     @Override
                     public void onError(Throwable e) {
                         String errMsg = (e == null ? "null" : (e.getMessage() == null ? "" : e.getMessage()));
-                        Logger.e("zfy", "delete upload on error: " + errMsg);
+                        Logger.e("delete upload on error: " + errMsg);
                         if (callback != null) {
                             callback.onError(errMsg);
                         }
@@ -556,7 +556,7 @@ public class MultipartNetworkManger {
 
                     @Override
                     public void onComplete() {
-                        Logger.d("zfy", "delete upload on complete");
+                        Logger.d("delete upload on complete");
                     }
                 });
     }
@@ -597,16 +597,16 @@ public class MultipartNetworkManger {
         }
 
         String chunkFileName = fileUuid + "_" + start + "_" + end;
-        Logger.d("zfy", "chunkFileName = " + chunkFileName);
+        Logger.d("chunkFileName = " + chunkFileName);
 
         String rangeValue = "bytes=" + start + "-" + end;
-        Logger.d("zfy", "range is:" + rangeValue);
+        Logger.d("range is:" + rangeValue);
 
         if (httpParseUrl != null) {
             HttpUrl httpUrl = httpParseUrl.newBuilder()
                     .addQueryParameter("uuid", fileUuid)
                     .build();
-            Logger.d("zfy", "download url: " + httpUrl);
+            Logger.d("download url: " + httpUrl);
             Request request = new Request.Builder()
                     .url(httpUrl)
                     .addHeader("Range", rangeValue)
@@ -624,7 +624,7 @@ public class MultipartNetworkManger {
 
                 @Override
                 public void onResponse(@NotNull Call call, @NotNull Response response) {
-                    Logger.d("zfy", "on response " + response.code());
+                    Logger.d("on response " + response.code());
 
                     if (!response.isSuccessful()) {
                         if (callback != null) {
@@ -635,16 +635,16 @@ public class MultipartNetworkManger {
 
                     Headers headers = response.headers();
                     String contentType = headers.get("content-type");
-                    Logger.d("zfy", "content-type = " + contentType);
+                    Logger.d("content-type = " + contentType);
                     if (TextUtils.isEmpty(contentType) || contentType.contains("json")) {
                         //没有文件流，下载文件失败
-                        Logger.d("zfy", "no stream");
+                        Logger.d("no stream");
                         String errorCode = "-1";
                         try {
                             byte[] bodyStr = response.body().bytes();
                             byte[] cipherResponseByte = EncryptionUtil.decrypt(transformation, null, bodyStr, secret, StandardCharsets.UTF_8, ivParams);
                             String cipherResponseText = new String(cipherResponseByte);
-                            Logger.d("zfy", "cipherResponseText=" + cipherResponseText);
+                            Logger.d("cipherResponseText=" + cipherResponseText);
                             if (!TextUtils.isEmpty(cipherResponseText)) {
                                 RealCallResult realCallResult = null;
                                 realCallResult = new Gson().fromJson(cipherResponseText, RealCallResult.class);
@@ -659,7 +659,7 @@ public class MultipartNetworkManger {
                                 }
                             }
                         } catch (Exception e) {
-                            Logger.d("zfy", "exception " + e.getMessage());
+                            Logger.d("exception " + e.getMessage());
                         }
                         if (callback != null) {
                             callback.onResult(false, errorCode);
@@ -667,7 +667,7 @@ public class MultipartNetworkManger {
                     } else {
                         //文件大小
                         String headerFileSizeStr = headers.get("file-size");
-                        Logger.d("zfy", "file-size=" + headerFileSizeStr);
+                        Logger.d("file-size=" + headerFileSizeStr);
                         if (TextUtils.isEmpty(headerFileSizeStr)) {
                             headerFileSizeStr = "0";
                         }
@@ -676,7 +676,7 @@ public class MultipartNetworkManger {
 
                         File chunkFile = new File(cacheDirPath, chunkFileName);
                         if (chunkFile.exists()) {
-                            Logger.d("zfy", "chunk file to download exist, delete");
+                            Logger.d("chunk file to download exist, delete");
                             chunkFile.delete();
                         }
 
@@ -688,19 +688,19 @@ public class MultipartNetworkManger {
                         if (decryptFile != null) {
                             //下载解析成功，size校验
                             long tempFileSize = decryptFile.length();
-                            Logger.d("zfy", "downloadSize=" + tempFileSize);
-                            Logger.d("zfy", "targetSize=" + fileSize);
+                            Logger.d("downloadSize=" + tempFileSize);
+                            Logger.d("targetSize=" + fileSize);
 
                             if (tempFileSize == fileSize) {
-                                Logger.d("zfy", "size校验通过");
+                                Logger.d("size校验通过");
                                 decryptFile.renameTo(chunkFile);
                                 if (callback != null) {
                                     callback.onResult(true, null);
                                 }
                             } else {
-                                Logger.d("zfy", "size校验失败");
+                                Logger.d("size校验失败");
                                 boolean result = decryptFile.delete();
-                                Logger.d("zfy", "decrypt file delete: " + result);
+                                Logger.d("decrypt file delete: " + result);
                                 if (callback != null) {
                                     callback.onResult(false, "size校验失败");
                                 }
@@ -773,12 +773,12 @@ public class MultipartNetworkManger {
                 .subscribe(new Observer<GetCertResponseBody>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-                        Logger.d("zfy", "list upload on subscribe");
+                        Logger.d("list upload on subscribe");
                     }
 
                     @Override
                     public void onNext(GetCertResponseBody responseBody) {
-                        Logger.d("zfy", "list upload on next: " + (responseBody == null ? "null" : responseBody.toString()));
+                        Logger.d("list upload on next: " + (responseBody == null ? "null" : responseBody.toString()));
                         if (callback != null) {
                             if (responseBody != null) {
                                 if (responseBody.getCodeInt() == 200) {
@@ -795,7 +795,7 @@ public class MultipartNetworkManger {
                     @Override
                     public void onError(Throwable e) {
                         String errMsg = (e == null ? "null" : (e.getMessage() == null ? "" : e.getMessage()));
-                        Logger.e("zfy", "list upload on error: " + errMsg);
+                        Logger.e("list upload on error: " + errMsg);
                         if (callback != null) {
                             callback.onError(errMsg);
                         }
@@ -806,14 +806,14 @@ public class MultipartNetworkManger {
 
                     @Override
                     public void onComplete() {
-                        Logger.d("zfy", "list upload on complete");
+                        Logger.d("list upload on complete");
                     }
                 });
     }
 
     //通过https上传
     public static void uploadFromHttps(Context context, OkHttpClient okHttpClient, String httpsDomain, String verifyToken, UploadChunkBean chunkBean, String uploadId, ResultCallback callback, TransferProgressListener progressListener, boolean isSync) {
-        Logger.d("zfy", "uploadFromHttps");
+        Logger.d("uploadFromHttps");
         if (chunkBean == null) {
             return;
         }
@@ -832,15 +832,15 @@ public class MultipartNetworkManger {
         urlSb.append(chunkBean.md5);
         String url = urlSb.toString();
         HttpUrl httpUrl = HttpUrl.parse(url);
-        Logger.d("zfy", "url = " + url);
-        Logger.d("zfy", "token:" + verifyToken);
+        Logger.d("url = " + url);
+        Logger.d("token:" + verifyToken);
         if (httpUrl == null) {
-            Logger.d("zfy", "url is error");
+            Logger.d("url is error");
             return;
         }
         File file = new File(chunkBean.path);
         if (!file.exists()) {
-            Logger.d("zfy", "local file not exist");
+            Logger.d("local file not exist");
             return;
         }
         LanUploadFileProgressRequestBody requestBody = new LanUploadFileProgressRequestBody(file, chunkBean.start, chunkBean.end - chunkBean.start, progressListener);
@@ -857,19 +857,19 @@ public class MultipartNetworkManger {
                 int code = response.code();
                 String message = response.message();
                 if (code == 200 || code == 1037) {
-                    Logger.d("zfy", "片段上传成功：" + file.getName() + "_" + chunkBean.start + "_" + chunkBean.end);
+                    Logger.d("片段上传成功：" + file.getName() + "_" + chunkBean.start + "_" + chunkBean.end);
                     if (callback != null) {
                         callback.onResult(true, null);
                     }
                 } else if (code == 1036) {
                     //盒子空间不足
-                    Logger.d("zfy", "空间不足，上传失败，请清理空间后再重试~");
+                    Logger.d("空间不足，上传失败，请清理空间后再重试~");
                     ToastUtil.showToast(context.getString(R.string.transfer_upload_failed));
                     if (callback != null) {
                         callback.onResult(false, String.valueOf(code));
                     }
                 } else {
-                    Logger.d("zfy", "片段上传失败：" + file.getName() + "_" + chunkBean.start + "_" + chunkBean.end + " " + code + "\n" + message);
+                    Logger.d("片段上传失败：" + file.getName() + "_" + chunkBean.start + "_" + chunkBean.end + " " + code + "\n" + message);
                     //关闭通道https通道可用性
                     LanManager.getInstance().closeHttpsChannel();
                     if (callback != null) {
@@ -880,7 +880,7 @@ public class MultipartNetworkManger {
 
             @Override
             public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                Logger.d("zfy", "片段上传失败onFailure：" + file.getName() + "_" + chunkBean.start + "_" + chunkBean.end);
+                Logger.d("片段上传失败onFailure：" + file.getName() + "_" + chunkBean.start + "_" + chunkBean.end);
                 //关闭通道https通道可用性
                 LanManager.getInstance().closeHttpsChannel();
                 Logger.e(e.getMessage());
@@ -894,7 +894,7 @@ public class MultipartNetworkManger {
 
     //通过https下载
     public static void downloadFromHttps(OkHttpClient okHttpClient, String httpsDomain, String verifyToken, String fileUuid, String cacheDirPath, long start, long end, ResultCallback callback, TransferProgressListener progressListener) {
-        Logger.d("zfy", "download from https");
+        Logger.d("download from https");
 
         StringBuilder urlSb = new StringBuilder();
         urlSb.append(httpsDomain);
@@ -903,18 +903,18 @@ public class MultipartNetworkManger {
         urlSb.append(fileUuid);
         String url = urlSb.toString();
         HttpUrl httpUrl = HttpUrl.parse(url);
-        Logger.d("zfy", "download url = " + url);
-        Logger.d("zfy", "token:" + verifyToken);
+        Logger.d("download url = " + url);
+        Logger.d("token:" + verifyToken);
         if (httpUrl == null) {
-            Logger.d("zfy", "url is error");
+            Logger.d("url is error");
             return;
         }
 
         String chunkFileName = fileUuid + "_" + start + "_" + end;
-        Logger.d("zfy", "chunkFileName = " + chunkFileName);
+        Logger.d("chunkFileName = " + chunkFileName);
 
         String rangeValue = "bytes=" + start + "-" + end;
-        Logger.d("zfy", "range is:" + rangeValue);
+        Logger.d("range is:" + rangeValue);
 
         long fileSize = end - start + 1;
 
@@ -933,7 +933,7 @@ public class MultipartNetworkManger {
         call.enqueue(new Callback() {
             @Override
             public void onResponse(@NotNull Call call, @NotNull Response response) {
-                Logger.d("zfy", "https download on response " + response.code());
+                Logger.d("https download on response " + response.code());
 
                 if (!response.isSuccessful()) {
                     if (callback != null) {
@@ -945,10 +945,10 @@ public class MultipartNetworkManger {
                 int code = response.code();
                 Headers headers = response.headers();
                 String contentType = headers.get("content-type");
-                Logger.d("zfy", "content-type = " + contentType);
+                Logger.d("content-type = " + contentType);
                 if (TextUtils.isEmpty(contentType) || contentType.contains("json")) {
                     //没有文件流，下载文件失败
-                    Logger.d("zfy", "no stream");
+                    Logger.d("no stream");
                     String errorCode = code + "";
                     String errorMsg = response.message();
                     if (code == 1003) {
@@ -967,18 +967,18 @@ public class MultipartNetworkManger {
                 } else {
                     //文件大小
                     String headerFileSizeStr = headers.get("file-size");
-                    Logger.d("zfy", "file-size=" + headerFileSizeStr);
+                    Logger.d("file-size=" + headerFileSizeStr);
 
                     File chunkFile = new File(cacheDirPath, chunkFileName);
                     if (chunkFile.exists()) {
-                        Logger.d("zfy", "chunk file to download exist, delete");
+                        Logger.d("chunk file to download exist, delete");
                         chunkFile.delete();
                     }
 
                     String tempChunkFileName = chunkFileName + "_temp";
                     File tempChunkFile = new File(cacheDirPath, tempChunkFileName);
                     if (tempChunkFile.exists()) {
-                        Logger.d("zfy", "temp chunk file to download exist, delete");
+                        Logger.d("temp chunk file to download exist, delete");
                         tempChunkFile.delete();
                     }
                     try (InputStream inputStream = Objects.requireNonNull(response.body()).byteStream();
@@ -1017,13 +1017,13 @@ public class MultipartNetworkManger {
 
                     //下载解析成功，size校验
                     long tempFileSize = tempChunkFile.length();
-                    Logger.d("zfy", "downloadSize=" + tempFileSize);
-                    Logger.d("zfy", "targetSize=" + fileSize);
+                    Logger.d("downloadSize=" + tempFileSize);
+                    Logger.d("targetSize=" + fileSize);
 
                     if (tempFileSize == fileSize) {
-                        Logger.d("zfy", "size校验通过");
+                        Logger.d("size校验通过");
                         if (chunkFile.exists()) {
-                            Logger.d("zfy", "chunk file to download exist, delete");
+                            Logger.d("chunk file to download exist, delete");
                             chunkFile.delete();
                         }
                         tempChunkFile.renameTo(chunkFile);
@@ -1031,8 +1031,8 @@ public class MultipartNetworkManger {
                             callback.onResult(true, null);
                         }
                     } else {
-                        Logger.d("zfy", "size校验失败");
-                        Logger.d("zfy", "tmp file delete: " + tempChunkFile.delete());
+                        Logger.d("size校验失败");
+                        Logger.d("tmp file delete: " + tempChunkFile.delete());
                         if (callback != null) {
                             callback.onResult(false, "size校验失败");
                         }
@@ -1043,10 +1043,10 @@ public class MultipartNetworkManger {
 
             @Override
             public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                Logger.d("zfy", "https片段下载失败：" + chunkFileName);
+                Logger.d("https片段下载失败：" + chunkFileName);
                 //通道异常，关闭
                 LanManager.getInstance().closeHttpsChannel();
-                Logger.e("zfy", e.getMessage());
+                Logger.e(e.getMessage());
                 if (callback != null) {
                     callback.onResult(false, "下载失败");
                 }

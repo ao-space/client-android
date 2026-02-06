@@ -61,7 +61,7 @@ public class BetagCalculator {
         }
         long fileSize = file.length();
         String sizeFlag = getSizeFlag(fileSize);
-        Logger.d("zfy", "sizeFlag = " + sizeFlag);
+        Logger.d("sizeFlag = " + sizeFlag);
         //片数
         int chunkCount = (int) Math.ceil((double) fileSize / (double) betagChunkSize);
         try (RandomAccessFile randomAccessFile = new RandomAccessFile(filePath, "r")) {
@@ -85,7 +85,7 @@ public class BetagCalculator {
                 byte[] md5Byte = messagedigest.digest();
                 md5ByteList.add(md5Byte);
                 String md5 = MD5Util.bufferToHex(md5Byte);
-                Logger.d("zfy", "chunk " + i + ",md5:" + md5);
+                Logger.d("chunk " + i + ",md5:" + md5);
             }
             String chunksMd5 = "";
             if (md5ByteList.size() > 1) {
@@ -99,9 +99,9 @@ public class BetagCalculator {
                 //单片，直接取md5值
                 chunksMd5 = MD5Util.bufferToHex(md5ByteList.get(0));
             }
-            Logger.d("zfy", "chunksMd5 = " + chunksMd5);
+            Logger.d("chunksMd5 = " + chunksMd5);
             betag = sizeFlag + chunksMd5;
-            Logger.d("zfy", "betag = " + betag);
+            Logger.d("betag = " + betag);
         } catch (Exception e) {
             e.printStackTrace();
         }

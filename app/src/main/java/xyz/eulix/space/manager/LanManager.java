@@ -72,6 +72,7 @@ import xyz.eulix.space.util.ThreadPool;
  * History:     2021/12/24
  */
 public class LanManager {
+    private static final String TAG = LanManager.class.getSimpleName();
     private static LanManager sInstance;
     private volatile boolean isLanEnable = false;
     //局域网http domain
@@ -121,20 +122,20 @@ public class LanManager {
     }
 
     private void setLanEnableCore(boolean isLanEnable, boolean isStopPoll) {
-        Logger.d("zfy", "#setLanEnableCore isLanEnable=" + isLanEnable + ",isStopPoll=" + isStopPoll);
+        Logger.d(TAG, "[LAN] #setLanEnableCore isLanEnable=" + isLanEnable + ", isStopPoll=" + isStopPoll);
         this.isLanEnable = isLanEnable;
         if (!isLanEnable) {
             //非局域网
             this.lanDomain = null;
             this.lanHttpsDomain = null;
             mCheckFailedTime++;
-            Logger.d("zfy", "check lan failed time:" + mCheckFailedTime);
+            Logger.d(TAG, "[LAN] check lan failed time:" + mCheckFailedTime);
             if (mCheckFailedTime >= LAN_CHECK_MAX_COUNT) {
-                Logger.d("zfy", "lan check failed time reach limit, turn long interval time");
+                Logger.d(TAG, "[LAN] lan check failed time reach limit, turn long interval time");
                 mPollingInterval = LONG_POLLING_INTERVAL_TIME;
             }
             if (isStopPoll) {
-                Logger.d("zfy", "stop poll");
+                Logger.d(TAG, "[LAN] stop poll");
                 stopPollTask();
                 mCheckFailedTime = 0;
                 mPollingInterval = NORMAL_POLLING_INTERVAL_TIME;
@@ -164,7 +165,7 @@ public class LanManager {
 
     //刷新局域网状态
     public void refreshLanState(ResultCallback callback, boolean isFore) {
-        Logger.d("zfy", "refreshLanState");
+        Logger.d(TAG, "[LAN] refreshLanState");
         if (!NetUtils.isWifiConnected(context)) {
             setLanEnableCore(false, false);
             callback.onResult(false, "client not wifi");
@@ -197,16 +198,16 @@ public class LanManager {
 
     //查询ip地址是否可用
     private void checkIpListConnect(List<InitResponseNetwork> ipList, final int index, ResultCallback callback) {
-        Logger.d("zfy", "checkIpListConnect index=" + index);
+        Logger.d(TAG, "[LAN] checkIpListConnect index=" + index);
         if (!NetUtils.isWifiConnected(context) || ipList == null || ipList.isEmpty() || index >= ipList.size()) {
             callback.onResult(false, null);
-            Logger.d("zfy", "no available lan");
+            Logger.d(TAG, "[LAN] no available lan");
             return;
         }
         String baseDomain = genDomainUrl(ipList.get(index));
         InitResponseNetwork finalIpItem = ipList.get(index);
         if (ipFailTimeMap.containsKey(finalIpItem.getIp()) && ipFailTimeMap.get(finalIpItem.getIp()) > 3) {
-            Logger.d("zfy", finalIpItem.getIp() + " failed too many times,try next");
+            Logger.d(TAG, finalIpItem.getIp() + " failed too many times,try next");
             int nextIndex = index + 1;
             checkIpListConnect(ipList, nextIndex, callback);
             return;
@@ -218,19 +219,19 @@ public class LanManager {
 //                    isLanEnable = true;
                     lanDomain = genDomainUrl(finalIpItem);
                     lanHttpsDomain = genHttpsDomainUrl(finalIpItem);
-                    Logger.d("zfy", "get available lan ip:" + lanDomain);
+                    Logger.d(TAG, "[LAN] get available lan ip:" + lanDomain);
                     if (!isLanEnable) {
                         lanDomain = genDomainUrl(finalIpItem);
                         lanHttpsDomain = genHttpsDomainUrl(finalIpItem);
                         setLanEnableCore(true, false);
-                        Logger.d("zfy", "get available lan ip:" + lanDomain);
+                        Logger.d(TAG, "[LAN] get available lan ip:" + lanDomain);
                         //获取局域网证书
                         if (mHttpsSwitch) {
                             LanHttpsUtil.getCert(context, new ResultCallbackObj() {
                                 @Override
                                 public void onResult(boolean result, Object extraObj) {
                                     if (result && extraObj != null) {
-                                        Logger.d("zfy", "get https cert success");
+                                        Logger.d(TAG, "[LAN] get https cert success");
                                         lanCert = (X509Certificate) extraObj;
                                     }
                                 }
@@ -250,10 +251,10 @@ public class LanManager {
                         ipFailTimeMap.put(finalIpItem.getIp(), 1);
                     }
                     if (index < ipList.size() - 1) {
-                        Logger.d("zfy", "no available lan");
+                        Logger.d(TAG, "[LAN] no available lan");
                         return;
                     }
-                    Logger.d("zfy", finalIpItem.getIp() + " not available,try next");
+                    Logger.d(TAG, finalIpItem.getIp() + " not available,try next");
                     int nextIndex = index + 1;
                     checkIpListConnect(ipList, nextIndex, callback);
                 }
@@ -308,7 +309,7 @@ public class LanManager {
             }
 
             if (ipList.isEmpty()) {
-                Logger.d("zfy", "has no local ips");
+                Logger.d(TAG, "[LAN] has no local ips");
                 setLanEnableCore(false, false);
                 callback.onResult(false, null);
                 return;
@@ -326,7 +327,7 @@ public class LanManager {
                 String baseDomain = genDomainUrl(wireIpItem);
                 InitResponseNetwork finalWireIpItem = wireIpItem;
                 if (ipFailTimeMap.containsKey(finalWireIpItem.getIp()) && ipFailTimeMap.get(finalWireIpItem.getIp()) > 3) {
-                    Logger.d("zfy", finalWireIpItem.getIp() + " failed too many times,try wireless");
+                    Logger.d(TAG, finalWireIpItem.getIp() + " failed too many times,try wireless");
                     ipList.remove(finalWireIpItem);
                     checkIpListConnect(ipList, 0, callback);
                     return;
@@ -340,30 +341,30 @@ public class LanManager {
                                 lanDomain = genDomainUrl(finalWireIpItem);
                                 lanHttpsDomain = genHttpsDomainUrl(finalWireIpItem);
                                 setLanEnableCore(true, false);
-                                Logger.d("zfy", "get available lan ip:" + lanDomain);
+                                Logger.d(TAG, "[LAN] get available lan ip:" + lanDomain);
                                 if (mHttpsSwitch) {
                                     //获取局域网证书
                                     LanHttpsUtil.getCert(context, new ResultCallbackObj() {
                                         @Override
                                         public void onResult(boolean result, Object extraObj) {
                                             if (result && extraObj != null) {
-                                                Logger.d("zfy", "get https cert success");
+                                                Logger.d(TAG, "[LAN] get https cert success");
                                                 lanCert = (X509Certificate) extraObj;
                                             } else {
-                                                Logger.d("zfy", "get https cert failed");
+                                                Logger.d(TAG, "[LAN] get https cert failed");
                                             }
                                         }
 
                                         @Override
                                         public void onError(String msg) {
-                                            Logger.d("zfy", "get https cert error");
+                                            Logger.d(TAG, "[LAN] get https cert error");
                                         }
                                     });
                                 }
                             }
                             callback.onResult(true, null);
                         } else {
-                            Logger.d("zfy", "wire not available, try others");
+                            Logger.d(TAG, "[LAN] wire not available, try others");
                             if (ipFailTimeMap.containsKey(finalWireIpItem.getIp())) {
                                 ipFailTimeMap.put(finalWireIpItem.getIp(), ipFailTimeMap.get(finalWireIpItem.getIp()) + 1);
                             } else {
@@ -375,11 +376,11 @@ public class LanManager {
                     }
                 });
             } else {
-                Logger.d("zfy", "no wire lan,check wireless list");
+                Logger.d(TAG, "[LAN] no wire lan,check wireless list");
                 checkIpListConnect(ipList, 0, callback);
             }
         } else {
-            Logger.d("zfy", "has no local ips");
+            Logger.d(TAG, "[LAN] has no local ips");
             setLanEnableCore(false, false);
             callback.onResult(false, null);
         }
@@ -417,7 +418,7 @@ public class LanManager {
         ThreadPool.getInstance().execute(() -> gatewayManager.getSpaceStatus(new ISpaceStatusCallback() {
             @Override
             public void onResult(SpaceStatusResult result) {
-                Logger.d("zfy", "checkConnectStates on result: " + result);
+                Logger.d(TAG, "[LAN] checkConnectStates on result: " + result);
                 if (result != null) {
                     callback.onResult(true, null);
                 } else {
@@ -427,7 +428,7 @@ public class LanManager {
 
             @Override
             public void onError(String errMsg) {
-                Logger.d("zfy", "checkConnectStates on error: " + errMsg);
+                Logger.d(TAG, "[LAN] checkConnectStates on error: " + errMsg);
                 callback.onResult(false, null);
             }
         }));
@@ -436,7 +437,7 @@ public class LanManager {
 
     //通过在局域网内发现设备的方式刷新局域网状态-不走平台
     public void refreshLanStateBySearchDevice(ResultCallback callback) {
-        Logger.d("zfy", "searchLanDevice");
+        Logger.d(TAG, "[LAN] searchLanDevice");
         if (!NetUtils.isWifiConnected(context)) {
             setLanEnableCore(false, false);
             if (callback != null) {
@@ -456,7 +457,7 @@ public class LanManager {
                 @Override
                 public void onResult(boolean result, LanDeviceInfoBean deviceInfo, LanSearchServiceConnection connection) {
                     if (deviceInfo != null && deviceInfo.btidhash != null && currentBtidhash.startsWith(deviceInfo.btidhash)) {
-                        Logger.d("zfy", "find lan device with same btidhash, ip=" + deviceInfo.ipAddress);
+                        Logger.d(TAG, "[LAN] find lan device with same btidhash, ip=" + deviceInfo.ipAddress);
                         if (connection != null) {
                             connection.stopDiscovery();
                         }
@@ -554,7 +555,7 @@ public class LanManager {
         @Override
         public void resolveDevice(NsdServiceInfo serviceInfo) {
             //发现设备
-            Logger.d("zfy", "#resolveDevice serviceName=" + serviceInfo.getServiceName() + ",host=" + serviceInfo.getHost());
+            Logger.d(TAG, "[LAN] #resolveDevice serviceName=" + serviceInfo.getServiceName() + ",host=" + serviceInfo.getHost());
             InetAddress inetAddress = serviceInfo.getHost();
             if (inetAddress instanceof Inet6Address) {
                 //过滤IPv6
@@ -568,9 +569,9 @@ public class LanManager {
                 Set<Map.Entry<String, byte[]>> entrySet = attributes.entrySet();
                 for (Map.Entry<String, byte[]> entry : entrySet) {
                     if (entry != null) {
-                        Logger.d("zfy", "key: " + entry.getKey());
+                        Logger.d(TAG, "[LAN] key: " + entry.getKey());
                         if (entry.getValue() != null) {
-                            Logger.d("zfy", "value: " + new String(entry.getValue(), StandardCharsets.UTF_8));
+                            Logger.d(TAG, "[LAN] value: " + new String(entry.getValue(), StandardCharsets.UTF_8));
                         }
                         String key = entry.getKey();
                         if (key.equals("btidhash") && entry.getValue() != null) {
@@ -670,7 +671,7 @@ public class LanManager {
             @Override
             public void onResult(boolean result, Object extraObj) {
                 if (result && extraObj != null) {
-                    Logger.d("zfy", "get https cert success");
+                    Logger.d(TAG, "[LAN] get https cert success");
                     lanCert = (X509Certificate) extraObj;
                 }
             }
@@ -684,11 +685,11 @@ public class LanManager {
 
     //启动轮询
     public void startPollCheckTask() {
-        Logger.d("zfy", "#startPollCheckTask");
+        Logger.d(TAG, "[LAN] #startPollCheckTask");
         stopPollTask();
 
         if (!NetUtils.isWifiConnected(context)) {
-            Logger.d("zfy", "network is not wifi,stop poll");
+            Logger.d(TAG, "[LAN] network is not wifi,stop poll");
             setLanEnableCore(false, true);
             return;
         }
@@ -705,11 +706,11 @@ public class LanManager {
         @Override
         public void run() {
             while (!isStop) {
-                Logger.d("zfy", "runnable poll check");
+                Logger.d(TAG, "[LAN] runnable poll check");
                 //应用在后台，且当前没有正在传输的任务，不进行局域网状态查询
                 if (!((EulixSpaceApplication) EulixSpaceApplication.getContext()).getIsAppForeground()
                         && (TransferTaskManager.getInstance().getTransferringCount() <= 0)) {
-                    Logger.d("zfy", "app is background and no transfer task, jump lan poll check");
+                    Logger.d(TAG, "[LAN] app is background and no transfer task, jump lan poll check");
                 } else {
                     checkLanState();
                 }
@@ -756,7 +757,7 @@ public class LanManager {
                                     checkAfterGetIpList(ipList, new ResultCallback() {
                                         @Override
                                         public void onResult(boolean result, String extraMsg) {
-                                            Logger.d("zfy", "refreshLanStateBySearchDevice onResult:" + result);
+                                            Logger.d(TAG, "[LAN] refreshLanStateBySearchDevice onResult:" + result);
                                             setLanEnableCore(result, false);
                                             if (result) {
                                                 EventBusUtil.post(new LanStatusEvent(true));
@@ -794,7 +795,7 @@ public class LanManager {
                     checkAfterGetIpList(ipList, new ResultCallback() {
                         @Override
                         public void onResult(boolean result, String extraMsg) {
-                            Logger.d("zfy", "refreshLanStateBySearchDevice onResult:" + result);
+                            Logger.d(TAG, "[LAN] refreshLanStateBySearchDevice onResult:" + result);
                             setLanEnableCore(result, false);
                             if (result) {
                                 EventBusUtil.post(new LanStatusEvent(true));
@@ -805,7 +806,7 @@ public class LanManager {
                     refreshLanStateBySearchDevice(new ResultCallback() {
                         @Override
                         public void onResult(boolean result, String extraMsg) {
-                            Logger.d("zfy", "refreshLanStateBySearchDevice onResult:" + result);
+                            Logger.d(TAG, "[LAN] refreshLanStateBySearchDevice onResult:" + result);
                             setLanEnableCore(result, false);
                             if (result) {
                                 EventBusUtil.post(new LanStatusEvent(true));
@@ -820,7 +821,7 @@ public class LanManager {
                 refreshLanStateBySearchDevice(new ResultCallback() {
                     @Override
                     public void onResult(boolean result, String extraMsg) {
-                        Logger.d("zfy", "refreshLanStateBySearchDevice onResult:" + result);
+                        Logger.d(TAG, "[LAN] refreshLanStateBySearchDevice onResult:" + result);
                         setLanEnableCore(result, false);
                         if (result) {
                             EventBusUtil.post(new LanStatusEvent(true));
@@ -854,23 +855,23 @@ public class LanManager {
         lanHttpsDomain = "https://" + lanIp + (!TextUtils.isEmpty(tlsPort) ? ":" + tlsPort : ":443") + "/";
         setLanEnableCore(true, false);
         EventBusUtil.post(new LanStatusEvent(true));
-        Logger.d("zfy", "get available lan ip:" + lanDomain);
+        Logger.d(TAG, "[LAN] get available lan ip:" + lanDomain);
         if (mHttpsSwitch) {
             //获取局域网证书
             LanHttpsUtil.getCert(context, new ResultCallbackObj() {
                 @Override
                 public void onResult(boolean result, Object extraObj) {
                     if (result && extraObj != null) {
-                        Logger.d("zfy", "get https cert success");
+                        Logger.d(TAG, "[LAN] get https cert success");
                         lanCert = (X509Certificate) extraObj;
                     } else {
-                        Logger.d("zfy", "get https cert failed");
+                        Logger.d(TAG, "[LAN] get https cert failed");
                     }
                 }
 
                 @Override
                 public void onError(String msg) {
-                    Logger.d("zfy", "get https cert error");
+                    Logger.d(TAG, "[LAN] get https cert error");
                 }
             });
         }

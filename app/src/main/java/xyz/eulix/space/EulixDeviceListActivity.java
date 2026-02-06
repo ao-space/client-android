@@ -1154,7 +1154,7 @@ public class EulixDeviceListActivity extends AbsActivity<EulixDeviceListPresente
             mHandler.post(() -> {
                 //切换盒子
                 EventBusUtil.post(new BoxOnlineRequestEvent(true));
-                Logger.d("zfy", "change box");
+                Logger.d("change box");
                 AlreadyUploadedManager.getInstance().init(getApplicationContext());
                 TransferTaskManager.getInstance().resetManagerData();
                 LanManager.getInstance().setLanEnable(false);

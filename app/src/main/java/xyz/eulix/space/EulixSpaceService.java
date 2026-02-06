@@ -188,6 +188,7 @@ import xyz.eulix.space.util.AOSpaceUtil;
 import xyz.eulix.space.util.AlarmUtil;
 import xyz.eulix.space.util.ConstantField;
 import xyz.eulix.space.util.DataUtil;
+import xyz.eulix.space.util.DeploymentModeUtil;
 import xyz.eulix.space.util.DebugUtil;
 import xyz.eulix.space.util.EventBusUtil;
 import xyz.eulix.space.util.FormatUtil;
@@ -2191,6 +2192,10 @@ public class EulixSpaceService extends Service implements BoxNetworkCheckManager
     }
 
     private void getPlatformAbility(String platformServerUrl, boolean isFore) {
+        if (DeploymentModeUtil.isNoPlatformMode()) {
+            Logger.d(TAG, "[PLATFORM] skip platform ability request in no-platform mode");
+            return;
+        }
         if (platformServerUrl != null && !DataUtil.isPlatformAbilityRequest(platformServerUrl, false)) {
             DataUtil.setPlatformAbilityRequest(platformServerUrl, true);
             EulixPlatformUtil.getPlatformAbility(platformServerUrl, isFore, new PlatformAbilityCallback() {
@@ -2199,23 +2204,24 @@ public class EulixSpaceService extends Service implements BoxNetworkCheckManager
                     DataUtil.setCurrentPlatformServerHost(StringUtil.urlToHost(platformServerUrl));
                     DataUtil.setPlatformAbility(getApplicationContext(), platformServerUrl, platformApis, false);
                     DataUtil.setPlatformAbilityRequest(platformServerUrl, false);
-                    Logger.d(TAG, "request platform ability success: " + platformServerUrl);
+                    Logger.d(TAG, "[PLATFORM] request success: " + Logger.safeUrl(platformServerUrl));
                 }
 
                 @Override
                 public void onFailed() {
                     DataUtil.setPlatformAbilityRequest(platformServerUrl, false);
-                    Logger.d(TAG, "request platform ability failed: " + platformServerUrl);
+                    Logger.w(TAG, "[PLATFORM] request failed: " + Logger.safeUrl(platformServerUrl));
                 }
 
                 @Override
                 public void onError(String errMsg) {
                     DataUtil.setPlatformAbilityRequest(platformServerUrl, false);
-                    Logger.d(TAG, "request platform ability error: " + platformServerUrl);
+                    Logger.e(TAG, "[PLATFORM] request error: " + Logger.safeUrl(platformServerUrl)
+                            + ", errMsg=" + errMsg);
                 }
             });
         } else {
-            Logger.d(TAG, "request platform ability in progress: " + platformServerUrl);
+            Logger.d(TAG, "[PLATFORM] request in progress: " + Logger.safeUrl(platformServerUrl));
         }
     }
 
@@ -2597,10 +2603,14 @@ public class EulixSpaceService extends Service implements BoxNetworkCheckManager
             }
         }
         EventBusUtil.register(this);
-        String platformServerUrl = DebugUtil.getEnvironmentServices();
-        if (platformServerUrl != null) {
-            Logger.d(TAG, "init request platform ability: " + platformServerUrl);
-            getPlatformAbility(platformServerUrl, false);
+        if (!DeploymentModeUtil.isNoPlatformMode()) {
+            String platformServerUrl = DebugUtil.getEnvironmentServices();
+            if (platformServerUrl != null) {
+                Logger.d(TAG, "[PLATFORM] init request platform ability: " + Logger.safeUrl(platformServerUrl));
+                getPlatformAbility(platformServerUrl, false);
+            }
+        } else {
+            Logger.d(TAG, "[PLATFORM] skip init platform ability in no-platform mode");
         }
     }
 
@@ -2945,6 +2955,10 @@ public class EulixSpaceService extends Service implements BoxNetworkCheckManager
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(PlatformAbilityRequestEvent event) {
         if (event != null) {
+            if (DeploymentModeUtil.isNoPlatformMode()) {
+                Logger.d(TAG, "[PLATFORM] skip platform ability event in no-platform mode");
+                return;
+            }
             String platformServerUrl = event.getPlatformServerUrl();
             Boolean isSupport = DataUtil.isPlatformAbilitySupport(getApplicationContext(), platformServerUrl
                     , ConstantField.URL.SERVERS_STUN_DETAIL_V2_API, ConstantField.HttpRequestMethod.GET);
@@ -2982,9 +2996,13 @@ public class EulixSpaceService extends Service implements BoxNetworkCheckManager
         if (!isForeground && event != null) {
             resetSpacePoll(event.isHeart());
         }
+        if (DeploymentModeUtil.isNoPlatformMode()) {
+            Logger.d(TAG, "[PLATFORM] skip space-change platform ability request in no-platform mode");
+            return;
+        }
         String platformServerUrl = DebugUtil.getEnvironmentServices();
         if (platformServerUrl != null && !StringUtil.compare(StringUtil.urlToHost(platformServerUrl), DataUtil.getCurrentPlatformServerHost())) {
-            Logger.d(TAG, "space change request platform ability: " + platformServerUrl);
+            Logger.d(TAG, "[PLATFORM] space-change request platform ability: " + Logger.safeUrl(platformServerUrl));
             getPlatformAbility(platformServerUrl, false);
         }
     }

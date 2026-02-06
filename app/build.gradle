@@ -63,6 +63,8 @@ android {
         versionCode 10000
         versionName "1.0.0"
         flavorDimensions "versionCode"
+        def noPlatformModeValue = (System.getenv("AO_NO_PLATFORM_MODE") ?: "true").toBoolean()
+        buildConfigField "boolean", "NO_PLATFORM_MODE", noPlatformModeValue.toString()
 
 //        ndk {
 //            abiFilters 'armeabi-v7a'

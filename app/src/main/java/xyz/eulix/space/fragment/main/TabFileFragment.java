@@ -1298,14 +1298,14 @@ public class TabFileFragment extends AbsFragment<TabFilePresenter.ITabFile, TabF
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(LanStatusEvent event) {
-        Logger.d("zfy", "receive LanEvent " + event.isLanEnable);
+        Logger.d("receive LanEvent " + event.isLanEnable);
 //        ConstantField.sIsLanConnect = event.isLanEnable();
         refreshTransferStyle(event.isLanEnable);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(SpaceOnlineCallbackEvent event) {
-        Logger.d("zfy", "receive SpaceOnlineCallbackEvent " + event.isOnline());
+        Logger.d("receive SpaceOnlineCallbackEvent " + event.isOnline());
         refreshTransferStyle(LanManager.getInstance().isLanEnable());
     }
 
@@ -1326,7 +1326,7 @@ public class TabFileFragment extends AbsFragment<TabFilePresenter.ITabFile, TabF
     //预览页删除文件
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(DeleteFileEvent event) {
-        Logger.d("zfy", "receive DeleteEvent");
+        Logger.d("receive DeleteEvent");
 //        showImageTextToast(R.drawable.toast_right, R.string.delete_success);
         refreshEulixSpaceStorage();
     }
@@ -1334,7 +1334,7 @@ public class TabFileFragment extends AbsFragment<TabFilePresenter.ITabFile, TabF
     //预览页删除文件
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(MoveFileEvent event) {
-        Logger.d("zfy", "receive MoveEvent:" + event.getFileName() + "," + event.getUuid());
+        Logger.d("receive MoveEvent:" + event.getFileName() + "," + event.getUuid());
 //        showImageTextToast(R.drawable.toast_right, R.string.cut_success);
         refreshEulixSpaceStorage();
     }
@@ -1342,14 +1342,14 @@ public class TabFileFragment extends AbsFragment<TabFilePresenter.ITabFile, TabF
     //预览页修改文件
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(RenameFileEvent event) {
-        Logger.d("zfy", "receive RenameEvent:" + event.getFileName() + "," + event.getUuid());
+        Logger.d("receive RenameEvent:" + event.getFileName() + "," + event.getUuid());
         refreshEulixSpaceStorage();
     }
 
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(TransferringCountEvent event) {
-        Logger.d("zfy", "receive TransferringCountEvent:" + event.currentCount);
+        Logger.d("receive TransferringCountEvent:" + event.currentCount);
         if (tvTransferringCount == null) {
             return;
         }
@@ -1358,7 +1358,7 @@ public class TabFileFragment extends AbsFragment<TabFilePresenter.ITabFile, TabF
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(BoxStatusEvent event) {
-        Logger.d("zfy", "receive BoxStatusEvent:" + event.isSelectBox);
+        Logger.d("receive BoxStatusEvent:" + event.isSelectBox);
         if (event.isSelectBox) {
             refreshTransferringCount(TransferTaskManager.getInstance().getTransferringCount());
         }
@@ -1401,7 +1401,7 @@ public class TabFileFragment extends AbsFragment<TabFilePresenter.ITabFile, TabF
     }
 
     private void refreshTransferringCount(int transferringCount) {
-        Logger.d("zfy", "transferringCount=" + transferringCount);
+        Logger.d("transferringCount=" + transferringCount);
         if (tvTransferringCount != null) {
             if (transferringCount > 99) {
                 tvTransferringCount.setVisibility(View.VISIBLE);

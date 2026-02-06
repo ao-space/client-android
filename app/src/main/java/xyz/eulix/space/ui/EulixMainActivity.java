@@ -676,7 +676,7 @@ public class EulixMainActivity extends AbsActivity<MainPresenter.IMain, MainPres
 
     private boolean initDevice() {
         boolean isActiveExist = true;
-        Logger.d("zfy", "initDevice()");
+        Logger.d(TAG, "[MAIN] initDevice()");
         isRequestAvatar = false;
         deviceNumber = EulixSpaceDBUtil.getDeviceNumber(getApplicationContext(), false);
         List<Map<String, String>> boxValues = EulixSpaceDBUtil.queryBox(getApplicationContext()
@@ -1033,7 +1033,8 @@ public class EulixMainActivity extends AbsActivity<MainPresenter.IMain, MainPres
                         return;
                     }
                     String result = data.getExtras().getString(Intents.Scan.RESULT);
-                    Logger.d(TAG, "qr code result: " + result);
+                    Logger.d(TAG, "qr scan result received, isNull=" + (result == null)
+                            + ", length=" + (result == null ? 0 : result.length()));
                     if (result != null) {
                         //解析二维码数据，并兼容旧格式 eg: p=aospace&bt=box-login&v=4e3022fd-156d-459f-8369-bbabe579b2b3
                         boolean isPlatformQrCode;
@@ -1064,6 +1065,8 @@ public class EulixMainActivity extends AbsActivity<MainPresenter.IMain, MainPres
                             value = paramMap.get("v");
                         }
 
+                        Logger.i(TAG, "qr scan parsed, loginType=" + (isPlatformQrCode ? "platform" : "box")
+                                + ", keyAvailable=" + (value != null && value.length() > 0));
                         Intent intent = new Intent(EulixMainActivity.this, GranterLoginActivity.class);
                         if (!isPlatformQrCode) {
                             intent.putExtra(GranterLoginActivity.KEY_IS_BOX_LOGIN, true);

@@ -1285,14 +1285,14 @@ public class FileSearchActivity extends AbsActivity<FileSearchPresenter.IFileSea
     //预览页删除文件
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(DeleteFileEvent event) {
-        Logger.d("zfy", "receive DeleteEvent");
+        Logger.d("receive DeleteEvent");
         showImageTextToast(R.drawable.toast_right, R.string.delete_success);
         refreshEulixSpaceStorage();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(TransferStateEvent event) {
-        Logger.d("zfy", "receive TransferStateEvent:" + event.state);
+        Logger.d("receive TransferStateEvent:" + event.state);
     }
 
     @Override

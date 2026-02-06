@@ -28,6 +28,7 @@ import xyz.eulix.space.manager.LanManager;
  * History:     2021/12/24
  */
 public class Urls {
+    private static final String TAG = Urls.class.getSimpleName();
 
     /**
      * @return 只获取ip地址
@@ -58,12 +59,14 @@ public class Urls {
         String baseUrl = boxDomain;
         if (baseUrl == null) {
             baseUrl = ConstantField.URL.BASE_GATEWAY_URL_DEBUG;
+            Logger.w(TAG, "boxDomain is null, fallback baseUrl=" + Logger.safeUrl(baseUrl));
         } else {
             while ((baseUrl.startsWith(":") || baseUrl.startsWith("/")) && baseUrl.length() > 1) {
                 baseUrl = baseUrl.substring(1);
             }
             if (TextUtils.isEmpty(baseUrl)) {
                 baseUrl = ConstantField.URL.BASE_GATEWAY_URL_DEBUG;
+                Logger.w(TAG, "boxDomain is empty after normalize, fallback baseUrl=" + Logger.safeUrl(baseUrl));
             } else {
                 if (!(baseUrl.startsWith("http://") || baseUrl.startsWith("https://"))) {
                     baseUrl = "https://" + baseUrl;
@@ -73,6 +76,7 @@ public class Urls {
                 }
             }
         }
+        Logger.d(TAG, "generateBaseUrl result=" + Logger.safeUrl(baseUrl));
         return baseUrl;
     }
 }

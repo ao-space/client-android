@@ -121,12 +121,12 @@ public class VideoNetManager {
                 .subscribe(new Observer<BaseResponseBody>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-                        Logger.d("zfy", "check video support on subscribe");
+                        Logger.d("check video support on subscribe");
                     }
 
                     @Override
                     public void onNext(BaseResponseBody responseBody) {
-                        Logger.d("zfy", "check video support on next: " + (responseBody == null ? "null" : responseBody.toString()));
+                        Logger.d("check video support on next: " + (responseBody == null ? "null" : responseBody.toString()));
                         if (callback != null) {
                             if (responseBody != null && responseBody.getCodeInt() == 200) {
                                 callback.onResult(true, null);
@@ -139,7 +139,7 @@ public class VideoNetManager {
                     @Override
                     public void onError(Throwable e) {
                         String errMsg = (e == null ? "null" : (e.getMessage() == null ? "" : e.getMessage()));
-                        Logger.e("zfy", "check video support on error: " + errMsg);
+                        Logger.e("check video support on error: " + errMsg);
                         if (callback != null) {
                             callback.onError(errMsg);
                         }
@@ -150,7 +150,7 @@ public class VideoNetManager {
 
                     @Override
                     public void onComplete() {
-                        Logger.d("zfy", "check video support on complete");
+                        Logger.d("check video support on complete");
                     }
                 });
     }
@@ -181,7 +181,7 @@ public class VideoNetManager {
             HttpUrl httpUrl = httpParseUrl.newBuilder()
                     .addQueryParameter("uuid", uuid)
                     .build();
-            Logger.d("zfy", "download file preview url: " + httpUrl);
+            Logger.d("download file preview url: " + httpUrl);
             Request request = new Request.Builder()
                     .url(httpUrl)
                     .get()
@@ -200,12 +200,12 @@ public class VideoNetManager {
             call.enqueue(new Callback() {
                 @Override
                 public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                    Logger.e("zfy", "get file preview on failure, e: " + e.getMessage());
+                    Logger.e("get file preview on failure, e: " + e.getMessage());
                 }
 
                 @Override
                 public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                    Logger.i("zfy", "on response " + response.code());
+                    Logger.i("on response " + response.code());
                     if (!response.isSuccessful()) {
                         if (callback != null) {
                             callback.onResult(false, null);
@@ -214,25 +214,25 @@ public class VideoNetManager {
                     }
                     Headers headers = response.headers();
                     String contentType = headers.get("content-type");
-                    Logger.d("zfy", "content-type = " + contentType);
+                    Logger.d("content-type = " + contentType);
                     if (!TextUtils.isEmpty(contentType) && (contentType.contains("stream") || contentType.contains("zip"))) {
                         //文件大小
                         String fileSizeStr = headers.get("file-size");
-                        Logger.d("zfy", "file-size=" + fileSizeStr);
+                        Logger.d("file-size=" + fileSizeStr);
                         long fileSize = Long.parseLong(fileSizeStr);
                         //文件名称等(inline; filename="header_chosen.jpg"; filename*=UTF-8''header_chosen.jpg)
                         String contentDisposition = headers.get("content-disposition");
-                        Logger.d("zfy", "content-disposition=" + contentDisposition);
+                        Logger.d("content-disposition=" + contentDisposition);
                         String suffix = "zip";
-                        Logger.d("zfy", "filepath: " + nFilePathFinal);
+                        Logger.d("filepath: " + nFilePathFinal);
                         FileUtil.mkFile(nFilePathFinal);
                         String saveFileName = "m3u8_" + uuid + "." + suffix;
-                        Logger.d("zfy", "saveFileName = " + saveFileName);
+                        Logger.d("saveFileName = " + saveFileName);
                         File file = new File(nFilePathFinal, saveFileName);
 
                         if (file.exists()) {
                             boolean result = file.delete();
-                            Logger.d("zfy", "delete file result =" + result);
+                            Logger.d("delete file result =" + result);
                         }
 
                         InputStream inputStream = response.body().byteStream();
@@ -241,7 +241,7 @@ public class VideoNetManager {
                         File decryptFile = EncryptionUtil.decrypt(ConstantField.Algorithm.Transformation.AES_CBC_PKCS5, null, inputStream,
                                 secret, StandardCharsets.UTF_8, ivParams, nFilePathFinal, saveFileName, fileSize, null);
                         if (decryptFile != null) {
-                            Logger.d("zfy", "get file preview success." + decryptFile.getAbsolutePath());
+                            Logger.d("get file preview success." + decryptFile.getAbsolutePath());
                             //回调
                             if (callback != null) {
                                 callback.onResult(true, decryptFile.getAbsolutePath());
@@ -251,7 +251,7 @@ public class VideoNetManager {
                         }
                     } else {
                         //没有文件流，下载文件失败
-                        Logger.d("zfy", "no stream:" + response.body().toString());
+                        Logger.d("no stream:" + response.body().toString());
                         if (callback != null) {
                             callback.onResult(false, null);
                         }

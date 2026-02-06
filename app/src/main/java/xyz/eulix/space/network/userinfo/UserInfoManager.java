@@ -312,7 +312,7 @@ public class UserInfoManager {
         if (filepath != null && filename != null) {
             File file = new File(filepath, filename);
             if (file.exists()) {
-                Logger.d("zfy", "filePath=" + file.getAbsolutePath());
+                Logger.d("filePath=" + file.getAbsolutePath());
                 HttpUrl httpParseUrl = HttpUrl.parse(generateBaseUrl(boxDomain) + ConstantField.URL.UPLOAD_GATEWAY_API);
                 if (httpParseUrl != null) {
                     HttpUrl httpUrl = httpParseUrl.newBuilder()
@@ -324,7 +324,7 @@ public class UserInfoManager {
                     if (externalCacheDir != null) {
                         String cachePath = externalCacheDir.getAbsolutePath() + "/header/";
                         FileUtil.mkFile(cachePath);
-                        Logger.d("zfy", "cachePath=" + cachePath);
+                        Logger.d("cachePath=" + cachePath);
 
                         String fileMD5 = "";
                         try {
@@ -365,14 +365,14 @@ public class UserInfoManager {
                             callRequestJson.put("headers", headerJsonObject);
                             callRequestJson.put("entity", entityJsonObject);
                             callRequestJson.put("serviceName", ConstantField.ServiceName.EULIXSPACE_ACCOUNT_SERVICE);
-                            Logger.d("zfy", "callJson=" + callRequestJson.toString());
+                            Logger.d("callJson=" + callRequestJson.toString());
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
                         //加密callRequest
                         String encryptCallJsonStr = EncryptionUtil.encrypt(ConstantField.Algorithm.Transformation.AES_CBC_PKCS5, null,
                                 callRequestJson.toString(), secret, StandardCharsets.UTF_8, ivParams);
-                        Logger.d("zfy", "encryptCallJsonStr=" + encryptCallJsonStr);
+                        Logger.d("encryptCallJsonStr=" + encryptCallJsonStr);
 
                         CallRequest callRequest = new CallRequest();
                         callRequest.setAccessToken(accessToken);
@@ -388,19 +388,19 @@ public class UserInfoManager {
                             Integer code = uploadResponseBody.getCodeInt();
                             //删除加密缓存文件
                             if (encryptFile != null && encryptFile.exists()) {
-                                Logger.d("zfy", "delete cache file");
+                                Logger.d("delete cache file");
                                 boolean result = encryptFile.delete();
-                                Logger.d("zfy", "encrypt file delete: " + result);
+                                Logger.d("encrypt file delete: " + result);
                             }
                             new Handler(context.getMainLooper()).post(() -> {
                                 if (code != null && code >= 200 && code < 300) {
-                                    Logger.d("zfy", "上传成功");
+                                    Logger.d("上传成功");
                                     if (listener != null) {
                                         listener.onResult(true, null);
                                     }
                                 } else {
                                     String message = uploadResponseBody.getMessage();
-                                    Logger.d("zfy", "上传失败" + code + "\n" + message);
+                                    Logger.d("上传失败" + code + "\n" + message);
                                     listener.onResult(false, message);
                                 }
                             });
@@ -431,7 +431,7 @@ public class UserInfoManager {
             HttpUrl httpUrl = httpParseUrl.newBuilder()
                     .addQueryParameter("aoid", aoid)
                     .build();
-            Logger.i("zfy", "download header url: " + httpUrl);
+            Logger.i("download header url: " + httpUrl);
             Request request = new Request.Builder()
                     .url(httpUrl)
                     .addHeader("Request-Id", uuid.toString())
@@ -468,18 +468,18 @@ public class UserInfoManager {
 
                     @Override
                     public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                        Logger.i("zfy", "on response " + response.code());
+                        Logger.i("on response " + response.code());
                         if (!response.isSuccessful()) {
                             return;
                         }
                         Headers headers = response.headers();
                         //文件大小
                         String fileSizeStr = headers.get("file-size");
-                        Logger.d("zfy", "file-size=" + fileSizeStr);
+                        Logger.d("file-size=" + fileSizeStr);
                         long fileSize = (fileSizeStr == null ? 0L : Long.parseLong(fileSizeStr));
                         //文件名称等(inline; filename="header_chosen.jpg"; filename*=UTF-8''header_chosen.jpg)
                         String contentDisposition= headers.get("content-disposition");
-                        Logger.d("zfy", "content-disposition=" + contentDisposition);
+                        Logger.d("content-disposition=" + contentDisposition);
                         String suffix = "png";
                         if (contentDisposition != null && !TextUtils.isEmpty(contentDisposition)) {
                             int contentDotIndex = contentDisposition.lastIndexOf(".");
@@ -488,12 +488,12 @@ public class UserInfoManager {
                         String saveFilename = filename + "." + suffix;
                         Logger.d(TAG, "filepath: " + nFilePathFinal);
                         FileUtil.mkFile(nFilePathFinal);
-                        Logger.d("zfy", "saveFileName = " + saveFilename);
+                        Logger.d("saveFileName = " + saveFilename);
                         File file = new File(nFilePathFinal, saveFilename);
 
                         if (file.exists()) {
                             boolean result = file.delete();
-                            Logger.d("zfy", "delete file result =" + result);
+                            Logger.d("delete file result =" + result);
                         }
 
                         ResponseBody responseBody = response.body();
@@ -853,7 +853,7 @@ public class UserInfoManager {
         UserInfoService service = retrofit.create(UserInfoService.class);
         Observable<RevokeMemberResponseBody> observable = service.revokeMember(uuid.toString(), createTokenInfo);
         if (isAdmin){
-            Logger.d("zfy", "current is admin");
+            Logger.d("current is admin");
             observable = service.revokeAdmin(uuid.toString(), createTokenInfo);
         }
         observable.subscribeOn(Schedulers.trampoline())
@@ -866,7 +866,7 @@ public class UserInfoManager {
 
                     @Override
                     public void onNext(RevokeMemberResponseBody revokeMemberResult) {
-                        Logger.i("zfy", "on next: " + (revokeMemberResult == null ? "null" : revokeMemberResult.toString()));
+                        Logger.i("on next: " + (revokeMemberResult == null ? "null" : revokeMemberResult.toString()));
                         if (callback != null) {
                             callback.onResult(revokeMemberResult);
                         }
@@ -875,7 +875,7 @@ public class UserInfoManager {
                     @Override
                     public void onError(Throwable e) {
                         String errMsg = (e == null ? "null" : (e.getMessage() == null ? "" : e.getMessage()));
-                        Logger.e("zfy", "on error: " + errMsg);
+                        Logger.e("on error: " + errMsg);
                         if (callback != null) {
                             callback.onError(errMsg);
                             if (e != null) {

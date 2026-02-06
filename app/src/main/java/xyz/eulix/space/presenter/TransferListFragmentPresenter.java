@@ -83,7 +83,7 @@ public class TransferListFragmentPresenter extends AbsPresenter<TransferListFrag
             //删除选中
             for (int i = 0; i < dataDoneSelected.size(); i++) {
                 if (dataDoneSelected.get(i).keyName.equals(item.keyName)) {
-                    Logger.d("zfy","delete done item");
+                    Logger.d("delete done item");
                     dataDoneSelected.remove(i);
                     selectedPositionList.remove(i);
                     break;

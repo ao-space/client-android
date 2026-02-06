@@ -381,7 +381,7 @@ public class FilePreviewActivity extends AbsActivity<FilePreviewPresenter.IFileP
                         public void openFileFinish() {
                             //加载成功
                             closeLoading();
-                            Logger.d("zfy", "openFileFinish");
+                            Logger.d("openFileFinish");
 
                             if (isShowBottomEdit) {
                                 fileEditContainer.setVisibility(View.VISIBLE);
@@ -406,14 +406,14 @@ public class FilePreviewActivity extends AbsActivity<FilePreviewPresenter.IFileP
                                 ((APageListView) view).setFitSize(1);
                                 int currentPageNumber = ((APageListView) view).getCurrentPageNumber();
                                 int totalPageCount = ((APageListView) view).getPageCount();
-                                Logger.d("zfy", currentPageNumber + "/" + totalPageCount);
+                                Logger.d(currentPageNumber + "/" + totalPageCount);
                             }
                         }
 
                         @Override
                         public void error(int errorCode) {
                             //加载失败
-                            Logger.d("zfy", "load error:" + errorCode);
+                            Logger.d("load error:" + errorCode);
                             closeLoading();
                             showNotSupportPreview();
                         }
@@ -426,14 +426,14 @@ public class FilePreviewActivity extends AbsActivity<FilePreviewPresenter.IFileP
 
                         @Override
                         public boolean onEventMethod(View v, MotionEvent e1, MotionEvent e2, float xValue, float yValue, byte eventMethodType) {
-//                        Logger.d("zfy","onEventMethod eventMethodType:"+eventMethodType);
+//                        Logger.d("onEventMethod eventMethodType:"+eventMethodType);
                             if (eventMethodType == IPageListViewListener.ON_FLING) {
                                 View view = getOfficeView();
 
                                 if (view instanceof APageListView) {
                                     int currentPageNumber = ((APageListView) view).getCurrentPageNumber();
                                     int totalPageCount = ((APageListView) view).getPageCount();
-                                    Logger.d("zfy", currentPageNumber + "/" + totalPageCount);
+                                    Logger.d(currentPageNumber + "/" + totalPageCount);
                                 }
                             }
                             return super.onEventMethod(v, e1, e2, xValue, yValue, eventMethodType);
@@ -575,13 +575,13 @@ public class FilePreviewActivity extends AbsActivity<FilePreviewPresenter.IFileP
                 pdfView.fromFile(pdfFile).onError(new OnErrorListener() {
                     @Override
                     public void onError(Throwable t) {
-                        Logger.d("zfy", "load pdf onError");
+                        Logger.d("load pdf onError");
                         showNotSupportPreview();
                     }
                 }).onLoad(new OnLoadCompleteListener() {
                     @Override
                     public void loadComplete(int nbPages) {
-                        Logger.d("zfy", "load pdf success.pages:" + nbPages);
+                        Logger.d("load pdf success.pages:" + nbPages);
                         closeLoading();
                     }
                 }).load();
@@ -592,12 +592,12 @@ public class FilePreviewActivity extends AbsActivity<FilePreviewPresenter.IFileP
             }
         } else if (FileUtil.isOfficeFile(mimeType)) {
             if (iOffice != null) {
-                Logger.d("zfy", "open office file:" + absolutePath);
+                Logger.d("open office file:" + absolutePath);
                 showLoading("");
                 try {
                     iOffice.openFile(absolutePath);
                 } catch (Exception e) {
-                    Logger.d("zfy", "open office exception");
+                    Logger.d("open office exception");
                     e.printStackTrace();
                     closeLoading();
                     showNotSupportPreview();
@@ -631,7 +631,7 @@ public class FilePreviewActivity extends AbsActivity<FilePreviewPresenter.IFileP
     //调用分享工具进行分享
     @Override
     public void callShareUtil(String fileAbsolutePath) {
-        Logger.d("zfy", fileAbsolutePath);
+        Logger.d(fileAbsolutePath);
         if (shareLoadingDialog != null && shareLoadingDialog.isShowing()) {
             shareLoadingDialog.dismiss();
         }
@@ -685,7 +685,7 @@ public class FilePreviewActivity extends AbsActivity<FilePreviewPresenter.IFileP
         }
         //刷新进度
         int progress = (int) (event.currentSize * 100 / fileSize);
-        Logger.d("zfy", "set progress:" + progress);
+        Logger.d("set progress:" + progress);
         if (tvShowOriginalImage.getVisibility() == View.VISIBLE) {
             String showOriginalText = getString(R.string.file_downloading) + " " + progress + "%";
             tvShowOriginalImage.setText(showOriginalText);
@@ -726,7 +726,7 @@ public class FilePreviewActivity extends AbsActivity<FilePreviewPresenter.IFileP
                 }
             } else if (event.state == TransferHelper.STATE_ERROR) {
                 //缓存失败
-                Logger.d("zfy", "文件缓存失败");
+                Logger.d("文件缓存失败");
                 showImageTextToast(R.drawable.toast_refuse, R.string.file_preview_failed);
                 finish();
             }
@@ -772,7 +772,7 @@ public class FilePreviewActivity extends AbsActivity<FilePreviewPresenter.IFileP
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(RenameFileEvent event) {
-        Logger.d("zfy", "#FilePreviewActivity RenameFileEvent");
+        Logger.d("#FilePreviewActivity RenameFileEvent");
         //成功重命名，刷新文件
         if (!event.getUuid().equals(fileUuid)) {
             return;

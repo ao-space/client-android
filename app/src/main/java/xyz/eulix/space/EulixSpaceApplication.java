@@ -33,7 +33,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.provider.MediaStore;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -116,8 +115,8 @@ public class EulixSpaceApplication extends Application implements NetworkCallbac
     private void init() {
         //updateLocale();
         //开启debug日志
-        Log.d("eulix", "buildConfig switch:" + BuildConfig.LOG_SWITCH);
-        Log.d("eulix", "logSwitch:" + PreferenceUtil.getLoggerSwitch(getContext()));
+        Logger.d(TAG, "[APP] buildConfig log switch: " + BuildConfig.LOG_SWITCH);
+        Logger.d(TAG, "[APP] local log switch: " + PreferenceUtil.getLoggerSwitch(getContext()));
         Logger.setDebuggable(BuildConfig.LOG_SWITCH || PreferenceUtil.getLoggerSwitch(getContext()));
         // 初始化客户端参数
         BaseParamsUtil.initBaseParams(this);
@@ -375,7 +374,7 @@ public class EulixSpaceApplication extends Application implements NetworkCallbac
 
             photoAlbumContentObserver.setOnChangeListener(uri -> {
                 if (!SystemUtil.checkPermission(getContext(), ConstantField.Permission.WRITE_EXTERNAL_STORAGE)) {
-                    Logger.d("zfy", "permission not allowed");
+                    Logger.d(TAG, "[APP] permission not allowed");
                     return;
                 }
                 String mediaId = uri.toString().substring(uri.toString().lastIndexOf("/") + 1);
@@ -389,7 +388,7 @@ public class EulixSpaceApplication extends Application implements NetworkCallbac
                     }
                 }
                 if (mediaFile == null || !mediaFile.exists()) {
-                    Logger.d("zfy", "delete a media");
+                    Logger.d(TAG, "[APP] delete a media");
                     try {
                         //检查是否为数字id
                         int mediaIdInt = Integer.parseInt(mediaId);
@@ -497,7 +496,7 @@ public class EulixSpaceApplication extends Application implements NetworkCallbac
     public void uncaughtException(@NonNull @NotNull Thread t, @NonNull @NotNull Throwable e) {
         Logger.e(TAG, "uncaught exception: " + e.getMessage());
         if (e instanceof ANRException) {
-            Logger.d("zfy", "uncaughtException");
+            Logger.d(TAG, "[APP] uncaughtException");
             e.printStackTrace();
         }
         //系统默认异常处理器

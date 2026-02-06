@@ -233,7 +233,7 @@ public class GranteeLoginActivity extends AbsActivity<GranteeLoginPresenter.IGra
             }
             urlSb.append("&isOpensource=1");
             String boxLoginPageUrl = urlSb.toString();
-            Logger.d("zfy", "boxLoginPageUrl=" + boxLoginPageUrl);
+            Logger.d("boxLoginPageUrl=" + boxLoginPageUrl);
             createWebView(boxLoginPageUrl);
         }
     }

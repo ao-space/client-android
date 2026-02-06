@@ -70,6 +70,8 @@ public class PKeyManager {
         OkHttpClient okHttpClient = OkHttpUtil.generateOkHttpClient(false);
         HttpUrl httpParseUrl = HttpUrl.parse((DebugUtil.getEnvironmentServices() + ConstantField.URL.AUTH_PLATFORM_KEY_BOX_INFO_API));
         if (httpParseUrl != null) {
+            Logger.i(TAG, "sendBoxInfo request, requestId=" + requestId
+                    + ", url=" + Logger.safeUrl(httpParseUrl.toString()));
             HttpUrl httpUrl = httpParseUrl.newBuilder()
                     .build();
             String requestBody = new Gson().toJson(pKeyBoxInfo, PKeyBoxInfo.class);
@@ -82,7 +84,8 @@ public class PKeyManager {
             call.enqueue(new Callback() {
                 @Override
                 public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                    Logger.e(TAG, "on failure, e: " + e.getMessage());
+                    Logger.e(TAG, "sendBoxInfo onFailure, requestId=" + requestId
+                            + ", url=" + Logger.safeUrl(httpUrl.toString()), e);
                     if (callback != null) {
                         callback.onError(e.getMessage());
                     }
@@ -92,12 +95,15 @@ public class PKeyManager {
                 public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                     int code = response.code();
                     String message = response.message();
-                    Logger.i(TAG, "on response: " + code + ", message: " + message);
+                    Logger.i(TAG, "sendBoxInfo onResponse, requestId=" + requestId
+                            + ", code=" + code + ", message=" + message);
                     if (callback != null) {
                         callback.onResult(code);
                     }
                 }
             });
+        } else {
+            Logger.e(TAG, "sendBoxInfo request url parse failed, requestId=" + requestId);
         }
     }
 
@@ -106,6 +112,9 @@ public class PKeyManager {
         HttpUrl httpParseUrl = HttpUrl.parse((DebugUtil.getOfficialEnvironmentServices() + ConstantField.URL.AUTH_PLATFORM_KEY_BOX_INFO_API_V2_PREFIX
                 + StringUtil.nullToEmpty(platformKey) + ConstantField.URL.AUTH_PLATFORM_KEY_BOX_INFO_API_V2_SUFFIX));
         if (httpParseUrl != null) {
+            Logger.i(TAG, "sendBoxInfoV2 request, requestId=" + requestId
+                    + ", platformKey=" + Logger.maskMiddle(platformKey, 4, 4)
+                    + ", url=" + Logger.safeUrl(httpParseUrl.toString()));
             HttpUrl httpUrl = httpParseUrl.newBuilder()
                     .build();
             String requestBody = new Gson().toJson(pKeyBoxInfo, PKeyBoxInfoV2.class);
@@ -118,7 +127,8 @@ public class PKeyManager {
             call.enqueue(new Callback() {
                 @Override
                 public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                    Logger.e(TAG, "on failure, e: " + e.getMessage());
+                    Logger.e(TAG, "sendBoxInfoV2 onFailure, requestId=" + requestId
+                            + ", url=" + Logger.safeUrl(httpUrl.toString()), e);
                     if (callback != null) {
                         callback.onError(e.getMessage());
                     }
@@ -128,12 +138,16 @@ public class PKeyManager {
                 public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                     int code = response.code();
                     String message = response.message();
-                    Logger.i(TAG, "on response: " + code + ", message: " + message);
+                    Logger.i(TAG, "sendBoxInfoV2 onResponse, requestId=" + requestId
+                            + ", code=" + code + ", message=" + message);
                     if (callback != null) {
                         callback.onResult(code);
                     }
                 }
             });
+        } else {
+            Logger.e(TAG, "sendBoxInfoV2 request url parse failed, requestId=" + requestId
+                    + ", platformKey=" + Logger.maskMiddle(platformKey, 4, 4));
         }
     }
 }

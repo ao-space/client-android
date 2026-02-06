@@ -320,10 +320,10 @@ public class EulixGatewayInterceptor implements Interceptor {
                     .post(cipherRequestBody)
                     .url(baseUrl + apiUrl)
                     .build();
-            Logger.d("zfy", "request realCallRequest:" + new Gson().toJson(realCallRequest, RealCallRequest.class));
-            Logger.d("zfy", "request url:" + baseUrl + apiUrl);
-            Logger.d("zfy", "request header:" + request.headers().toString());
-            Logger.d("zfy", "request body:" + new Gson().toJson(callRequest, CallRequest.class));
+            Logger.d("request realCallRequest:" + new Gson().toJson(realCallRequest, RealCallRequest.class));
+            Logger.d("request url:" + baseUrl + apiUrl);
+            Logger.d("request header:" + request.headers().toString());
+            Logger.d("request body:" + new Gson().toJson(callRequest, CallRequest.class));
             finalUrl = (baseUrl + apiUrl);
             finalHeader = request.headers().toString();
         }
@@ -472,7 +472,7 @@ public class EulixGatewayInterceptor implements Interceptor {
                             case ConstantField.ServiceFunction.UPLOAD_FILE:
                                 if (body != null) {
                                     String decryptBody = EncryptionUtil.decrypt(algorithm, provider, body, secret, StandardCharsets.UTF_8, ivParams);
-                                    Logger.d("zfy", "decryptBody = " + decryptBody);
+                                    Logger.d("decryptBody = " + decryptBody);
                                     if (decryptBody != null) {
                                         UploadResponseBodyResult fileListResponseBody = null;
                                         try {
@@ -537,7 +537,7 @@ public class EulixGatewayInterceptor implements Interceptor {
                             case ConstantField.ServiceFunction.PERSONALINFO_UPDATE:
                                 if (body != null) {
                                     String decryptBody = EncryptionUtil.decrypt(algorithm, provider, body, secret, StandardCharsets.UTF_8, ivParams);
-                                    Logger.d("zfy", "decryptBody = " + decryptBody);
+                                    Logger.d("decryptBody = " + decryptBody);
                                     if (decryptBody != null) {
                                         AccountInfoResult accountInfoResult = null;
                                         try {
@@ -557,7 +557,7 @@ public class EulixGatewayInterceptor implements Interceptor {
                             case ConstantField.ServiceFunction.PERSONALINFO_SHOW:
                                 if (body != null) {
                                     String decryptBody = EncryptionUtil.decrypt(algorithm, provider, body, secret, StandardCharsets.UTF_8, ivParams);
-                                    Logger.d("zfy", "PERSONALINFO_SHOW decryptBody = " + decryptBody);
+                                    Logger.d("PERSONALINFO_SHOW decryptBody = " + decryptBody);
                                     if (decryptBody != null) {
                                         AccountInfoResult accountInfoResult = null;
                                         try {
@@ -596,7 +596,7 @@ public class EulixGatewayInterceptor implements Interceptor {
                             case ConstantField.ServiceFunction.IMAGE_SHOW:
                                 if (body != null) {
                                     String decryptBody = EncryptionUtil.decrypt(algorithm, provider, body, secret, StandardCharsets.UTF_8, ivParams);
-                                    Logger.d("zfy", "decryptBody = " + decryptBody);
+                                    Logger.d("decryptBody = " + decryptBody);
 
                                     isDecrypt = true;
                                 }
@@ -1101,7 +1101,7 @@ public class EulixGatewayInterceptor implements Interceptor {
                             case ConstantField.ServiceFunction.SET_UPGRADE_CONFIG:
                                 if (body != null) {
                                     String decryptBody = EncryptionUtil.decrypt(algorithm, provider, body, secret, StandardCharsets.UTF_8, ivParams);
-                                    Logger.d("zfy", "get/set upgrade config decryptBody = " + decryptBody);
+                                    Logger.d("get/set upgrade config decryptBody = " + decryptBody);
                                     if (!TextUtils.isEmpty(decryptBody)) {
                                         UpgradeConfigResponseBody responseBody = null;
                                         try {
@@ -1121,7 +1121,7 @@ public class EulixGatewayInterceptor implements Interceptor {
                             case ConstantField.ServiceFunction.UPGRADE_STATUS:
                                 if (responseCode == 400) {
                                     //当前没有升级任务（升级已完成或未开始升级）
-                                    Logger.d("zfy", "check upgrade status, response 400");
+                                    Logger.d("check upgrade status, response 400");
 //                                    break;
                                 }
                             case ConstantField.ServiceFunction.UPGRADE_START_PULL:
@@ -1129,9 +1129,9 @@ public class EulixGatewayInterceptor implements Interceptor {
                                 if (body != null) {
                                     String decryptBody = EncryptionUtil.decrypt(algorithm, provider, body, secret, StandardCharsets.UTF_8, ivParams);
                                     if (requestType.equals(ConstantField.ServiceFunction.UPGRADE_START_UPGRADE)) {
-                                        Logger.d("zfy", "start upgrade decryptBody = " + decryptBody);
+                                        Logger.d("start upgrade decryptBody = " + decryptBody);
                                     } else {
-                                        Logger.d("zfy", "get upgrade status decryptBody = " + decryptBody);
+                                        Logger.d("get upgrade status decryptBody = " + decryptBody);
                                     }
                                     if (!TextUtils.isEmpty(decryptBody)) {
                                         UpgradeStatusResponseBody responseBody = null;
@@ -1228,7 +1228,7 @@ public class EulixGatewayInterceptor implements Interceptor {
                             case ConstantField.ServiceFunction.MULTIPART_CREATE_UPLOAD:
                                 if (body != null) {
                                     String decryptBody = EncryptionUtil.decrypt(algorithm, provider, body, secret, StandardCharsets.UTF_8, ivParams);
-                                    Logger.d("zfy", "multipart_create decryptBody:" + decryptBody);
+                                    Logger.d("multipart_create decryptBody:" + decryptBody);
                                     if (decryptBody != null) {
                                         UploadCreateResponseBody responseBody = null;
                                         try {
@@ -1249,7 +1249,7 @@ public class EulixGatewayInterceptor implements Interceptor {
                             case ConstantField.ServiceFunction.MULTIPART_LIST_UPLOAD:
                                 if (body != null) {
                                     String decryptBody = EncryptionUtil.decrypt(algorithm, provider, body, secret, StandardCharsets.UTF_8, ivParams);
-                                    Logger.d("zfy", "multipart_list decryptBody:" + decryptBody);
+                                    Logger.d("multipart_list decryptBody:" + decryptBody);
 
                                     if (decryptBody != null) {
                                         UploadListResponseBody responseBody = null;
@@ -1271,7 +1271,7 @@ public class EulixGatewayInterceptor implements Interceptor {
                             case ConstantField.ServiceFunction.MULTIPART_COMPLETE_UPLOAD:
                                 if (body != null) {
                                     String decryptBody = EncryptionUtil.decrypt(algorithm, provider, body, secret, StandardCharsets.UTF_8, ivParams);
-                                    Logger.d("zfy", "multipart_complete decryptBody=" + decryptBody);
+                                    Logger.d("multipart_complete decryptBody=" + decryptBody);
                                     if (decryptBody != null) {
                                         UploadCompleteResponseBody responseBody = null;
                                         try {
@@ -1322,7 +1322,7 @@ public class EulixGatewayInterceptor implements Interceptor {
                 cipherResponseBody.close();
                 if (isDecrypt) {
                     ResponseBody plainResponseBody = ResponseBody.create(plainResponseText, responseMediaType);
-                    Logger.d("zfy", "plainResponseText=" + plainResponseText);
+                    Logger.d("plainResponseText=" + plainResponseText);
                     if (errorInterceptor) {
                         response = response.newBuilder()
                                 .code(200)
@@ -1389,7 +1389,7 @@ public class EulixGatewayInterceptor implements Interceptor {
         boolean isDecrypt = false;
         if (body != null) {
             String decryptBody = EncryptionUtil.decrypt(algorithm, provider, body, secret, StandardCharsets.UTF_8, ivParams);
-            Logger.d("zfy", "decryptBody:" + decryptBody);
+            Logger.d("decryptBody:" + decryptBody);
             if (decryptBody != null) {
                 T responseBody = null;
                 try {

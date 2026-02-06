@@ -210,24 +210,24 @@ public class MultipartUploadTask {
         MultipartNetworkManger.createUpload(mContext, mGatewayCommunicationBase, mTargetPath, mFilePath, mBetag, mIsSync, mAlbumId, new ResultCallbackObj() {
             @Override
             public void onResult(boolean result, Object extraObj) {
-                Logger.d("zfy", "create upload result: " + result);
+                Logger.d("create upload result: " + result);
                 if (result && extraObj != null) {
                     if (isPause) {
                         return;
                     }
                     logItem.createTaskEndTime = System.currentTimeMillis();
                     UploadCreateResponseBody createResponseBody = (UploadCreateResponseBody) extraObj;
-                    Logger.d("zfy", "create upload success");
+                    Logger.d("create upload success");
                     if (createResponseBody.getResults() != null) {
                         int repType = createResponseBody.getResults().rspType;
-                        Logger.d("zfy", "repType = " + repType);
+                        Logger.d("repType = " + repType);
                         if (repType == 0) {
                             //创建任务成功。获取uploadId，进行分片、传输
-                            Logger.d("zfy", "create new upload task");
+                            Logger.d("create new upload task");
                             UploadCreateResponseBody.Results.SuccInfo succInfo = createResponseBody.getResults().succInfo;
                             if (succInfo != null) {
                                 mUploadId = succInfo.uploadId;
-                                Logger.d("zfy", "uploadId=" + mUploadId);
+                                Logger.d("uploadId=" + mUploadId);
                                 if (mTaskListener != null) {
                                     mTaskListener.onGetUploadId(mUploadId);
                                 }
@@ -238,22 +238,22 @@ public class MultipartUploadTask {
                             }
                         } else if (repType == 1) {
                             //秒传完成。直接返回上传成功
-                            Logger.d("zfy", "秒传成功");
+                            Logger.d("秒传成功");
                             FileListItem fileItem = createResponseBody.getResults().completeInfo;
                             if (fileItem != null) {
                                 listener.onResult(true, fileItem);
                             } else {
-                                Logger.d("zfy", "response data error");
+                                Logger.d("response data error");
                                 listener.onResult(false, "-1");
                             }
                         } else if (repType == 2) {
                             //冲突，任务已存在。获取已上传列表，续传剩余分片
-                            Logger.d("zfy", "upload task already exist");
+                            Logger.d("upload task already exist");
                             UploadCreateResponseBody.Results.ConflictInfo conflictInfo = createResponseBody.getResults().conflictInfo;
                             if (conflictInfo != null) {
                                 //获取已完成传输的片段
                                 mUploadId = conflictInfo.uploadId;
-                                Logger.d("zfy", "uploadId=" + mUploadId);
+                                Logger.d("uploadId=" + mUploadId);
                                 if (mTaskListener != null) {
                                     mTaskListener.onGetUploadId(mUploadId);
                                 }
@@ -270,7 +270,7 @@ public class MultipartUploadTask {
                             listener.onResult(false, "params error");
                         }
                     } else {
-                        Logger.d("zfy", "create upload error");
+                        Logger.d("create upload error");
                         listener.onResult(false, "create upload error");
                     }
                 }
@@ -278,7 +278,7 @@ public class MultipartUploadTask {
 
             @Override
             public void onError(String msg) {
-                Logger.d("zfy", "create upload error " + msg);
+                Logger.d("create upload error " + msg);
                 if (!isPause) {
                     listener.onResult(false, msg);
                 }
@@ -350,7 +350,7 @@ public class MultipartUploadTask {
         public void run() {
             while (taskSwitch) {
                 if (!NetUtils.isNetAvailable(mContext) || (!mIsSync && NetUtils.isMobileNetWork(mContext) && !ConstantField.sIAllowTransferWithMobileData)) {
-                    Logger.d("zfy", "no network, transfer task waiting");
+                    Logger.d("no network, transfer task waiting");
                     try {
                         Thread.sleep(3000);
                     } catch (Exception e) {
@@ -366,7 +366,7 @@ public class MultipartUploadTask {
                         mUploadDoingList.add(item);
                         currentList.add(item);
                         long startUpTime = System.currentTimeMillis();
-                        Logger.d("zfy", "startUpTime = " + startUpTime + ", p2p chunk: " + p2pChunk.get());
+                        Logger.d("startUpTime = " + startUpTime + ", p2p chunk: " + p2pChunk.get());
                         uploadWrap(item, new ResultCallback() {
                             @Override
                             public void onResult(boolean result, String extraMsg) {
@@ -375,9 +375,9 @@ public class MultipartUploadTask {
                                 long endUpTime = System.currentTimeMillis();
 
                                 if (result) {
-                                    Logger.d("zfy", "endUpTime = " + endUpTime);
+                                    Logger.d("endUpTime = " + endUpTime);
                                     long chunkSpeed = (item.end - item.start) / (endUpTime - startUpTime) * 1000;
-                                    Logger.d("zfy", "chunkSpeed=" + chunkSpeed);
+                                    Logger.d("chunkSpeed=" + chunkSpeed);
                                     TaskSpeed.getInstance().start();
                                     TaskSpeed.getInstance().updateUploadSpeed(uniqueTag, (chunkSpeed * currentList.size()));
                                     if (mUploadFailedList.contains(item)) {
@@ -388,7 +388,7 @@ public class MultipartUploadTask {
                                     }
                                     //单片上传成功，判断是否都上传完成
                                     if (waitingQueue.isEmpty() && mUploadDoingList.isEmpty() && mUploadFailedList.isEmpty()) {
-                                        Logger.d("zfy", "all chunk upload success,complete");
+                                        Logger.d("all chunk upload success,complete");
                                         p2pChunk.getAndSet(0);
                                         logItem.transferEndTime = System.currentTimeMillis();
                                         //全部片段上传完成，调用合并
@@ -401,12 +401,12 @@ public class MultipartUploadTask {
                                         workThread = null;
                                     } else {
                                         currentList.remove(item);
-                                        Logger.d("zfy", "upload next chunk");
+                                        Logger.d("upload next chunk");
                                     }
 
                                 } else {
 
-                                    Logger.d("zfy", "chunk " + item.start + " failed");
+                                    Logger.d("chunk " + item.start + " failed");
 //                                    P2PUpDownloadUtil.addError(uniqueTag, extraMsg);
 
                                     if (!NetUtils.isNetAvailable(mContext)) {
@@ -416,7 +416,7 @@ public class MultipartUploadTask {
                                     //单片上传失败
                                     if (!TextUtils.isEmpty(extraMsg) && extraMsg.equals(String.valueOf(FailCodeUtil.ERROR_UPLOAD_LOCAL_SOURCE_DELETE))) {
                                         //本地文件被删除
-                                        Logger.d("zfy", "chunk " + item.start + " delete, return");
+                                        Logger.d("chunk " + item.start + " delete, return");
                                         mListener.onResult(false, extraMsg);
                                         return;
                                     }
@@ -435,7 +435,7 @@ public class MultipartUploadTask {
                                         thisItemFailedTime = itemFailedTimes.get(item.start + "");
                                     }
                                     if (thisItemFailedTime < MultipartUtil.RETRY_TIME) {
-                                        Logger.d("zfy", "chunk " + item.start + " failed time is:" + thisItemFailedTime + ",retry!");
+                                        Logger.d("chunk " + item.start + " failed time is:" + thisItemFailedTime + ",retry!");
                                         thisItemFailedTime++;
                                         try {
                                             Thread.sleep(2000);
@@ -449,7 +449,7 @@ public class MultipartUploadTask {
                                     } else {
                                         //超过重试次数，停止当前文件传输，返回失败
                                         if (NetUtils.isNetAvailable(mContext)) {
-                                            Logger.d("zfy", "item failed too many time,give up " + item.start);
+                                            Logger.d("item failed too many time,give up " + item.start);
                                             taskSwitch = false;
 //                                            P2PUpDownloadUtil.finishLoad(uniqueTag, System.currentTimeMillis());
                                             if (uploadExecutor != null) {
@@ -499,7 +499,7 @@ public class MultipartUploadTask {
                 }
                 UploadChunkBean uploadChunkInfo = MultipartUtil.getPlainChunkInfo(mFilePath, uploadChunkItem.start, uploadChunkItem.end);
                 if (uploadChunkInfo == null) {
-                    Logger.d("zfy", "create chunk file failed");
+                    Logger.d("create chunk file failed");
                     callback.onResult(false, "-1");
                     return;
                 }
@@ -540,7 +540,7 @@ public class MultipartUploadTask {
                 UploadChunkBean uploadChunkInfo = MultipartUtil.createEncryptChunkFile(mFilePath, mCacheDir, uploadChunkItem.start, uploadChunkItem.end,
                         mGatewayCommunicationBase.getTransformation(), mGatewayCommunicationBase.getSecretKey(), mGatewayCommunicationBase.getIvParams());
                 if (uploadChunkInfo == null) {
-                    Logger.d("zfy", "create chunk file failed");
+                    Logger.d("create chunk file failed");
                     callback.onResult(false, "-1");
                     return;
                 }
@@ -571,7 +571,7 @@ public class MultipartUploadTask {
 
     //合并分片
     private void completeChunks(ResultCallbackObj listener) {
-        Logger.d("zfy", "ready complete chunk, is pause: " + isPause);
+        Logger.d("ready complete chunk, is pause: " + isPause);
         if (isPause) {
             return;
         }
@@ -585,24 +585,24 @@ public class MultipartUploadTask {
             @Override
             public void onResult(boolean result, Object extraObj) {
                 logItem.completeEndTime = System.currentTimeMillis();
-                Logger.d("zfy", "complete chunk, is pause: " + isPause + ", result: " + result);
+                Logger.d("complete chunk, is pause: " + isPause + ", result: " + result);
                 if (isPause) {
                     return;
                 }
                 if (result && extraObj != null) {
-                    Logger.d("zfy", "complete chunk");
+                    Logger.d("complete chunk");
                     mUploadId = null;
                     FileListItem fileListItem = (FileListItem) extraObj;
                     listener.onResult(true, fileListItem);
                 } else {
-                    Logger.d("zfy", "complete chunk fail");
+                    Logger.d("complete chunk fail");
                     if (!result && Integer.parseInt((String) extraObj) == 1032) {
                         //合并校验失败，删除已上传分片
-                        Logger.d("zfy", "complete check error,delete task");
+                        Logger.d("complete check error,delete task");
                         MultipartNetworkManger.deleteUpload(mContext, mUploadId, new ResultCallbackObj() {
                             @Override
                             public void onResult(boolean result, Object extraObj) {
-                                Logger.d("zfy", "delete upload task:" + result);
+                                Logger.d("delete upload task:" + result);
                                 mUploadId = null;
                             }
 
@@ -618,7 +618,7 @@ public class MultipartUploadTask {
 
             @Override
             public void onError(String msg) {
-                Logger.d("zfy", "complete chunk error, is pause: " + isPause + ", msg: " + msg);
+                Logger.d("complete chunk error, is pause: " + isPause + ", msg: " + msg);
                 if (!isPause) {
                     listener.onResult(false, msg);
                 }
@@ -638,7 +638,7 @@ public class MultipartUploadTask {
     public void pauseTask() {
 //        P2PUpDownloadUtil.finishLoad(uniqueTag, System.currentTimeMillis());
         isPause = true;
-        Logger.d("zfy", "pause upload task:" + mUploadId + ",path=" + mFilePath);
+        Logger.d("pause upload task:" + mUploadId + ",path=" + mFilePath);
         if (TextUtils.isEmpty(mUploadId)) {
             return;
         }

@@ -104,7 +104,7 @@ public class LocalMediaUtil {
                 }
             }
         } catch (Exception e) {
-            Logger.e("zfy", e.getMessage());
+            Logger.e(e.getMessage());
         } finally {
             if (cur != null) {
                 cur.close();

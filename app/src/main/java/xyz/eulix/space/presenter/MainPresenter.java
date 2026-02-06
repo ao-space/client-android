@@ -424,7 +424,7 @@ public class MainPresenter extends AbsPresenter<MainPresenter.IMain> {
             public void onResult(VersionCheckResponseBody responseBody) {
                 if (responseBody != null && responseBody.results != null) {
                     VersionCheckResponseBody.Results results = responseBody.results;
-                    Logger.d("zfy", "result newVersionExist:" + results.newVersionExist);
+                    Logger.d("result newVersionExist:" + results.newVersionExist);
 
                     if (results.newVersionExist && results.latestBoxPkg != null) {
                         ConstantField.boxVersionCheckBody = results;
@@ -437,7 +437,7 @@ public class MainPresenter extends AbsPresenter<MainPresenter.IMain> {
 
             @Override
             public void onError(String msg) {
-                Logger.d("zfy", "checkVersion error:" + msg);
+                Logger.d("checkVersion error:" + msg);
             }
         });
     }
@@ -445,7 +445,7 @@ public class MainPresenter extends AbsPresenter<MainPresenter.IMain> {
     public void getCurrentBoxVersion() {
         GatewayUtil.getCurrentBoxVersion(context, (result, extraMsg) -> {
             if (result && !TextUtils.isEmpty(extraMsg)) {
-                Logger.d("zfy", "get current box version:" + extraMsg);
+                Logger.d("get current box version:" + extraMsg);
                 PreferenceUtil.saveCurrentBoxVersion(context, extraMsg);
             }
         });
@@ -492,7 +492,7 @@ public class MainPresenter extends AbsPresenter<MainPresenter.IMain> {
     }
 
     public void upgradeDbAccountValue() {
-        Logger.d("zfy", "#upgradeDbAccountValue");
+        Logger.d("#upgradeDbAccountValue");
         ThreadPool.getInstance().getBackThreadPoolExecutor().execute(() -> {
             String clientUuid = DataUtil.getClientUuid(EulixSpaceApplication.getContext());
             List<Map<String, String>> boxValues = EulixSpaceDBUtil.queryBox(EulixSpaceApplication.getContext());
@@ -505,10 +505,10 @@ public class MainPresenter extends AbsPresenter<MainPresenter.IMain> {
                             && boxValue.containsKey(EulixSpaceDBManager.FIELD_BOX_STATUS)) {
 
                         String boxUuid = boxValue.get(EulixSpaceDBManager.FIELD_BOX_UUID);
-                        Logger.d("zfy", "boxUuid=" + boxUuid);
+                        Logger.d("boxUuid=" + boxUuid);
                         if (boxUpgradeStateMap.containsKey(boxUuid) && Boolean.TRUE.equals(boxUpgradeStateMap.get(boxUuid))) {
                             //该盒子已处理过
-                            Logger.d("zfy", "this box value has upgraded");
+                            Logger.d("this box value has upgraded");
                             continue;
                         }
                         boolean hasMultiUser = false;
@@ -520,14 +520,14 @@ public class MainPresenter extends AbsPresenter<MainPresenter.IMain> {
                         }
                         if (hasMultiUser) {
                             //该盒子上有多个用户
-                            Logger.d("zfy", "has multi user");
+                            Logger.d("has multi user");
                             CacheDBManager.getInstance(EulixSpaceApplication.getContext()).deleteByAccount(boxUuid);
                             TransferDBManager.getInstance(EulixSpaceApplication.getContext()).deleteByAccount(boxUuid);
                         } else {
                             //该盒子上只有一个用户
-                            Logger.d("zfy", "only one user");
+                            Logger.d("only one user");
                             String userId = getUserIdByBox(boxValue, clientUuid);
-                            Logger.d("zfy", "userId = " + userId);
+                            Logger.d("userId = " + userId);
                             String newAccount = boxUuid + userId;
                             CacheDBManager.getInstance(EulixSpaceApplication.getContext()).upgradeAccountValue(boxUuid, newAccount);
                             TransferDBManager.getInstance(EulixSpaceApplication.getContext()).upgradeAccountValue(boxUuid, newAccount);

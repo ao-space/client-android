@@ -353,7 +353,7 @@ public class TabMineFragment extends AbsFragment<TabMinePresenter.ITabMine, TabM
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(UserInfoEvent event) {
-        Logger.d("zfy", "receive UserInfoEvent type = " + event.type);
+        Logger.d("receive UserInfoEvent type = " + event.type);
         if (event.type == UserInfoEvent.TYPE_NAME) {
             //更新昵称
             tvNickName.setText(StringUtil.nullToEmpty(event.nickName));

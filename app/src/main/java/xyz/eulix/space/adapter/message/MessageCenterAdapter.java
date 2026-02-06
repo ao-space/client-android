@@ -216,7 +216,7 @@ public class MessageCenterAdapter extends RecyclerView.Adapter<RecyclerView.View
                         case ConstantField.PushType.BOX_UPGRADE_PACKAGE_PULLED:
                             messageTitle = mContext.getString(R.string.box_upgrade_reminder);
                             String versionStr = mContext.getResources().getString(R.string.app_name);
-                            Logger.d("zfy", "data:" + messageData);
+                            Logger.d("data:" + messageData);
                             if (!TextUtils.isEmpty(messageData)) {
                                 try {
                                     JSONObject jsonObject = new JSONObject(messageData);
@@ -224,7 +224,7 @@ public class MessageCenterAdapter extends RecyclerView.Adapter<RecyclerView.View
                                     //删除换行符
                                     versionStr.replaceAll("\n", "");
                                 } catch (Exception e) {
-                                    Logger.d("zfy", "data is not json");
+                                    Logger.d("data is not json");
                                 }
                             }
                             messageContent = mContext.getString(R.string.box_package_pulled_desc_msg_center).replace("%$", versionStr);

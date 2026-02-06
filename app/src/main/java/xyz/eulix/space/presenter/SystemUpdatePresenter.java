@@ -93,7 +93,7 @@ public class SystemUpdatePresenter extends AbsPresenter<SystemUpdatePresenter.IS
             public void onResult(VersionCheckResponseBody responseBody) {
                 if (responseBody != null && responseBody.results != null) {
                     VersionCheckResponseBody.Results results = responseBody.results;
-                    Logger.d("zfy", "result newVersionExist:" + results.newVersionExist);
+                    Logger.d("result newVersionExist:" + results.newVersionExist);
 
                     if (results.newVersionExist && results.latestBoxPkg != null) {
                         ConstantField.boxVersionCheckBody = results;
@@ -114,7 +114,7 @@ public class SystemUpdatePresenter extends AbsPresenter<SystemUpdatePresenter.IS
 
             @Override
             public void onError(String msg) {
-                Logger.d("zfy", "checkVersion error:" + msg);
+                Logger.d("checkVersion error:" + msg);
                 ConstantField.boxVersionCheckBody = null;
                 EventBusUtil.post(new BoxVersionCheckEvent());
                 iView.onCheckVersionError();
@@ -127,7 +127,7 @@ public class SystemUpdatePresenter extends AbsPresenter<SystemUpdatePresenter.IS
         UpgradeUtils.getSystemAutoUpgradeConfig(context, new IGetUpgradeConfigCallback() {
             @Override
             public void onResult(boolean autoDownload, boolean autoInstall) {
-                Logger.d("zfy", "autoDownload = " + autoDownload + ",autoInstall = " + autoInstall);
+                Logger.d("autoDownload = " + autoDownload + ",autoInstall = " + autoInstall);
                 PreferenceUtil.saveUpgradeAutoDownload(context, autoDownload);
                 PreferenceUtil.saveUpgradeAutoInstall(context, autoInstall);
                 iView.refreshConfigState(autoDownload || autoInstall);
@@ -135,7 +135,7 @@ public class SystemUpdatePresenter extends AbsPresenter<SystemUpdatePresenter.IS
 
             @Override
             public void onError(String msg) {
-                Logger.d("zfy", "get system auto upgrade config error:" + msg);
+                Logger.d("get system auto upgrade config error:" + msg);
             }
         });
     }
@@ -143,7 +143,7 @@ public class SystemUpdatePresenter extends AbsPresenter<SystemUpdatePresenter.IS
     public void getCurrentBoxVersion() {
         GatewayUtil.getCurrentBoxVersion(context, (result, extraMsg) -> {
             if (result && !TextUtils.isEmpty(extraMsg)) {
-                Logger.d("zfy", "get current box version:" + extraMsg);
+                Logger.d("get current box version:" + extraMsg);
                 iView.onGetCurrentVersion(extraMsg);
             }
         });
@@ -154,7 +154,7 @@ public class SystemUpdatePresenter extends AbsPresenter<SystemUpdatePresenter.IS
         UpgradeUtils.checkUpgradeStatus(context, new ICheckUpgradeStatusCallback() {
             @Override
             public void onResult(UpgradeStatusResponseBody upgradeStatusResponseBody) {
-                Logger.d("zfy", "check upgrade status:" + upgradeStatusResponseBody.status);
+                Logger.d("check upgrade status:" + upgradeStatusResponseBody.status);
                 if (!TextUtils.isEmpty(upgradeStatusResponseBody.status)) {
                     callback.onResult(true, upgradeStatusResponseBody.status);
                 } else {
@@ -174,7 +174,7 @@ public class SystemUpdatePresenter extends AbsPresenter<SystemUpdatePresenter.IS
         UpgradeUtils.checkUpgradeStatus(context, new ICheckUpgradeStatusCallback() {
             @Override
             public void onResult(UpgradeStatusResponseBody upgradeStatusResponseBody) {
-                Logger.d("zfy", "check upgrade status:" + upgradeStatusResponseBody.status);
+                Logger.d("check upgrade status:" + upgradeStatusResponseBody.status);
                 if (sUpgradeState == STATE_NORMAL) {
                     //方式重复接收
                     return;
@@ -198,28 +198,28 @@ public class SystemUpdatePresenter extends AbsPresenter<SystemUpdatePresenter.IS
 
             @Override
             public void onError(String msg) {
-                Logger.d("zfy", "check upgrade status error:" + msg);
+                Logger.d("check upgrade status error:" + msg);
                 if (sUpgradeState >= STATE_POLLING && !TextUtils.isEmpty(msg)) {
                     if (msg.equals("closed")) {
                         //开始正常轮询，网络断开，说明镜像开始重启，延迟轮询时间
                         if (sUpgradeState == STATE_POLLING) {
                             sUpgradeState = STATE_DOCKER_RESTART;
-                            Logger.d("zfy", "docker begin restart");
+                            Logger.d("docker begin restart");
                             if (mFirstCheckErrorTime == -1) {
                                 //记录开始重启时间
                                 mFirstCheckErrorTime = System.currentTimeMillis();
                             }
                         } else if (sUpgradeState == STATE_DOCKER_RESTART) {
-                            Logger.d("zfy", "docker is restarting");
+                            Logger.d("docker is restarting");
                             if (mFirstCheckErrorTime > -1 && System.currentTimeMillis() - mFirstCheckErrorTime > RESTARTING_CHECK_LIMIT_TIME) {
-                                Logger.d("zfy", "restart check over limit time!stop task");
+                                Logger.d("restart check over limit time!stop task");
                                 mFirstCheckErrorTime = -1;
                                 cancelPollingCheck();
                                 iView.onCheckInfoResult(false, "");
                             }
                         }
                     } else {
-                        Logger.d("zfy", "check error:" + msg);
+                        Logger.d("check error:" + msg);
                     }
                 } else {
                     cancelPollingCheck();
@@ -236,7 +236,7 @@ public class SystemUpdatePresenter extends AbsPresenter<SystemUpdatePresenter.IS
             @Override
             public void onResult(Boolean result, String extraMsg) {
                 if (result != null && result) {
-                    Logger.d("zfy", "start upgrade success");
+                    Logger.d("start upgrade success");
                     if (sUpgradeState < STATE_UPGRADING) {
                         sUpgradeState = STATE_UPGRADING;
                     }
@@ -263,7 +263,7 @@ public class SystemUpdatePresenter extends AbsPresenter<SystemUpdatePresenter.IS
 
     //取消轮询
     public void cancelPollingCheck() {
-        Logger.d("zfy", "cancelPollingCheck");
+        Logger.d("cancelPollingCheck");
         if (pollingTask != null) {
             pollingTask.cancel();
             pollingTask = null;

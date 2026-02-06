@@ -220,7 +220,7 @@ public class DeviceManagePresenter extends AbsPresenter<DeviceManagePresenter.ID
             public void onSuccess(String source, int code, String boxUuidValue, String boxBindValue, String extraMsg, boolean isSuccess) {
                 if (isSuccess) {
                     //解绑成功
-                    Logger.d("zfy", "revoke member success, box uuid: " + boxUuidValue + ", bind: " + boxBindValue);
+                    Logger.d("revoke member success, box uuid: " + boxUuidValue + ", bind: " + boxBindValue);
                     //删除盒子数据
                     if (boxUuidValue != null && boxBindValue != null) {
                         DataUtil.boxUnavailable(boxUuidValue, boxBindValue);
@@ -283,7 +283,7 @@ public class DeviceManagePresenter extends AbsPresenter<DeviceManagePresenter.ID
         UpgradeUtils.getDeviceVersionDetailInfo(context, new ResultCallbackObj() {
             @Override
             public void onResult(boolean result, Object extraObj) {
-                Logger.d("zfy", "getDeviceVersionDetailInfo onResult:" + result + ",extraObj:" + extraObj.toString());
+                Logger.d("getDeviceVersionDetailInfo onResult:" + result + ",extraObj:" + extraObj.toString());
                 if (result) {
                     deviceVersionInfoBean = (DeviceVersionInfoBean) extraObj;
                     Gson gson = new Gson();
@@ -301,7 +301,7 @@ public class DeviceManagePresenter extends AbsPresenter<DeviceManagePresenter.ID
 
             @Override
             public void onError(String msg) {
-                Logger.d("zfy", "getDeviceVersionDetailInfo onError " + msg);
+                Logger.d("getDeviceVersionDetailInfo onError " + msg);
                 iView.refreshDeviceInfoViews(null);
             }
         });

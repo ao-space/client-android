@@ -95,7 +95,7 @@ public class SecurityPwdVerifyDialog extends Dialog {
 
                 @Override
                 public void onFinished(String pwd) {
-                    Logger.d("zfy", "psw:" + pwd);
+                    Logger.d("psw:" + pwd);
                     if (listener != null) {
                         listener.onInputFinish(pwd, new WatchResult() {
                             @Override

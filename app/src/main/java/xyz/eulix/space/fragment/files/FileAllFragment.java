@@ -427,7 +427,7 @@ public class FileAllFragment extends AbsFragment<FileAllPresenter.IFileAll, File
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(ThumbEvent event) {
-        Logger.d("zfy", "onReceive ThumbEvent:" + event.uuid);
+        Logger.d("onReceive ThumbEvent:" + event.uuid);
         for (int i = 0; i < adapter.mCustomizeFileList.size(); i++) {
             if (adapter.mCustomizeFileList.get(i).getId().equals(event.uuid)) {
                 int realPosition = headerFooterWrapper.getHeaderCount() + i;

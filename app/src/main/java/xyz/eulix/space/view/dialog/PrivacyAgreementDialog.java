@@ -106,7 +106,7 @@ public class PrivacyAgreementDialog extends BottomDialog {
             LinkClickSpan trialSpan = new LinkClickSpan() {
                 @Override
                 public void onClick(View widget) {
-                    Logger.d("zfy","click trial");
+                    Logger.d("click trial");
                     String url = FormatUtil.isChinese(FormatUtil.getLocale(mContext)
                             , false) ? ConstantField.URL.AGREEMENT_API
                             : ConstantField.URL.EN_AGREEMENT_API;
@@ -117,7 +117,7 @@ public class PrivacyAgreementDialog extends BottomDialog {
             LinkClickSpan privacySpan = new LinkClickSpan() {
                 @Override
                 public void onClick(View widget) {
-                    Logger.d("zfy","click privacy");
+                    Logger.d("click privacy");
                     String url = FormatUtil.isChinese(FormatUtil.getLocale(mContext)
                             , false) ? ConstantField.URL.PRIVACY_API
                             : ConstantField.URL.EN_PRIVACY_API;

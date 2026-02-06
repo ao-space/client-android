@@ -825,18 +825,18 @@ public abstract class AbsActivity<V extends IBaseView, P extends AbsPresenter<V>
                             break;
                         case ConstantField.PushType.BOX_UPGRADE_PACKAGE_PULLED:
                             //系统下载完成，弹框
-                            Logger.d("zfy", "receive BOX_UPGRADE_PACKAGE_PULLED");
+                            Logger.d("receive BOX_UPGRADE_PACKAGE_PULLED");
                             if (SystemUtil.requestNotification(getApplicationContext(), false) && DataUtil.getBusinessMessageEnable(getApplicationContext())) {
                                 if (activityIndex == ConstantField.ActivityIndex.SYSTEM_UPDATE_ACTIVITY_INDEX || this instanceof SystemUpdateActivity || ConstantField.boxVersionCheckBody == null) {
                                     //当前页面为升级页面，不提示
-                                    Logger.d("zfy", "current activity is " + ConstantField.ActivityIndex.SYSTEM_UPDATE_ACTIVITY_INDEX);
+                                    Logger.d("current activity is " + ConstantField.ActivityIndex.SYSTEM_UPDATE_ACTIVITY_INDEX);
                                     handleStrongPush(true);
                                     pollStrongPush();
                                 } else {
                                     handleStrongPush(false);
                                     handleStrongPushLock(true);
                                     String versionStr = getResources().getString(R.string.app_name);
-                                    Logger.d("zfy", "data:" + data);
+                                    Logger.d("data:" + data);
                                     if (!TextUtils.isEmpty(data)) {
                                         try {
                                             JSONObject jsonObject = new JSONObject(data);
@@ -844,7 +844,7 @@ public abstract class AbsActivity<V extends IBaseView, P extends AbsPresenter<V>
                                             //删除换行符
                                             versionStr.replaceAll("\n", "");
                                         } catch (Exception e) {
-                                            Logger.d("zfy", "data is not json");
+                                            Logger.d("data is not json");
                                         }
                                     } else if (ConstantField.boxVersionCheckBody != null && ConstantField.boxVersionCheckBody.latestAppPkg != null
                                             && !TextUtils.isEmpty(ConstantField.boxVersionCheckBody.latestAppPkg.pkgVersion)) {
@@ -1047,7 +1047,7 @@ public abstract class AbsActivity<V extends IBaseView, P extends AbsPresenter<V>
                             }
                             break;
                         case ConstantField.PushType.BOX_START_UPGRADE:
-                            Logger.d("zfy", "receive BOX_START_UPGRADE");
+                            Logger.d("receive BOX_START_UPGRADE");
                             if (topNotificationTwoTitle != null) {
                                 topNotificationTwoTitle.setText(getString(R.string.box_start_upgarde_title));
                             }
@@ -1305,7 +1305,7 @@ public abstract class AbsActivity<V extends IBaseView, P extends AbsPresenter<V>
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(LanStatusEvent event) {
-        Logger.d("zfy", "receive LanStatusEvent " + event.isLanEnable);
+        Logger.d("receive LanStatusEvent " + event.isLanEnable);
         if (event.isLanEnable) {
             if (isVisible && !lastLanState) {
                 showLANDialog();

@@ -41,7 +41,7 @@ public class PhotoAlbumContentObserver extends ContentObserver {
     public void onChange(boolean selfChange, @Nullable Uri uri) {
         super.onChange(selfChange, uri);
         if (uri != null && (uri.toString().contains("images") || uri.toString().contains("video"))) {
-            Logger.d("zfy", "photo album onChange：Uri = " + uri.toString());
+            Logger.d("photo album onChange：Uri = " + uri.toString());
             if (onChangeListener != null) {
                 onChangeListener.onChange(uri);
             }

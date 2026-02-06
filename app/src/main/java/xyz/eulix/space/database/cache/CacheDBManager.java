@@ -184,7 +184,7 @@ public class CacheDBManager {
         cv.put(CacheHelper.KEY_ACCOUNT, newAccount);
 
         int accountCache = mDBHelper.updateCacheInfo(cv, where, null);
-        Logger.d("zfy", "updateCacheInfo count = " + accountCache);
+        Logger.d("updateCacheInfo count = " + accountCache);
         if (accountCache > -1) {
             result = accountCache;
         }

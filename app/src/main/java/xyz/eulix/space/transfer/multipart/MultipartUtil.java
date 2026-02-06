@@ -86,7 +86,7 @@ public class MultipartUtil {
         }
         long fileSize = file.length();
         String sizeFlag = getSizeFlag(fileSize);
-        Logger.d("zfy", "sizeFlag = " + sizeFlag);
+        Logger.d("sizeFlag = " + sizeFlag);
         //片数
         int chunkCount = (int) Math.ceil((double) fileSize / (double) betagChunkSize);
         try (RandomAccessFile randomAccessFile = new RandomAccessFile(filePath, "r")) {
@@ -106,7 +106,7 @@ public class MultipartUtil {
                 byte[] md5Byte = messagedigest.digest();
                 md5ByteList.add(md5Byte);
                 String md5 = MD5Util.bufferToHex(md5Byte);
-                Logger.d("zfy", "chunk " + i + ",md5:" + md5);
+                Logger.d("chunk " + i + ",md5:" + md5);
             }
             String chunksMd5 = "";
             if (md5ByteList.size() > 1) {
@@ -120,9 +120,9 @@ public class MultipartUtil {
                 //单片，直接取md5值
                 chunksMd5 = MD5Util.bufferToHex(md5ByteList.get(0));
             }
-            Logger.d("zfy", "chunksMd5 = " + chunksMd5);
+            Logger.d("chunksMd5 = " + chunksMd5);
             betag = sizeFlag + chunksMd5;
-            Logger.d("zfy", "betag = " + betag);
+            Logger.d("betag = " + betag);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -256,11 +256,11 @@ public class MultipartUtil {
     public static UploadChunkBean createChunkFile(String filePath, String cacheDirPath, long start, long end) {
         File file = new File(filePath);
         if (!file.exists()) {
-            Logger.d("zfy", "file not exist");
+            Logger.d("file not exist");
             return null;
         }
         if (end > file.length()) {
-            Logger.d("zfy", "end position overSize");
+            Logger.d("end position overSize");
             return null;
         }
         FileOutputStream fileOutputStream = null;
@@ -295,8 +295,8 @@ public class MultipartUtil {
             uploadChunkBean.end = end;
             uploadChunkBean.md5 = chunkMd5;
             uploadChunkBean.path = chunkFile.getAbsolutePath();
-            Logger.d("zfy", "chunk name:" + chunkFile.getName());
-//            Logger.d("zfy", "chunk md5:" + uploadChunkBean.md5 + ";realMd5:" + MD5Util.getFileMD5String(chunkFile));
+            Logger.d("chunk name:" + chunkFile.getName());
+//            Logger.d("chunk md5:" + uploadChunkBean.md5 + ";realMd5:" + MD5Util.getFileMD5String(chunkFile));
             return uploadChunkBean;
         } catch (Exception e) {
             Logger.e(e.getMessage());
@@ -326,16 +326,16 @@ public class MultipartUtil {
                                                          String algorithm, String encryptKey, String ivParams) {
         File file = new File(filePath);
         if (!file.exists()) {
-            Logger.d("zfy", "file not exist");
+            Logger.d("file not exist");
             return null;
         }
         if (end > file.length()) {
-            Logger.d("zfy", "end position overSize");
+            Logger.d("end position overSize");
             return null;
         }
 
         if (TextUtils.isEmpty(algorithm)) {
-            Logger.d("zfy", "algorithm is null");
+            Logger.d("algorithm is null");
             return null;
         }
 
@@ -346,7 +346,7 @@ public class MultipartUtil {
         Cipher cipher = EncryptionUtil.getCipher(algorithm, baseAlgorithm, null);
         Charset charset = StandardCharsets.UTF_8;
         if (cipher == null || baseAlgorithm == null) {
-            Logger.d("zfy", "ciper is null");
+            Logger.d("ciper is null");
             return null;
         }
 
@@ -417,8 +417,8 @@ public class MultipartUtil {
             uploadChunkBean.end = end;
             uploadChunkBean.md5 = chunkMd5;
             uploadChunkBean.path = chunkFile.getAbsolutePath();
-            Logger.d("zfy", "chunk name:" + chunkFile.getName());
-//            Logger.d("zfy", "chunk md5:" + uploadChunkBean.md5 + ";realMd5:" + MD5Util.getFileMD5String(chunkFile));
+            Logger.d("chunk name:" + chunkFile.getName());
+//            Logger.d("chunk md5:" + uploadChunkBean.md5 + ";realMd5:" + MD5Util.getFileMD5String(chunkFile));
             return uploadChunkBean;
         } catch (Exception e) {
             Logger.e(e.getMessage());
@@ -445,11 +445,11 @@ public class MultipartUtil {
     public static UploadChunkBean getPlainChunkInfo(String filePath, long start, long end){
         File file = new File(filePath);
         if (!file.exists()) {
-            Logger.d("zfy", "file not exist");
+            Logger.d("file not exist");
             return null;
         }
         if (end > file.length()) {
-            Logger.d("zfy", "end position overSize");
+            Logger.d("end position overSize");
             return null;
         }
 
@@ -583,7 +583,7 @@ public class MultipartUtil {
                 //比已完成第一批更靠前
                 if (chunkToMerge.end + 1 < firstChunkStart) {
                     //与其他片段不连续
-                    Logger.d("zfy", "no continuous file,quit");
+                    Logger.d("no continuous file,quit");
                 } else {
                     FileInputStream fileInputStream = null;
                     try (RandomAccessFile firstRandomAccessFile = new RandomAccessFile(fileToMerge, "rwd")) {
@@ -625,7 +625,7 @@ public class MultipartUtil {
             if (chunkToMerge.start > itemStart && chunkToMerge.start <= itemEnd + 1 && chunkToMerge.end >= itemEnd) {
                 if (chunkToMerge.end <= itemEnd) {
                     //需合并片段全部包含在已完成片段内
-                    Logger.d("zfy", "chunkToMerge include");
+                    Logger.d("chunkToMerge include");
                     break;
                 } else {
                     RandomAccessFile nextRandomAccessFile = null;
@@ -635,7 +635,7 @@ public class MultipartUtil {
                         randomAccessFile.seek(seekPos);
                         if (!fileToMerge.exists()) {
                             //分片文件不存在
-                            Logger.d("zfy", "chunk to merge file not exist");
+                            Logger.d("chunk to merge file not exist");
                             return;
                         }
                         long currentLength = seekPos;
@@ -753,7 +753,7 @@ public class MultipartUtil {
     //合并所有下载完成分片
     public static boolean mergeAllDownloadChunks(String fileUuid, String cacheDirPath,
                                                  String targetDirPath, String fileName, long fileSize) {
-        Logger.d("zfy", "call mergeAllDownloadChunks");
+        Logger.d("call mergeAllDownloadChunks");
         if (TextUtils.isEmpty(fileUuid) || TextUtils.isEmpty(cacheDirPath)
                 || TextUtils.isEmpty(fileName) || TextUtils.isEmpty(targetDirPath) || fileSize < 0) {
             return false;
@@ -803,7 +803,7 @@ public class MultipartUtil {
 
         //校验文件大小
         if (resultFile.length() != fileSize) {
-            Logger.d("zfy", "check file size error");
+            Logger.d("check file size error");
             resultFile.delete();
             return false;
         }
@@ -824,7 +824,7 @@ public class MultipartUtil {
             for (int i = 0; i < itemFiles.length; i++) {
                 File itemFile = itemFiles[i];
                 if (itemFile.getName().startsWith(fileUuid)) {
-                    Logger.d("zfy", "clear " + itemFile.getName());
+                    Logger.d("clear " + itemFile.getName());
                     itemFile.delete();
                 }
             }

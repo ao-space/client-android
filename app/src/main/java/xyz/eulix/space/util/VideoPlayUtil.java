@@ -176,7 +176,7 @@ public class VideoPlayUtil {
     private static void parseM3u8(Context context, String uuid, String zipSourcePath, ResultCallback callback) {
         File zipSourceFile = new File(zipSourcePath);
         if (!zipSourceFile.exists()) {
-            Logger.d("zfy", "zipSourceFile not exist!" + zipSourcePath);
+            Logger.d("zipSourceFile not exist!" + zipSourcePath);
             if (callback != null) {
                 callback.onResult(false, "zip not exist");
             }
@@ -190,7 +190,7 @@ public class VideoPlayUtil {
         }
         //zip解压
         boolean unZipResult = FileUtil.unZipFolder(zipSourcePath, m3u8Path);
-        Logger.d("zfy", "unZipResult:" + unZipResult);
+        Logger.d("unZipResult:" + unZipResult);
         if (callback != null) {
             callback.onResult(unZipResult, m3u8Path);
         }

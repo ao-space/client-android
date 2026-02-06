@@ -165,7 +165,7 @@ public class TransferTaskManager {
                 TransferItem item = unFinishDownList.get(i);
                 if (item.state == TransferHelper.STATE_PREPARE) {
                     mDownPrepareList.add(item);
-                    Logger.d("zfy", "int mDownPrepareList size=" + mDownPrepareList.size());
+                    Logger.d("int mDownPrepareList size=" + mDownPrepareList.size());
                 } else if (item.state == TransferHelper.STATE_DOING) {
                     mDownDoingList.add(item);
                 } else if (item.state == TransferHelper.STATE_ERROR) {
@@ -186,7 +186,7 @@ public class TransferTaskManager {
 
     public static synchronized TransferTaskManager getInstance() {
         if (sInstance == null) {
-            Logger.d("zfy", "create TransferTaskManager");
+            Logger.d("create TransferTaskManager");
             sInstance = new TransferTaskManager();
         }
         return sInstance;
@@ -197,22 +197,22 @@ public class TransferTaskManager {
     public synchronized void insertUploadTask(String filepath, String filename, String remotePath, boolean insertFirst, String albumId) {
         File file = new File(filepath, filename);
         if (!file.exists()) {
-            Logger.d("zfy", "file to upload not exist");
+            Logger.d("file to upload not exist");
             return;
         }
         final String uniqueTag = TransferItemFactory.getUniqueTagWithAlbumId(TransferHelper.TYPE_UPLOAD, filename, filepath, remotePath, null, albumId);
         for (TransferItem item : mUploadDoingList) {
             if (uniqueTag.equals(item.ext1)) {
-                Logger.d("zfy", "upload doing list exist item");
+                Logger.d("upload doing list exist item");
                 //复查数据库
                 TransferItem transferItem = TransferDBManager.getInstance(mContext).queryByUniqueTag(uniqueTag, TransferHelper.TYPE_UPLOAD);
                 if (transferItem != null && transferItem.state == TransferHelper.STATE_DOING) {
                     //数据库存在
-                    Logger.d("zfy", "file is uploading, exit");
+                    Logger.d("file is uploading, exit");
                     return;
                 } else {
                     //数据库不存在，删除当前正在进行列表数据
-                    Logger.d("zfy", "db not exist item");
+                    Logger.d("db not exist item");
                     mDownDoingList.remove(item);
                     break;
                 }
@@ -237,7 +237,7 @@ public class TransferTaskManager {
 
             TransferDBManager.getInstance(mContext).updateTransferInfo(uniqueTag, item, true);
         } else {
-            Logger.d("zfy", "create upload task");
+            Logger.d("create upload task");
             String fileMD5 = "";
 
             item = TransferItemFactory.createUploadPrepareItem(mContext, filename, filepath, remotePath, file.length(), file.lastModified(), null, fileMD5, uniqueTag, false, albumId);
@@ -273,14 +273,14 @@ public class TransferTaskManager {
             String filePath = localItem.getMediaPath().substring(0, index + 1);
             File file = new File(filePath, fileName);
             if (!file.exists()) {
-                Logger.d("zfy", "file to upload not exist");
+                Logger.d("file to upload not exist");
                 return;
             }
             final String uniqueTag = TransferItemFactory.getUniqueTagWithAlbumId(TransferHelper.TYPE_UPLOAD, fileName, filePath, remotePath, null, albumId);
             boolean isDoing = false;
             for (TransferItem item : mUploadDoingList) {
                 if (uniqueTag.equals(item.ext1)) {
-                    Logger.d("zfy", "file is uploading, exit");
+                    Logger.d("file is uploading, exit");
                     isDoing = true;
                     break;
                 }
@@ -315,7 +315,7 @@ public class TransferTaskManager {
                 item.createTime = System.currentTimeMillis();
                 TransferDBManager.getInstance(mContext).updateTransferInfo(uniqueTag, item, true);
             } else {
-                Logger.d("zfy", "create upload task");
+                Logger.d("create upload task");
                 String fileMD5 = "";
                 item = TransferItemFactory.createUploadPrepareItem(mContext, fileName, filePath, remotePath, file.length(), System.currentTimeMillis(), null, fileMD5, uniqueTag, false, albumId);
                 mUploadPrepareList.add(0, item);
@@ -340,7 +340,7 @@ public class TransferTaskManager {
 
     //重试下载失败的任务
     public synchronized void retryDownloadFailedItems() {
-        Logger.d("zfy", "retryDownloadFailedItems");
+        Logger.d("retryDownloadFailedItems");
         if (mDownFailedList.size() > 0) {
             for (TransferItem item : mDownFailedList) {
                 insertDownloadTask(item.uuid, item.remotePath, item.keyName, item.totalSize, item.md5, true, item.ext2);
@@ -352,12 +352,12 @@ public class TransferTaskManager {
 
     //重试下载失败的任务
     public synchronized void retryUploadFailedItems() {
-        Logger.d("zfy", "retryUploadFailedItems");
+        Logger.d("retryUploadFailedItems");
 
         if (mUploadFailedList.size() > 0) {
-            Logger.d("zfy", "mUploadFailedList.size = " + mUploadFailedList.size());
+            Logger.d("mUploadFailedList.size = " + mUploadFailedList.size());
             for (TransferItem item : mUploadFailedList) {
-                Logger.d("zfy", "insert uploadTask:" + item.keyName);
+                Logger.d("insert uploadTask:" + item.keyName);
                 insertUploadTask(item.localPath, item.keyName, item.remotePath, true, item.ext3);
                 mUploadFailedList.remove(item);
             }
@@ -510,7 +510,7 @@ public class TransferTaskManager {
         public void run() {
             File file = new File(transferItem.localPath, transferItem.keyName);
             if (!file.exists()) {
-                Logger.d("zfy", "file to upload not exist");
+                Logger.d("file to upload not exist");
                 callback.onResult(false, FailCodeUtil.ERROR_UPLOAD_LOCAL_SOURCE_DELETE + "");
                 return;
             }
@@ -539,7 +539,7 @@ public class TransferTaskManager {
                 betag = betagCalculator.getFileBetag();
                 if (TextUtils.isEmpty(betag)) {
                     if (isPaused) {
-                        Logger.d("zfy", "customUploadRunnable is paused");
+                        Logger.d("customUploadRunnable is paused");
                         isFinished = true;
                     } else {
                         callback.onResult(false, "");
@@ -563,7 +563,7 @@ public class TransferTaskManager {
 
             //判断任务是否手动停止
             if (isPaused) {
-                Logger.d("zfy", "customUploadRunnable is paused");
+                Logger.d("customUploadRunnable is paused");
                 isFinished = true;
                 return;
             }
@@ -586,7 +586,7 @@ public class TransferTaskManager {
                 @Override
                 public void onProgress(long currentSize, long totalSize, long appendSize, boolean isPercentChange, boolean isResume) {
                     if (isPercentChange) {
-//                        Logger.d("zfy", "onProgressResult:currentSize=" + currentSize + ",totalSize=" + totalSize);
+//                        Logger.d("onProgressResult:currentSize=" + currentSize + ",totalSize=" + totalSize);
                         TransferDBManager.getInstance(mContext).updateTransferSize(transferItem.keyName, TransferHelper.TYPE_UPLOAD, currentSize, totalSize, true, transferItem.ext1);
                     }
                 }
@@ -601,7 +601,7 @@ public class TransferTaskManager {
                 }
             }
             if (hasSameContentDoing) {
-                Logger.d("zfy", "has same betag task uploading");
+                Logger.d("has same betag task uploading");
                 return;
             }
 
@@ -619,7 +619,7 @@ public class TransferTaskManager {
                     if (result && extraObj != null) {
                         FileListItem fileListItem = (FileListItem) extraObj;
                         String fileUuid = fileListItem.getUuid();
-                        Logger.d("zfy", "file upload success:" + transferItem.keyName + ";uuid=" + fileUuid);
+                        Logger.d("file upload success:" + transferItem.keyName + ";uuid=" + fileUuid);
                         if (!TextUtils.isEmpty(transferItem.ext3)) {
                             TransferDBManager.getInstance(mContext).updateTransferRemotePath(transferItem.ext1, fileListItem.getPath());
                             //相簿更新路径
@@ -676,16 +676,16 @@ public class TransferTaskManager {
         final String uniqueTag = TransferItemFactory.getUniqueTag(TransferHelper.TYPE_DOWNLOAD, null, null, null, fileUuid);
         for (TransferItem item : mDownDoingList) {
             if (uniqueTag.equals(item.ext1)) {
-                Logger.d("zfy", "download doing list exist item");
+                Logger.d("download doing list exist item");
                 //复查数据库
                 TransferItem transferItem = TransferDBManager.getInstance(mContext).queryByUniqueTag(uniqueTag, TransferHelper.TYPE_DOWNLOAD);
                 if (transferItem != null && transferItem.state == TransferHelper.STATE_DOING) {
                     //数据库存在
-                    Logger.d("zfy", "file is downloading, exit");
+                    Logger.d("file is downloading, exit");
                     return;
                 } else {
                     //数据库不存在，删除当前数据
-                    Logger.d("zfy", "db not exist item");
+                    Logger.d("db not exist item");
                     mDownDoingList.remove(item);
                     break;
                 }
@@ -700,10 +700,10 @@ public class TransferTaskManager {
                 //判断文件是否本地还在
                 File localFile = new File(dbItem.localPath, dbItem.keyName);
                 if (localFile.exists()) {
-                    Logger.d("zfy", "local file is exist");
+                    Logger.d("local file is exist");
                     long localFileSize = localFile.length();
                     if (fileSize == localFileSize) {
-                        Logger.d("zfy", "local file size is match");
+                        Logger.d("local file size is match");
                         //修改时间
                         item.createTime = dbItem.createTime;
                         TransferDBManager.getInstance(mContext).updateTransferInfo(uniqueTag, dbItem, true);
@@ -724,7 +724,7 @@ public class TransferTaskManager {
 
             TransferDBManager.getInstance(mContext).updateTransferInfo(uniqueTag, item, true);
         } else {
-            Logger.d("zfy", "create download task:" + filename);
+            Logger.d("create download task:" + filename);
             String localFilePath = getDownloadLocalFolderPath(filepath);
             //判断是否为本地文件未删除，仅下载记录删除
             item = TransferItemFactory.createDownloadPrepareItem(filename, localFilePath, filepath, null,
@@ -732,15 +732,15 @@ public class TransferTaskManager {
             File localFile = new File(localFilePath, filename);
             boolean hasLocalFile = false;
             if (localFile.exists()) {
-                Logger.d("zfy", "local file is exist");
+                Logger.d("local file is exist");
                 long localFileSize = localFile.length();
                 if (fileSize == localFileSize) {
-                    Logger.d("zfy", "local file size is match");
+                    Logger.d("local file size is match");
                     hasLocalFile = true;
                 }
             }
             if (hasLocalFile && item != null) {
-                Logger.d("zfy", "add finish record");
+                Logger.d("add finish record");
                 item.state = TransferHelper.STATE_FINISH;
                 TransferDBManager.getInstance(mContext).insert(item);
                 return;
@@ -768,7 +768,7 @@ public class TransferTaskManager {
 //        private ArrayList<TransferItem> currentList = new ArrayList<>();
 
         public DownWorkManager(BlockingDeque<TransferItem> items) {
-            Logger.d("zfy", "#create DownWorkManager");
+            Logger.d("#create DownWorkManager");
             waitingQueue = items;
         }
 
@@ -776,7 +776,7 @@ public class TransferTaskManager {
         public void run() {
             while (taskSwitch) {
                 if (!NetUtils.isNetAvailable(mContext)) {
-                    Logger.d("zfy", "no network, transfer task waiting");
+                    Logger.d("no network, transfer task waiting");
 //                    retryDownloadFailedItems();
                     try {
                         Thread.sleep(3000);
@@ -789,7 +789,7 @@ public class TransferTaskManager {
                 if (mDownloadCurrentList.size() < LIMIT_COUNT_DOWNLOAD) {
                     try {
                         TransferItem item = waitingQueue.take();
-                        Logger.d("zfy", "waitingQueue item:" + item.keyName + ";thread:" + Thread.currentThread());
+                        Logger.d("waitingQueue item:" + item.keyName + ";thread:" + Thread.currentThread());
                         mDownPrepareList.remove(item);
                         mDownDoingList.add(item);
                         mDownloadCurrentList.add(item);
@@ -866,7 +866,7 @@ public class TransferTaskManager {
                     for (TransferItem item : finishedList) {
                         File finishedFile = new File(item.localPath, item.keyName);
                         if (finishedFile.exists()) {
-                            Logger.d("zfy", "has exist same md5 file,copy!");
+                            Logger.d("has exist same md5 file,copy!");
                             //复制文件
                             try {
                                 File targetFile = new File(transferItem.localPath, transferItem.keyName);
@@ -892,7 +892,7 @@ public class TransferTaskManager {
 
             //判断任务是否手动停止
             if (!mDownWorkManager.isTransferring(transferItem.ext1)) {
-                Logger.d("zfy", "task has removed, quite this thread");
+                Logger.d("task has removed, quite this thread");
                 return;
             }
 
@@ -905,7 +905,7 @@ public class TransferTaskManager {
                 @Override
                 public void onProgress(long currentSize, long totalSize, long appendSize, boolean isPercentChange, boolean isResume) {
                     if (isPercentChange) {
-//                        Logger.d("zfy", "onProgressResult:currentSize=" + currentSize + ",totalSize=" + totalSize);
+//                        Logger.d("onProgressResult:currentSize=" + currentSize + ",totalSize=" + totalSize);
                         TransferDBManager.getInstance(mContext).updateTransferSize(transferItem.keyName, transferItem.transferType, currentSize, totalSize, true, transferItem.ext1);
                     }
                     //统计传输速度
@@ -923,7 +923,7 @@ public class TransferTaskManager {
                 getLogItem(transferItem.ext1).taskEndTime = System.currentTimeMillis();
                 //更改数据库状态
                 if (result) {
-                    Logger.d("zfy", "file download success:" + transferItem.keyName + ";uuid=" + transferItem.uuid);
+                    Logger.d("file download success:" + transferItem.keyName + ";uuid=" + transferItem.uuid);
                     TransferDBManager.getInstance(mContext).updateTransferState(transferItem.keyName, TransferHelper.TYPE_DOWNLOAD, TransferHelper.STATE_FINISH, 0, transferItem.uuid, true, transferItem.ext1);
                     //加入媒体库
                     File file = new File(transferItem.localPath, transferItem.keyName);
@@ -1296,7 +1296,7 @@ public class TransferTaskManager {
                 TransferItem item = unFinishDownList.get(i);
                 if (item.state == TransferHelper.STATE_PREPARE) {
                     mDownPrepareList.add(item);
-                    Logger.d("zfy", "int mDownPrepareList size=" + mDownPrepareList.size());
+                    Logger.d("int mDownPrepareList size=" + mDownPrepareList.size());
                 } else if (item.state == TransferHelper.STATE_DOING) {
                     mDownDoingList.add(item);
                 } else if (item.state == TransferHelper.STATE_ERROR) {

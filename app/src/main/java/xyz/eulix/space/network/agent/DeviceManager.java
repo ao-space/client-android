@@ -125,12 +125,12 @@ public class DeviceManager {
                 .subscribe(new Observer<LocalIpInfo>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-                        Logger.d("zfy", "get local ip on subscribe");
+                        Logger.d("get local ip on subscribe");
                     }
 
                     @Override
                     public void onNext(LocalIpInfo localIpInfo) {
-                        Logger.i("zfy", "on next: " + (localIpInfo == null ? "null" : localIpInfo.toString()));
+                        Logger.i("on next: " + (localIpInfo == null ? "null" : localIpInfo.toString()));
                         if (callback != null) {
                             callback.onResult(localIpInfo);
                         }
@@ -139,7 +139,7 @@ public class DeviceManager {
                     @Override
                     public void onError(Throwable e) {
                         String errMsg = (e == null ? "null" : (e.getMessage() == null ? "" : e.getMessage()));
-                        Logger.e("zfy", "on error: " + errMsg);
+                        Logger.e("on error: " + errMsg);
                         if (callback != null) {
                             callback.onError(errMsg);
                         }
@@ -147,7 +147,7 @@ public class DeviceManager {
 
                     @Override
                     public void onComplete() {
-                        Logger.d("zfy", "get local ip on complete");
+                        Logger.d("get local ip on complete");
                     }
                 });
     }

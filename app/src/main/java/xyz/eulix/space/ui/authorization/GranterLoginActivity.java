@@ -283,7 +283,7 @@ public class GranterLoginActivity extends AbsActivity<GranterLoginPresenter.IGra
                                     }
                                 }
                             } catch (Exception e) {
-                                Logger.e("zfy", e.getMessage());
+                                Logger.e(e.getMessage());
                             }
                         }
                     }

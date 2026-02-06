@@ -242,7 +242,7 @@ public class LocalMediaUpSelectHelper extends AsyncTask<Object, Object, Object> 
                             cur.getString(photoPathIndex).lastIndexOf("/") + 1,
                             typeIndex);
                 } catch (Exception e) {
-                    Logger.e("zfy", e.getMessage());
+                    Logger.e(e.getMessage());
                 }
                 if (TextUtils.isEmpty(fileName)) {
                     continue;
@@ -261,7 +261,7 @@ public class LocalMediaUpSelectHelper extends AsyncTask<Object, Object, Object> 
 
                     File file = new File(path);
                     if (!file.exists()) {
-                        Logger.d("zfy", "file not exist." + file.getAbsolutePath());
+                        Logger.d("file not exist." + file.getAbsolutePath());
                         continue;
                     }
 
@@ -269,7 +269,7 @@ public class LocalMediaUpSelectHelper extends AsyncTask<Object, Object, Object> 
                     long fileSize = cur.getLong(fileSizeIndex);
                     if (mLimitSwitch && fileSize > mLimitSize) {
                         //文件大小超过限制
-                        Logger.d("zfy", fileName + ", file over size: " + fileSize);
+                        Logger.d(fileName + ", file over size: " + fileSize);
                         continue;
                     }
                     long modifiedDate = cur.getLong(dateIndex);
@@ -410,7 +410,7 @@ public class LocalMediaUpSelectHelper extends AsyncTask<Object, Object, Object> 
                             cur.getString(photoPathIndex).lastIndexOf("/") + 1,
                             typeIndex);
                 } catch (Exception e) {
-                    Logger.e("zfy", e.getMessage());
+                    Logger.e(e.getMessage());
                 }
                 if (TextUtils.isEmpty(fileName)) {
                     continue;

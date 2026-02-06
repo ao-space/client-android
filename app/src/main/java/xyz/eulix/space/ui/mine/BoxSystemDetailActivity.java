@@ -137,7 +137,7 @@ public class BoxSystemDetailActivity extends AbsActivity<BoxSystemDetailPresente
     @Override
     public void initEvent() {
         btnCheckUpdate.setOnClickListener(v -> {
-            Logger.d("zfy", "click btnCheckUpdate");
+            Logger.d("click btnCheckUpdate");
             changeBtnState(true);
             presenter.checkBoxVersion();
         });

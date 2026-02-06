@@ -606,7 +606,7 @@ public class FileListManager {
             return;
         }
 
-        Logger.d("zfy", "start download:" + filename);
+        Logger.d("start download:" + filename);
         Logger.d("GarveyP2P", "http download single start");
         OkHttpClient okHttpClient = OkHttpUtil.generateOkHttpClient(true).newBuilder()
                 .addInterceptor(new EulixGatewayInterceptor(boxDomain, setUUIDMapping(UUID.fromString(fileUuid)), ConstantField.ServiceFunction.DOWNLOAD_FILE
@@ -699,14 +699,14 @@ public class FileListManager {
                     File file = new File(nFilePathFinal, filename);
                     if (file.exists()) {
                         boolean result = file.delete();
-                        Logger.d("zfy", "delete file result =" + result);
+                        Logger.d("delete file result =" + result);
                     }
                     Headers headers = response.headers();
                     String contentType = headers.get("content-type");
-                    Logger.d("zfy", "content-type = " + contentType);
+                    Logger.d("content-type = " + contentType);
                     if (TextUtils.isEmpty(contentType) || contentType.contains("json")) {
                         //没有文件流，下载文件失败
-                        Logger.d("zfy", "no stream");
+                        Logger.d("no stream");
                         try {
                             String cipherResponseText = response.body().string();
                             if (!TextUtils.isEmpty(cipherResponseText)) {
@@ -715,17 +715,17 @@ public class FileListManager {
                                 if (realCallResult != null) {
                                     String body = realCallResult.getBody();
                                     String decryptBody = EncryptionUtil.decrypt(transformation, null, body, secret, StandardCharsets.UTF_8, ivParams);
-                                    Logger.d("zfy", "decryptBody=" + decryptBody);
+                                    Logger.d("decryptBody=" + decryptBody);
                                 }
                             }
                         } catch (Exception e) {
-                            Logger.d("zfy", "exception " + e.getMessage());
+                            Logger.d("exception " + e.getMessage());
                         }
                         TransferDBManager.getInstance(context).updateTransferState(filename, transferType, TransferHelper.STATE_ERROR, 0, null, true, uniqueTag);
                     } else {
                         //文件大小
                         String headerFileSizeStr = headers.get("file-size");
-                        Logger.d("zfy", "file-size=" + headerFileSizeStr);
+                        Logger.d("file-size=" + headerFileSizeStr);
                         if (TextUtils.isEmpty(headerFileSizeStr)) {
                             headerFileSizeStr = "0";
                         }
@@ -734,7 +734,7 @@ public class FileListManager {
 
                         TransferProgressListener progressListener = (currentSize, totalSize, appendSize, isPercentChange, isResume) -> {
                             if (isPercentChange) {
-                                Logger.d("zfy", "currentDownSize=" + currentSize + ",totalSize=" + totalSize);
+                                Logger.d("currentDownSize=" + currentSize + ",totalSize=" + totalSize);
                                 //回调返回的totalSize为加密文件的值，与实际文件大小有区别
                                 if (currentSize > fileSize) {
                                     currentSize = fileSize;
@@ -755,12 +755,12 @@ public class FileListManager {
                         if (decryptFile != null) {
                             //下载解析成功，size校验
                             long tempFileSize = decryptFile.length();
-                            Logger.d("zfy", "downloadSize=" + tempFileSize);
-                            Logger.d("zfy", "targetSize=" + fileSize);
+                            Logger.d("downloadSize=" + tempFileSize);
+                            Logger.d("targetSize=" + fileSize);
 
                             if (FILE_CHECK_SWITCH) {
                                 if (tempFileSize == fileSize) {
-                                    Logger.d("zfy", "size校验通过");
+                                    Logger.d("size校验通过");
                                     TransferDBManager.getInstance(context).updateTransferState(filename, transferType, TransferHelper.STATE_FINISH, 0, null, true, uniqueTag);
                                     if (!isCache) {
                                         AlbumNotifyHelper.insertToAlbum(context, decryptFile);
@@ -769,16 +769,16 @@ public class FileListManager {
                                         callback.onResult(true, decryptFile.getAbsolutePath());
                                     }
                                 } else {
-                                    Logger.d("zfy", "size校验失败");
+                                    Logger.d("size校验失败");
                                     boolean result = decryptFile.delete();
-                                    Logger.d("zfy", "decrypt file delete: " + result);
+                                    Logger.d("decrypt file delete: " + result);
                                     TransferDBManager.getInstance(context).updateTransferState(filename, transferType, TransferHelper.STATE_ERROR, -1, null, true, uniqueTag);
                                     if (callback != null) {
                                         callback.onResult(false, "size校验失败");
                                     }
                                 }
                             } else {
-                                Logger.d("zfy", "下载完成");
+                                Logger.d("下载完成");
                                 TransferDBManager.getInstance(context).updateTransferState(filename, transferType, TransferHelper.STATE_FINISH, 0, null, true, uniqueTag);
                                 if (!isCache) {
                                     AlbumNotifyHelper.insertToAlbum(context, decryptFile);
@@ -842,7 +842,7 @@ public class FileListManager {
             call.enqueue(new Callback() {
                 @Override
                 public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                    Logger.e("zfy", "get thumb on failure, e: " + e.getMessage());
+                    Logger.e("get thumb on failure, e: " + e.getMessage());
                     if (callback != null) {
                         callback.onError("response not stream");
                     }
@@ -850,21 +850,21 @@ public class FileListManager {
 
                 @Override
                 public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                    Logger.i("zfy", "get thumb on response " + response.code());
+                    Logger.i("get thumb on response " + response.code());
                     if (!response.isSuccessful()) {
                         return;
                     }
                     Headers headers = response.headers();
                     String contentType = headers.get("content-type");
-                    Logger.d("zfy", "thumb content-type = " + contentType);
+                    Logger.d("thumb content-type = " + contentType);
                     if (!TextUtils.isEmpty(contentType) && (contentType.contains("stream") || contentType.contains("image"))) {
                         //文件大小
                         String fileSizeStr = headers.get("file-size");
-                        Logger.d("zfy", "file-size=" + fileSizeStr);
+                        Logger.d("file-size=" + fileSizeStr);
                         long fileSize = Long.parseLong(fileSizeStr);
                         //文件名称等(inline; filename="header_chosen.jpg"; filename*=UTF-8''header_chosen.jpg)
                         String contentDisposition = headers.get("content-disposition");
-                        Logger.d("zfy", "content-disposition=" + contentDisposition);
+                        Logger.d("content-disposition=" + contentDisposition);
                         String suffix = "jpg";
                         if (!TextUtils.isEmpty(contentDisposition)) {
                             int contentDotIndex = contentDisposition.lastIndexOf(".");
@@ -873,11 +873,11 @@ public class FileListManager {
                         Logger.d(TAG, "filepath: " + nFilePathFinal);
                         FileUtil.mkFile(nFilePathFinal);
                         String saveFileName = uuid.toString() + "." + suffix;
-                        Logger.d("zfy", "saveFileName = " + saveFileName);
+                        Logger.d("saveFileName = " + saveFileName);
                         File file = new File(nFilePathFinal, saveFileName);
                         if (file.exists()) {
                             boolean result = file.delete();
-                            Logger.d("zfy", "delete file result =" + result);
+                            Logger.d("delete file result =" + result);
                         }
 
                         InputStream inputStream = response.body().byteStream();
@@ -886,7 +886,7 @@ public class FileListManager {
                         File decryptFile = EncryptionUtil.decrypt(ConstantField.Algorithm.Transformation.AES_CBC_PKCS5, null, inputStream,
                                 secret, StandardCharsets.UTF_8, ivParams, nFilePathFinal, tempFileName, fileSize, null);
                         if (decryptFile != null) {
-                            Logger.d("zfy", "get thumb success." + decryptFile.getAbsolutePath());
+                            Logger.d("get thumb success." + decryptFile.getAbsolutePath());
                             //获取完成，修改名称
                             File finalFile = new File(nFilePathFinal, saveFileName);
                             decryptFile.renameTo(finalFile);
@@ -900,7 +900,7 @@ public class FileListManager {
                             }
                         }
                     } else {//没有文件流，下载文件失败
-                        Logger.d("zfy", "no stream");
+                        Logger.d("no stream");
                         if (callback != null) {
                             callback.onError("response not stream");
                         }
@@ -953,12 +953,12 @@ public class FileListManager {
             call.enqueue(new Callback() {
                 @Override
                 public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                    Logger.e("zfy", "get compressed on failure, e: " + e.getMessage());
+                    Logger.e("get compressed on failure, e: " + e.getMessage());
                 }
 
                 @Override
                 public void onResponse(@NotNull Call call, @NotNull Response response) {
-                    Logger.i("zfy", "on response " + response.code());
+                    Logger.i("on response " + response.code());
                     if (!response.isSuccessful()) {
                         if (listener != null) {
                             listener.onResult(false, null);
@@ -967,15 +967,15 @@ public class FileListManager {
                     }
                     Headers headers = response.headers();
                     String contentType = headers.get("content-type");
-                    Logger.d("zfy", "content-type = " + contentType);
+                    Logger.d("content-type = " + contentType);
                     if (!TextUtils.isEmpty(contentType) && (contentType.contains("stream") || contentType.contains("image"))) {
                         //文件大小
                         String fileSizeStr = headers.get("file-size");
-                        Logger.d("zfy", "file-size=" + fileSizeStr);
+                        Logger.d("file-size=" + fileSizeStr);
                         long fileSize = Long.parseLong(fileSizeStr);
                         //文件名称等(inline; filename="header_chosen.jpg"; filename*=UTF-8''header_chosen.jpg)
                         String contentDisposition = headers.get("content-disposition");
-                        Logger.d("zfy", "content-disposition=" + contentDisposition);
+                        Logger.d("content-disposition=" + contentDisposition);
                         String suffix = "";
                         if (!TextUtils.isEmpty(filename)) {
                             int typeIndex = filename.lastIndexOf(".");
@@ -988,17 +988,17 @@ public class FileListManager {
                         Logger.d(TAG, "filepath: " + nFilePathFinal);
                         FileUtil.mkFile(nFilePathFinal);
                         String saveFileName = uuid + "." + suffix;
-                        Logger.d("zfy", "saveFileName = " + saveFileName);
+                        Logger.d("saveFileName = " + saveFileName);
                         File file = new File(nFilePathFinal, saveFileName);
 
                         if (file.exists()) {
                             boolean result = file.delete();
-                            Logger.d("zfy", "delete file result =" + result);
+                            Logger.d("delete file result =" + result);
                         }
 
                         InputStream inputStream = response.body().byteStream();
                         TransferProgressListener progressListener = (currentSize, totalSize, appendSize, isPercentChange, isResume) -> {
-                            Logger.d("zfy", "currentDownSize=" + currentSize + ",totalSize=" + totalSize);
+                            Logger.d("currentDownSize=" + currentSize + ",totalSize=" + totalSize);
                             if (isPercentChange) {
                                 TransferDBManager.getInstance(context).updateTransferSize(filename, TransferHelper.TYPE_CACHE, currentSize, totalSize, true, uniqueTag);
                             }
@@ -1009,7 +1009,7 @@ public class FileListManager {
                                 secret, StandardCharsets.UTF_8, ivParams, nFilePathFinal, tempFileName, fileSize, progressListener);
                         if (decryptFile != null) {
                             //获取完成，修改名称
-                            Logger.d("zfy", "get compressed image success." + decryptFile.getAbsolutePath());
+                            Logger.d("get compressed image success." + decryptFile.getAbsolutePath());
                             File finalFile = new File(nFilePathFinal, saveFileName);
                             decryptFile.renameTo(finalFile);
                             ThumbManager.getInstance().insertLocalCompressPath(uuid.toString(), finalFile.getAbsolutePath());
@@ -1022,7 +1022,7 @@ public class FileListManager {
                         }
                     } else {
                         //没有文件流，下载文件失败
-                        Logger.d("zfy", "no stream:" + response.body().toString());
+                        Logger.d("no stream:" + response.body().toString());
                         listener.onResult(false, null);
                     }
                 }

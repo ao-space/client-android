@@ -366,7 +366,7 @@ public class AboutUsActivity extends AbsActivity<AboutUsPresenter.IAboutUs, Abou
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(BoxVersionCheckEvent event) {
-        Logger.d("zfy", "device manager BoxVersionCheckEvent");
+        Logger.d("device manager BoxVersionCheckEvent");
         if (ConstantField.boxVersionCheckBody != null) {
             newSystemVersionReminder.setVisibility(View.VISIBLE);
         } else {

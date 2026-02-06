@@ -104,15 +104,15 @@ public class UpgradeManager {
                 .subscribe(new Observer<UpgradeConfigResponseBody>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-                        Logger.d("zfy", "get upgrade config on subscribe");
+                        Logger.d("get upgrade config on subscribe");
                     }
 
                     @Override
                     public void onNext(UpgradeConfigResponseBody baseRsp) {
-                        Logger.d("zfy", "get upgrade config on next: " + (baseRsp == null ? "null" : baseRsp.toString()));
+                        Logger.d("get upgrade config on next: " + (baseRsp == null ? "null" : baseRsp.toString()));
                         if (callback != null) {
                             if (baseRsp != null && baseRsp.getCodeInt() == 0) {
-                                Logger.d("zfy", "baseRsp=" + baseRsp.toString());
+                                Logger.d("baseRsp=" + baseRsp.toString());
                                 callback.onResult(baseRsp.autoDownload, baseRsp.autoInstall);
                             } else {
                                 callback.onError(baseRsp != null ? baseRsp.getMessage() : "");
@@ -123,7 +123,7 @@ public class UpgradeManager {
                     @Override
                     public void onError(Throwable e) {
                         String errMsg = (e == null ? "null" : (e.getMessage() == null ? "" : e.getMessage()));
-                        Logger.d("zfy", "get upgrade config on error: " + errMsg);
+                        Logger.d("get upgrade config on error: " + errMsg);
                         if (callback != null) {
                             callback.onError(errMsg);
                         }
@@ -132,7 +132,7 @@ public class UpgradeManager {
 
                     @Override
                     public void onComplete() {
-                        Logger.d("zfy", "get upgrade config on complete");
+                        Logger.d("get upgrade config on complete");
                     }
                 });
     }
@@ -154,12 +154,12 @@ public class UpgradeManager {
                 .subscribe(new Observer<BaseResponseBody>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-                        Logger.d("zfy", "set upgrade config on subscribe");
+                        Logger.d("set upgrade config on subscribe");
                     }
 
                     @Override
                     public void onNext(BaseResponseBody baseRsp) {
-                        Logger.d("zfy", "set upgrade config on next: " + (baseRsp == null ? "null" : baseRsp.toString()));
+                        Logger.d("set upgrade config on next: " + (baseRsp == null ? "null" : baseRsp.toString()));
                         if (callback != null) {
                             callback.onResult(true, "");
                         }
@@ -168,7 +168,7 @@ public class UpgradeManager {
                     @Override
                     public void onError(Throwable e) {
                         String errMsg = (e == null ? "null" : (e.getMessage() == null ? "" : e.getMessage()));
-                        Logger.d("zfy", "set upgrade config on error: " + errMsg);
+                        Logger.d("set upgrade config on error: " + errMsg);
                         if (callback != null) {
                             callback.onResult(null, errMsg);
                         }
@@ -177,7 +177,7 @@ public class UpgradeManager {
 
                     @Override
                     public void onComplete() {
-                        Logger.d("zfy", "set upgrade config on complete");
+                        Logger.d("set upgrade config on complete");
                     }
                 });
     }
@@ -195,15 +195,15 @@ public class UpgradeManager {
                 .subscribe(new Observer<UpgradeStatusResponseBody>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-                        Logger.d("zfy", "get upgrade status on subscribe");
+                        Logger.d("get upgrade status on subscribe");
                     }
 
                     @Override
                     public void onNext(UpgradeStatusResponseBody baseRsp) {
-                        Logger.d("zfy", "get upgrade status on next: " + (baseRsp == null ? "null" : baseRsp.toString()));
+                        Logger.d("get upgrade status on next: " + (baseRsp == null ? "null" : baseRsp.toString()));
                         if (callback != null) {
                             if (baseRsp != null && baseRsp.getCodeInt() == 0) {
-                                Logger.d("zfy", "baseRsp=" + baseRsp.toString());
+                                Logger.d("baseRsp=" + baseRsp.toString());
 //                                callback.onResult(baseRsp.autoInstall, baseRsp.autoDownload);
                                 callback.onResult(baseRsp);
                             } else {
@@ -215,7 +215,7 @@ public class UpgradeManager {
                     @Override
                     public void onError(Throwable e) {
                         String errMsg = (e == null ? "null" : (e.getMessage() == null ? "" : e.getMessage()));
-                        Logger.d("zfy", "get upgrade status on error: " + errMsg);
+                        Logger.d("get upgrade status on error: " + errMsg);
                         if (callback != null) {
                             callback.onError(errMsg);
                         }
@@ -224,7 +224,7 @@ public class UpgradeManager {
 
                     @Override
                     public void onComplete() {
-                        Logger.d("zfy", "get upgrade status on complete");
+                        Logger.d("get upgrade status on complete");
                     }
                 });
     }
@@ -263,12 +263,12 @@ public class UpgradeManager {
                 .subscribe(new Observer<UpgradeStatusResponseBody>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-                        Logger.d("zfy", "start upgrade on subscribe");
+                        Logger.d("start upgrade on subscribe");
                     }
 
                     @Override
                     public void onNext(UpgradeStatusResponseBody responseBody) {
-                        Logger.i("zfy", "start upgrade on next: " + (responseBody == null ? "null" : responseBody.toString()));
+                        Logger.i("start upgrade on next: " + (responseBody == null ? "null" : responseBody.toString()));
                         if (callback != null) {
                             if (responseBody != null && responseBody.getCodeInt() == 0) {
                                 callback.onResult(true, null);
@@ -288,7 +288,7 @@ public class UpgradeManager {
                     @Override
                     public void onError(Throwable e) {
                         String errMsg = (e == null ? "null" : (e.getMessage() == null ? "" : e.getMessage()));
-                        Logger.e("zfy", "start upgrade on error: " + errMsg);
+                        Logger.e("start upgrade on error: " + errMsg);
                         e.printStackTrace();
                         if (callback != null) {
                             callback.onResult(null, errMsg);
@@ -297,7 +297,7 @@ public class UpgradeManager {
 
                     @Override
                     public void onComplete() {
-                        Logger.d("zfy", "start upgrade on complete");
+                        Logger.d("start upgrade on complete");
                     }
                 });
     }
@@ -315,12 +315,12 @@ public class UpgradeManager {
                 .subscribe(new Observer<DeviceVersionInfoResponseBody>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-                        Logger.d("zfy", "get device version info on subscribe");
+                        Logger.d("get device version info on subscribe");
                     }
 
                     @Override
                     public void onNext(DeviceVersionInfoResponseBody responseBody) {
-                        Logger.i("zfy", "get device version info on next: " + (responseBody == null ? "null" : responseBody.toString()));
+                        Logger.i("get device version info on next: " + (responseBody == null ? "null" : responseBody.toString()));
                         if (callback != null) {
                             if (responseBody != null && responseBody.getCodeInt() == 200) {
                                 callback.onResult(true, responseBody.results);
@@ -333,7 +333,7 @@ public class UpgradeManager {
                     @Override
                     public void onError(Throwable e) {
                         String errMsg = (e == null ? "null" : (e.getMessage() == null ? "" : e.getMessage()));
-                        Logger.e("zfy", "get device version info on error: " + errMsg);
+                        Logger.e("get device version info on error: " + errMsg);
                         e.printStackTrace();
                         if (callback != null) {
                             callback.onResult(false, errMsg);
@@ -342,7 +342,7 @@ public class UpgradeManager {
 
                     @Override
                     public void onComplete() {
-                        Logger.d("zfy", "get device version info on complete");
+                        Logger.d("get device version info on complete");
                     }
                 });
     }

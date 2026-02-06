@@ -63,7 +63,7 @@ public class BoxSystemDetailPresenter extends AbsPresenter<BoxSystemDetailPresen
             public void onResult(VersionCheckResponseBody responseBody) {
                 if (responseBody != null && responseBody.results != null) {
                     VersionCheckResponseBody.Results results = responseBody.results;
-                    Logger.d("zfy", "result newVersionExist:" + results.newVersionExist);
+                    Logger.d("result newVersionExist:" + results.newVersionExist);
 
                     if (results.newVersionExist && results.latestBoxPkg != null) {
                         ConstantField.boxVersionCheckBody = results;
@@ -81,7 +81,7 @@ public class BoxSystemDetailPresenter extends AbsPresenter<BoxSystemDetailPresen
 
             @Override
             public void onError(String msg) {
-                Logger.d("zfy", "checkVersion error:" + msg);
+                Logger.d("checkVersion error:" + msg);
                 iView.onCheckError("");
             }
         });
@@ -92,7 +92,7 @@ public class BoxSystemDetailPresenter extends AbsPresenter<BoxSystemDetailPresen
         UpgradeUtils.getDeviceVersionDetailInfo(context, new ResultCallbackObj() {
             @Override
             public void onResult(boolean result, Object extraObj) {
-                Logger.d("zfy", "getDeviceVersionDetailInfo onResult:" + result + ",extraObj:" + extraObj.toString());
+                Logger.d("getDeviceVersionDetailInfo onResult:" + result + ",extraObj:" + extraObj.toString());
                 if (result) {
                     DeviceVersionInfoBean deviceVersionInfoBean = (DeviceVersionInfoBean) extraObj;
                     iView.onGetDeviceVersionInfo(true, deviceVersionInfoBean);
@@ -110,7 +110,7 @@ public class BoxSystemDetailPresenter extends AbsPresenter<BoxSystemDetailPresen
 
             @Override
             public void onError(String msg) {
-                Logger.d("zfy", "getDeviceVersionDetailInfo onError " + msg);
+                Logger.d("getDeviceVersionDetailInfo onError " + msg);
                 iView.onGetDeviceVersionInfo(false, null);
             }
         });

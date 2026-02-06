@@ -247,7 +247,7 @@ public class LocalMediaSelectAdapter extends RecyclerView.Adapter<RecyclerView.V
     @Override
     public void setSelected(int index, boolean selected) {
         // do something to mark this index as selected/unselected
-        Logger.d("zfy", "AlbumHomeAdapter setSelected:index=" + index + ",selected=" + selected);
+        Logger.d("AlbumHomeAdapter setSelected:index=" + index + ",selected=" + selected);
         if (dataList.isEmpty() || index >= dataList.size()) {
             return;
         }

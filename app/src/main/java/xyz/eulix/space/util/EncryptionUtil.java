@@ -247,7 +247,7 @@ public class EncryptionUtil {
                     resFile=new File(resFilePath, "en_"+file.getName());
                     if (resFile.exists()){
                         boolean result = resFile.delete();
-                        Logger.d("zfy", "file delete "+result);
+                        Logger.d("file delete "+result);
                     }
                     try( FileInputStream fis = new FileInputStream(file);
                          FileOutputStream fos=new FileOutputStream(resFile);
@@ -321,7 +321,7 @@ public class EncryptionUtil {
                     resFile = new File(resFilePath, decryptFileName);
                     if (resFile.exists()) {
                         boolean result = resFile.delete();
-                        Logger.d("zfy", "file delete "+result);
+                        Logger.d("file delete "+result);
                     }
                     try (InputStream fis = inputStream;
                          FileOutputStream fos = new FileOutputStream(resFile);){
@@ -352,7 +352,7 @@ public class EncryptionUtil {
                                     progressListener.onProgress(currentSize, fileSize, len, false,false);
                                 }
                             }
-//                            Logger.d("zfy", "currentSize = " + currentSize);
+//                            Logger.d("currentSize = " + currentSize);
                         }
                         cos.close();
                         resultFile = resFile;

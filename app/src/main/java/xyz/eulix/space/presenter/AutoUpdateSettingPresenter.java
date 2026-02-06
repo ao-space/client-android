@@ -50,7 +50,7 @@ public class AutoUpdateSettingPresenter extends AbsPresenter<AutoUpdateSettingPr
         UpgradeUtils.getSystemAutoUpgradeConfig(context, new IGetUpgradeConfigCallback() {
             @Override
             public void onResult(boolean autoDownload, boolean autoInstall) {
-                Logger.d("zfy", "autoDownload = " + autoDownload + ",autoInstall = " + autoInstall);
+                Logger.d("autoDownload = " + autoDownload + ",autoInstall = " + autoInstall);
                 PreferenceUtil.saveUpgradeAutoDownload(context, autoDownload);
                 PreferenceUtil.saveUpgradeAutoInstall(context, autoInstall);
                 iView.setResult(autoDownload, autoInstall);
@@ -58,7 +58,7 @@ public class AutoUpdateSettingPresenter extends AbsPresenter<AutoUpdateSettingPr
 
             @Override
             public void onError(String msg) {
-                Logger.d("zfy", "get system auto upgrade config error:" + msg);
+                Logger.d("get system auto upgrade config error:" + msg);
                 iView.setFailed(true);
             }
         });

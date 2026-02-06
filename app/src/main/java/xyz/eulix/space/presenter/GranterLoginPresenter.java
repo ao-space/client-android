@@ -40,6 +40,7 @@ import xyz.eulix.space.network.platform.PKeyBoxInfoCallback;
 import xyz.eulix.space.network.platform.PKeyUtil;
 import xyz.eulix.space.util.ConstantField;
 import xyz.eulix.space.util.DataUtil;
+import xyz.eulix.space.util.Logger;
 import xyz.eulix.space.util.ThreadPool;
 
 /**
@@ -48,6 +49,7 @@ import xyz.eulix.space.util.ThreadPool;
  * date: 2021/8/10 15:08
  */
 public class GranterLoginPresenter extends AbsPresenter<GranterLoginPresenter.IGranterLogin> {
+    private static final String TAG = GranterLoginPresenter.class.getSimpleName();
     private CountDownTimer countDownTimer;
     private static final int SECOND_UNIT = 1000;
     private static final int timeSecond = 30;
@@ -68,6 +70,7 @@ public class GranterLoginPresenter extends AbsPresenter<GranterLoginPresenter.IG
     private PKeyBoxInfoCallback pKeyBoxInfoCallback = new PKeyBoxInfoCallback() {
         @Override
         public void onError(String msg) {
+            Logger.e(TAG, "send box info callback onError: " + msg);
             if (iView != null) {
                 iView.boxInfoCallback(false, msg);
             }
@@ -75,6 +78,7 @@ public class GranterLoginPresenter extends AbsPresenter<GranterLoginPresenter.IG
 
         @Override
         public void onFailed(int code) {
+            Logger.w(TAG, "send box info callback onFailed, code=" + code);
             if (iView != null) {
                 iView.boxInfoCallback(false, String.valueOf(code));
             }
@@ -82,6 +86,7 @@ public class GranterLoginPresenter extends AbsPresenter<GranterLoginPresenter.IG
 
         @Override
         public void onSuccess(int code) {
+            Logger.i(TAG, "send box info callback onSuccess, code=" + code);
             if (iView != null) {
                 iView.boxInfoCallback(true, String.valueOf(code));
             }
@@ -165,6 +170,9 @@ public class GranterLoginPresenter extends AbsPresenter<GranterLoginPresenter.IG
     }
 
     public boolean sendBoxInfo(String boxKey, String platformKey, String lanDomain, String lanIp) {
+        Logger.i(TAG, "start sendBoxInfo, boxKey=" + Logger.maskMiddle(boxKey, 4, 4)
+                + ", platformKey=" + Logger.maskMiddle(platformKey, 4, 4)
+                + ", lanDomain=" + lanDomain + ", lanIp=" + lanIp);
         boolean result = false;
         String boxDomainValue = null;
         String boxPublicKeyValue = null;
@@ -191,14 +199,17 @@ public class GranterLoginPresenter extends AbsPresenter<GranterLoginPresenter.IG
             result = true;
             String boxDomain = boxDomainValue;
             String boxPubKey = boxPublicKeyValue;
+            Logger.d(TAG, "active box found for sendBoxInfo, boxDomain=" + Logger.safeUrl(boxDomain)
+                    + ", boxPubKeyAvailable=" + (boxPubKey != null && boxPubKey.length() > 0));
             try {
 //                ThreadPool.getInstance().execute(() -> PKeyUtil.sendBoxInfo(boxKey, boxDomain, boxPubKey, platformKey, pKeyBoxInfoCallback));
                 ThreadPool.getInstance().execute(() -> PKeyUtil.sendBoxInfoV2(boxKey, boxDomain, boxPubKey, platformKey, lanDomain, lanIp, pKeyBoxInfoCallback));
             } catch (RejectedExecutionException e) {
-                e.printStackTrace();
+                Logger.e(TAG, "sendBoxInfo task rejected", e);
             }
         }
         if (!result && iView != null) {
+            Logger.w(TAG, "sendBoxInfo aborted, no active/offline-use box found with domain and public key");
             iView.boxInfoCallback(false, null);
         }
         return result;

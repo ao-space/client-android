@@ -148,7 +148,7 @@ public class TransferNetUtil {
         long fixedLength = accessTokenHeader.length() + accessToken.length() + newLine.length()
                 + callRequestHeader.length() + callRequest.length() + newLine.length()
                 + fileHeader.length() + fileLength + newLine.length() + (dash + boundary + dash + newLine).length();
-        Logger.d("zfy", "fixedLength = " + fixedLength);
+        Logger.d("fixedLength = " + fixedLength);
 
         connection.setRequestProperty("request-id", requestId);
         connection.setRequestProperty("User-Agent", "Android Multipart HTTP Client 1.0");
@@ -189,7 +189,7 @@ public class TransferNetUtil {
 
             // file data
             outputStream.writeBytes(fileHeader);
-            Logger.d("zfy", "totalSize=" + fileLength);
+            Logger.d("totalSize=" + fileLength);
             long currentSize = 0L;
             byte[] buffer = new byte[2048];
             int count;
@@ -206,7 +206,7 @@ public class TransferNetUtil {
                     currentPercent = (int) (currentSize * 100 / fileLength);
                     //进度有变化时再回调，减少回调次数
                     if (currentPercent > oldPercent) {
-//                        Logger.d("zfy", "currentSize = " + currentSize);
+//                        Logger.d("currentSize = " + currentSize);
                         isPercentChange = true;
                         oldPercent = currentPercent;
                     } else {
@@ -226,7 +226,7 @@ public class TransferNetUtil {
             int statusCode = connection.getResponseCode();
             StringBuilder response = new StringBuilder();
 
-            Logger.d("zfy", "transformNetUtil response=" + statusCode);
+            Logger.d("transformNetUtil response=" + statusCode);
             //解析返回数据
             if (statusCode >= 200 && statusCode < 300) {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
@@ -235,7 +235,7 @@ public class TransferNetUtil {
                     response.append(line);
                 }
                 String cipherResponseText = response.toString();
-                Logger.d("zfy", "cipherResponseText" + cipherResponseText);
+                Logger.d("cipherResponseText" + cipherResponseText);
                 if (!TextUtils.isEmpty(cipherResponseText)) {
                     RealCallResult realCallResult = null;
                     realCallResult = new Gson().fromJson(cipherResponseText, RealCallResult.class);
@@ -245,7 +245,7 @@ public class TransferNetUtil {
                         if (body != null) {
                             String decryptBody = EncryptionUtil.decrypt(transformation, null,
                                     body, secret, StandardCharsets.UTF_8, ivParams);
-                            Logger.d("zfy", "decryptBody = " + decryptBody);
+                            Logger.d("decryptBody = " + decryptBody);
                             resultResponseStr = decryptBody;
                         }
                     }
@@ -257,10 +257,10 @@ public class TransferNetUtil {
                 resultResponseStr = new Gson().toJson(responseBodyResult, UploadResponseBodyResult.class);
             }
         } catch (IOException e) {
-            Logger.d("zfy", "transformNetUtil exception");
+            Logger.d("transformNetUtil exception");
             e.printStackTrace();
         }
-        Logger.d("zfy", "close connect");
+        Logger.d("close connect");
         connection.disconnect();
 
         Logger.d("GarveyP2P", "http upload file end");

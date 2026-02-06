@@ -204,7 +204,7 @@ public class AlbumNotifyHelper {
             context.getApplicationContext().getContentResolver().insert(MediaStore.Files.getContentUri("external"), values);
         } catch (Exception e) {
             e.printStackTrace();
-            Logger.d("zfy", "insertFileToMediaStore error");
+            Logger.d("insertFileToMediaStore error");
             Logger.e(e.getMessage());
         }
 

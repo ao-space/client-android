@@ -725,7 +725,7 @@ public class TransferDBManager {
         result = update(cv, where, null);
 
         if (isFeedBack) {
-            Logger.d("zfy", "post transfer state event:" + state);
+            Logger.d("post transfer state event:" + state);
             EventBusUtil.post(new TransferStateEvent(keyName, transferType, state, uniqueTag));
         }
 

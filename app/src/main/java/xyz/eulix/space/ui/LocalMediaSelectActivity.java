@@ -332,7 +332,7 @@ public class LocalMediaSelectActivity extends AbsActivity<LocalMediaSelectPresen
                     }
                     break;
                 case TitleBarWithSelect.CLICK_EVENT_SELECT_NULL:
-                    Logger.d("zfy", "onSelectNone");
+                    Logger.d("onSelectNone");
                     presenter.dataSelected.clear();
                     refreshShowCount(presenter.dataSelected.size());
                     for (int i = 0; i < adapter.dataList.size(); i++) {
@@ -375,7 +375,7 @@ public class LocalMediaSelectActivity extends AbsActivity<LocalMediaSelectPresen
             ArrayList<LocalMediaUpItem> tmpList = new ArrayList<>();
             tmpList.addAll(presenter.dataSelected);
             for (LocalMediaUpItem item : tmpList) {
-                Logger.d("zfy", "upload file path:" + item.getMediaPath());
+                Logger.d("upload file path:" + item.getMediaPath());
                 int index = item.getMediaPath().lastIndexOf("/");
                 String fileName = item.getMediaPath().substring(index + 1);
                 String filePath = item.getMediaPath().substring(0, index + 1);

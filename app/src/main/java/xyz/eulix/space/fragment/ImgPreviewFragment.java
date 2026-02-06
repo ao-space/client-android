@@ -301,7 +301,7 @@ public class ImgPreviewFragment extends AbsFragment<ImgPreviewFragmentPresenter.
 
         //刷新进度
         int progress = (int) (event.currentSize * 100 / mData.getSize());
-        Logger.d("zfy", "set progress:" + progress);
+        Logger.d("set progress:" + progress);
         if (tvShowOriginalImage.getVisibility() == View.VISIBLE) {
             String showOriginalText = getString(R.string.file_downloading) + " " + progress + "%";
             tvShowOriginalImage.setText(showOriginalText);
@@ -336,7 +336,7 @@ public class ImgPreviewFragment extends AbsFragment<ImgPreviewFragmentPresenter.
                 }
             } else if (event.state == TransferHelper.STATE_ERROR) {
                 //缓存失败
-                Logger.d("zfy", "文件缓存失败");
+                Logger.d("文件缓存失败");
                 showImageTextToast(R.drawable.toast_refuse, R.string.file_preview_failed);
                 Objects.requireNonNull(getActivity()).finish();
             }
@@ -356,7 +356,7 @@ public class ImgPreviewFragment extends AbsFragment<ImgPreviewFragmentPresenter.
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(ThumbEvent event) {
-        Logger.d("zfy", "onReceive ThumbEvent:" + event.uuid);
+        Logger.d("onReceive ThumbEvent:" + event.uuid);
         if (needResetThumb && event.uuid.equals(mData.getId())) {
             refreshThumb(event.thumbPath);
         }

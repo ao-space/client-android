@@ -296,7 +296,7 @@ public class UserInfoActivity extends AbsActivity<UserInfoPresenter.IUserInfo, U
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(UserInfoEvent event) {
-        Logger.d("zfy", "receive UserInfoEvent type = " + event.type);
+        Logger.d("receive UserInfoEvent type = " + event.type);
         if (event.type == UserInfoEvent.TYPE_NAME) {
             //更新昵称
             String nickName = UserInfoUtil.getNickname(this);
@@ -474,12 +474,12 @@ public class UserInfoActivity extends AbsActivity<UserInfoPresenter.IUserInfo, U
                     return;
                 }
                 path = data.getStringExtra("path");
-                Logger.d("zfy", "图片地址：" + path);
+                Logger.d("图片地址：" + path);
                 callClipImage(path, mOutputPath);
                 break;
             case CameraUtil.REQUEST_CAMERA_CODE:
                 path = CameraUtil.getCameraBack();
-                Logger.d("zfy", "照片地址：" + path);
+                Logger.d("照片地址：" + path);
                 callClipImage(path, mOutputPath);
                 break;
             default:
@@ -491,7 +491,7 @@ public class UserInfoActivity extends AbsActivity<UserInfoPresenter.IUserInfo, U
                 && requestCode == CameraUtil.REQUEST_CLIP_CODE) {
             //裁剪成功
             String pathClip = ClipImageActivity.ClipOptions.createFromBundle(data).getOutputPath();
-            Logger.d("zfy", "pathClip=" + pathClip);
+            Logger.d("pathClip=" + pathClip);
             showLoading(getString(R.string.uploading_avatar));
             presenter.updateHeader(this, pathClip);
         }

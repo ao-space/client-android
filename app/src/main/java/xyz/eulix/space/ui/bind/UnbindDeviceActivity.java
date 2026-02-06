@@ -416,7 +416,7 @@ public class UnbindDeviceActivity extends AbsActivity<UnbindDevicePresenter.IUnb
 
     @Override
     public void onRevokeResult(boolean result, int code, String source, List<Long> timestampList) {
-        Logger.d("zfy", "revoke result:" + result);
+        Logger.d("revoke result:" + result);
         if (mHandler != null) {
             mHandler.post(() -> {
                 closeLoading();

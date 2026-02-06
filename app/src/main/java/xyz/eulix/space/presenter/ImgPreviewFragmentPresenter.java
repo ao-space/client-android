@@ -62,7 +62,7 @@ public class ImgPreviewFragmentPresenter extends AbsPresenter<ImgPreviewFragment
             for (TransferItem item : finishList) {
                 File localFile = new File(item.localPath, item.keyName);
                 if (localFile.exists()) {
-                    Logger.d("zfy", "has transferred item,open local file");
+                    Logger.d("has transferred item,open local file");
                     if (mimeType.contains("video")) {
                         iView.showVideoPreview(localFile.getAbsolutePath());
                         return;
@@ -137,7 +137,7 @@ public class ImgPreviewFragmentPresenter extends AbsPresenter<ImgPreviewFragment
                                 }
                             } else if (mimeType.contains("image")){
                                 //下载压缩图失败，缓存原图
-                                Logger.d("zfy", "download compressed image failed,start download original image");
+                                Logger.d("download compressed image failed,start download original image");
                                 FileListUtil.downloadFile(context, fileUuid, filePath, fileName, fileSize, md5, true, from, null);
                             }
                         }

@@ -176,16 +176,16 @@ public class LocalMediaCacheManager {
 
     //相册有新增
     public static void onGalleryAdd(LocalMediaUpItem addItem, Uri uri) {
-        Logger.d("zfy", "onGalleryAdd");
+        Logger.d("onGalleryAdd");
         if (addItem.getMediaId().equals(lastAddId)) {
-            Logger.d("zfy", "file repeat");
+            Logger.d("file repeat");
             return;
         }
         lastAddId = addItem.getMediaId();
         boolean isExit = false;
         if (addItem.getMimeType().contains("image")) {
             if (totalImageList.isEmpty()) {
-                Logger.d("zfy", "has no cache data");
+                Logger.d("has no cache data");
             } else {
                 if (currentImagesMap.containsKey(addItem.getMediaId())) {
                     isExit = true;
@@ -198,7 +198,7 @@ public class LocalMediaCacheManager {
             }
         } else {
             if (totalVideoList.isEmpty()) {
-                Logger.d("zfy", "has no cache data");
+                Logger.d("has no cache data");
             } else {
                 if (currentVideosMap.containsKey(addItem.getMediaId())) {
                     isExit = true;
@@ -211,7 +211,7 @@ public class LocalMediaCacheManager {
         }
 
         if (totalImageAndVideList.isEmpty()) {
-            Logger.d("zfy", "has no cache data");
+            Logger.d("has no cache data");
         } else {
             boolean isExitImageAndVideo = false;
             if (currentImageAndVideMap.containsKey(addItem.getMediaId())) {
@@ -240,18 +240,18 @@ public class LocalMediaCacheManager {
             for (int i = 0; i < imageBucketList.size(); i++) {
                 if (imageBucketList.get(i).getBucketId().equals(ConstantField.ALL_IMAGES_BUCKET_ID)) {
                     //添加至“所有图片”相册
-                    Logger.d("zfy", "add to all image bucket:" + imageBucketList.get(i).getBucketName());
+                    Logger.d("add to all image bucket:" + imageBucketList.get(i).getBucketName());
                     addMediaToRightPosition(localMediaUpItem, imageBucketList.get(i).getImageList());
                 }
                 if (imageBucketList.get(i).getBucketId().equals(bucketId)) {
-                    Logger.d("zfy", "add to bucket:" + imageBucketList.get(i).getBucketName());
+                    Logger.d("add to bucket:" + imageBucketList.get(i).getBucketName());
                     bucketExist = true;
                     addMediaToRightPosition(localMediaUpItem, imageBucketList.get(i).getImageList());
                     break;
                 }
             }
             if (!bucketExist) {
-                Logger.d("zfy", "create bucket:" + bucketName);
+                Logger.d("create bucket:" + bucketName);
                 PhotoUpImageBucket bucket = new PhotoUpImageBucket();
                 bucket.setBucketId(bucketId);
                 bucket.setBucketName(bucketName);
@@ -292,18 +292,18 @@ public class LocalMediaCacheManager {
             for (int i = 0; i < imageAndVideoBucketList.size(); i++) {
                 if (imageAndVideoBucketList.get(i).getBucketId().equals(ConstantField.ALL_IMAGES_BUCKET_ID)) {
                     //添加至“所有图片”相册
-                    Logger.d("zfy", "add to all image bucket:" + imageAndVideoBucketList.get(i).getBucketName());
+                    Logger.d("add to all image bucket:" + imageAndVideoBucketList.get(i).getBucketName());
                     addMediaToRightPosition(localMediaUpItem, imageAndVideoBucketList.get(i).getImageList());
                 }
                 if (imageAndVideoBucketList.get(i).getBucketId().equals(bucketId)) {
-                    Logger.d("zfy", "add to bucket:" + imageAndVideoBucketList.get(i).getBucketName());
+                    Logger.d("add to bucket:" + imageAndVideoBucketList.get(i).getBucketName());
                     bucketExist = true;
                     addMediaToRightPosition(localMediaUpItem, imageAndVideoBucketList.get(i).getImageList());
                     break;
                 }
             }
             if (!bucketExist) {
-                Logger.d("zfy", "create bucket:" + bucketName);
+                Logger.d("create bucket:" + bucketName);
                 PhotoUpImageBucket bucket = new PhotoUpImageBucket();
                 bucket.setBucketId(bucketId);
                 bucket.setBucketName(bucketName);
@@ -372,11 +372,11 @@ public class LocalMediaCacheManager {
                 }
             } else {
                 //部分手机无法确定删除文件id，整体刷新
-                Logger.d("zfy", "onGalleryDelete refresh totalImageList");
+                Logger.d("onGalleryDelete refresh totalImageList");
                 for (int i = 0; i < totalImageList.size(); i++) {
                     File file = new File(totalImageList.get(i).getMediaPath());
                     if (!file.exists()) {
-                        Logger.d("zfy", "remove " + totalImageList.get(i).getMediaPath());
+                        Logger.d("remove " + totalImageList.get(i).getMediaPath());
                         deleteItem = totalImageList.get(i);
                         totalImageList.remove(i);
                         break;
@@ -385,7 +385,7 @@ public class LocalMediaCacheManager {
             }
             if (deleteItem != null) {
                 String deleteItemBucketId = currentImagesMap.get(deleteItem.getMediaId());
-                Logger.d("zfy", "deleteItemBucketId = " + deleteItemBucketId);
+                Logger.d("deleteItemBucketId = " + deleteItemBucketId);
                 for (int i = 0; i < imageBucketList.size(); i++) {
                     if (!imageBucketList.get(i).getBucketId().equals(ConstantField.ALL_IMAGES_BUCKET_ID) &&
                             !imageBucketList.get(i).getBucketId().equals(deleteItemBucketId)) {
@@ -395,7 +395,7 @@ public class LocalMediaCacheManager {
                     for (int j = 0; j < imageBucketList.get(i).getImageList().size(); j++) {
                         if (imageBucketList.get(i).getImageList().get(j).getMediaId().equals(deleteItem.getMediaId())) {
                             imageBucketList.get(i).getImageList().remove(j);
-                            Logger.d("zfy", "remove from bucket: " + imageBucketList.get(i).getBucketName());
+                            Logger.d("remove from bucket: " + imageBucketList.get(i).getBucketName());
                             if (!imageBucketList.get(i).getBucketId().equals(ConstantField.ALL_IMAGES_BUCKET_ID)) {
                                 isDeleted = true;
                             }
@@ -427,16 +427,16 @@ public class LocalMediaCacheManager {
                     }
                 }
                 if (!currentVideosMap.containsKey(mediaId)) {
-                    Logger.d("zfy", "mediaId not exist:" + mediaId);
+                    Logger.d("mediaId not exist:" + mediaId);
                     return;
                 }
             } else {
-                Logger.d("zfy", "onGalleryDelete refresh totalImageList");
+                Logger.d("onGalleryDelete refresh totalImageList");
                 //部分手机无法确定删除文件id，整体刷新
                 for (int i = 0; i < totalVideoList.size(); i++) {
                     File file = new File(totalVideoList.get(i).getMediaPath());
                     if (!file.exists()) {
-                        Logger.d("zfy", "remove " + totalVideoList.get(i).getMediaPath());
+                        Logger.d("remove " + totalVideoList.get(i).getMediaPath());
                         totalVideoList.remove(i);
                         currentVideosMap.remove(totalVideoList.get(i).getMediaId());
                         break;
@@ -459,11 +459,11 @@ public class LocalMediaCacheManager {
                 }
             } else {
                 //部分手机无法确定删除文件id，整体刷新
-                Logger.d("zfy", "onGalleryDelete refresh totalImageAndVideList");
+                Logger.d("onGalleryDelete refresh totalImageAndVideList");
                 for (int i = 0; i < totalImageAndVideList.size(); i++) {
                     File file = new File(totalImageAndVideList.get(i).getMediaPath());
                     if (!file.exists()) {
-                        Logger.d("zfy", "remove " + totalImageAndVideList.get(i).getMediaPath());
+                        Logger.d("remove " + totalImageAndVideList.get(i).getMediaPath());
                         deleteItem = totalImageAndVideList.get(i);
                         totalImageAndVideList.remove(i);
                         break;
@@ -472,7 +472,7 @@ public class LocalMediaCacheManager {
             }
             if (deleteItem != null) {
                 String deleteItemBucketId = currentImageAndVideMap.get(deleteItem.getMediaId());
-                Logger.d("zfy", "deleteItemBucketId = " + deleteItemBucketId);
+                Logger.d("deleteItemBucketId = " + deleteItemBucketId);
                 for (int i = 0; i < imageAndVideoBucketList.size(); i++) {
                     if (!imageAndVideoBucketList.get(i).getBucketId().equals(ConstantField.ALL_IMAGES_BUCKET_ID) &&
                             !imageAndVideoBucketList.get(i).getBucketId().equals(deleteItemBucketId)) {
@@ -482,7 +482,7 @@ public class LocalMediaCacheManager {
                     for (int j = 0; j < imageAndVideoBucketList.get(i).getImageList().size(); j++) {
                         if (imageAndVideoBucketList.get(i).getImageList().get(j).getMediaId().equals(deleteItem.getMediaId())) {
                             imageAndVideoBucketList.get(i).getImageList().remove(j);
-                            Logger.d("zfy", "remove from bucket: " + imageAndVideoBucketList.get(i).getBucketName());
+                            Logger.d("remove from bucket: " + imageAndVideoBucketList.get(i).getBucketName());
                             if (!imageAndVideoBucketList.get(i).getBucketId().equals(ConstantField.ALL_IMAGES_BUCKET_ID)) {
                                 isDeleted = true;
                             }

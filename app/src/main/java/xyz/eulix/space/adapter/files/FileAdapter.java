@@ -506,7 +506,7 @@ public class FileAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
 
     @Override
     public void onClick(View v) {
-        Logger.d("zfy","files/adapter onClick");
+        Logger.d("files/adapter onClick");
         if (v != null) {
             Object positionTag = v.getTag();
             if (positionTag instanceof Integer) {

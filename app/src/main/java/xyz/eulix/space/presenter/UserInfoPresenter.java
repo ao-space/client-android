@@ -57,7 +57,7 @@ public class UserInfoPresenter extends AbsPresenter<UserInfoPresenter.IUserInfo>
         int index = pictureAbsolutePath.lastIndexOf("/");
         String headerFilePath = pictureAbsolutePath.substring(0, index);
         String headerFileName = pictureAbsolutePath.substring(index + 1);
-        Logger.d("zfy", "headerPath = " + headerFilePath + ",headerFileName = " + headerFileName);
+        Logger.d("headerPath = " + headerFilePath + ",headerFileName = " + headerFileName);
         String boxUuid = null;
         String boxBind = null;
         List<Map<String, String>> boxValues = EulixSpaceDBUtil.queryBox(context, EulixSpaceDBManager.FIELD_BOX_STATUS

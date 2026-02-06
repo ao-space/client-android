@@ -122,7 +122,7 @@ public class MultipartDownloadTask {
 
         mGatewayCommunicationBase = GatewayUtils.generateGatewayCommunication(mContext);
         if (mGatewayCommunicationBase == null) {
-            Logger.d("zfy", "gatewayCommunicationBase is null");
+            Logger.d("gatewayCommunicationBase is null");
             listener.onResult(false, "gatewayCommunicationBase is null");
             return;
         }
@@ -169,7 +169,7 @@ public class MultipartDownloadTask {
         private ResultCallback mListener;
 
         public DownWorkManager(BlockingDeque<UploadChunkBean> items, ResultCallback listener) {
-            Logger.d("zfy", "#create DownWorkManager");
+            Logger.d("#create DownWorkManager");
             waitingQueue = items;
             this.mListener = listener;
         }
@@ -178,7 +178,7 @@ public class MultipartDownloadTask {
         public void run() {
             while (taskSwitch) {
                 if (!NetUtils.isNetAvailable(mContext) || (NetUtils.isMobileNetWork(mContext) && !ConstantField.sIAllowTransferWithMobileData)) {
-                    Logger.d("zfy", "no network, transfer task waiting");
+                    Logger.d("no network, transfer task waiting");
                     try {
                         Thread.sleep(3000);
                     } catch (Exception e) {
@@ -191,7 +191,7 @@ public class MultipartDownloadTask {
                 if ((currentList.size() - (Math.max(p2pChunk.get(), 0)) * MultipartUtil.P2P_COMPENSATION) < MultipartUtil.LIMIT_COUNT_DOWNLOAD) {
                     try {
                         UploadChunkBean item = waitingQueue.take();
-//                        Logger.d("zfy", "waitingQueue item:" + item.keyName + ";thread:" + Thread.currentThread());
+//                        Logger.d("waitingQueue item:" + item.keyName + ";thread:" + Thread.currentThread());
                         mDownloadPrepareList.remove(item);
                         mDownloadDoingList.add(item);
                         currentList.add(item);
@@ -213,7 +213,7 @@ public class MultipartDownloadTask {
 
                                     //单片下载成功，判断是否都下载完成
                                     if (waitingQueue.isEmpty() && mDownloadDoingList.isEmpty() && mDownloadFailedList.isEmpty()) {
-                                        Logger.d("zfy", "all chunk download success,complete");
+                                        Logger.d("all chunk download success,complete");
                                         p2pChunk.getAndSet(0);
                                         logItem.transferEndTime = System.currentTimeMillis();
                                         //全部片段上传完成，调用合并
@@ -227,13 +227,13 @@ public class MultipartDownloadTask {
                                     } else {
                                         //下载下一片
                                         currentList.remove(item);
-                                        Logger.d("zfy", "download next chunk");
+                                        Logger.d("download next chunk");
                                     }
                                 } else {
                                     if (!mDownloadFailedList.contains(item)) {
                                         mDownloadFailedList.add(item);
                                     }
-                                    Logger.d("zfy", "chunk " + item.start + " failed");
+                                    Logger.d("chunk " + item.start + " failed");
 
 //                                    P2PUpDownloadUtil.addError(mFileUuid, extraMsg);
 
@@ -266,7 +266,7 @@ public class MultipartDownloadTask {
                                         thisItemFailedTime = itemFailedTimes.get(item.start + "");
                                     }
                                     if (thisItemFailedTime < MultipartUtil.RETRY_TIME) {
-                                        Logger.d("zfy", "chunk " + item.start + " failed time is:" + thisItemFailedTime + ",retry!");
+                                        Logger.d("chunk " + item.start + " failed time is:" + thisItemFailedTime + ",retry!");
                                         thisItemFailedTime++;
                                         try {
                                             Thread.sleep(2000);
@@ -280,7 +280,7 @@ public class MultipartDownloadTask {
                                     } else {
                                         //超过重试次数，停止当前文件传输，返回失败
                                         if (NetUtils.isNetAvailable(mContext)) {
-                                            Logger.d("zfy", "item failed too many time,give up " + item.start);
+                                            Logger.d("item failed too many time,give up " + item.start);
                                             taskSwitch = false;
 //                                            P2PUpDownloadUtil.finishLoad(mFileUuid, System.currentTimeMillis());
                                             if (downExecutor != null) {
@@ -314,7 +314,7 @@ public class MultipartDownloadTask {
             final long[] itemTransferredSize = {0L};
             mGatewayCommunicationBase = GatewayUtils.generateGatewayCommunication(mContext);
             if (LanManager.getInstance().isHttpsAvailable()) {
-                Logger.d("zfy", "download https available");
+                Logger.d("download https available");
                 //局域网Https通道可用
                 OkHttpClient okHttpClient = LanManager.getInstance().getHttpsClient();
                 if (okHttpClient == null) {

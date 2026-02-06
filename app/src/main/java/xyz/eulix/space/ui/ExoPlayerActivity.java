@@ -187,7 +187,7 @@ public class ExoPlayerActivity extends Activity {
             @Override
             public void onPlayerError(PlaybackException error) {
                 Player.Listener.super.onPlayerError(error);
-                Logger.d("zfy", "onPlayerError " + error.errorCode + ",msg:" + error.getMessage());
+                Logger.d("onPlayerError " + error.errorCode + ",msg:" + error.getMessage());
 //                if (!isOnline) {
 //                    //非在线播放失败，调用第三方播放器
 //                    SystemMediaUtils.openMediaFile(EulixSpaceApplication.getContext(), mVideoLocalPath);
@@ -355,7 +355,7 @@ public class ExoPlayerActivity extends Activity {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(LanStatusEvent event) {
-        Logger.d("zfy", "receive LanStatusEvent " + event.isLanEnable);
+        Logger.d("receive LanStatusEvent " + event.isLanEnable);
         if (isOnline) {
             changeLanSourceStatus(event.isLanEnable);
         }
@@ -363,7 +363,7 @@ public class ExoPlayerActivity extends Activity {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(VideoSegmentLogEvent event) {
-        Logger.d("zfy", "receive VideoSegmentLogEvent " + event.videoName + ",sourceType=" + event.sourceType);
+        Logger.d("receive VideoSegmentLogEvent " + event.videoName + ",sourceType=" + event.sourceType);
         if (event.videoName != null && event.videoName.equals(mVideoName)) {
             if (event.sourceType == VideoSegmentLogEvent.SOURCE_TYPE_P2P) {
                 mP2PSegmentCount++;
@@ -391,7 +391,7 @@ public class ExoPlayerActivity extends Activity {
         MediaSource mediaSource = getOnlineMediaSource(isLanEnable);
         if (mediaSource != null) {
             isUsingLan = isLanEnable;
-            Logger.d("zfy", "change video source to " + (isLanEnable ? "lan" : "wan"));
+            Logger.d("change video source to " + (isLanEnable ? "lan" : "wan"));
             long currentPosition = player.getCurrentPosition();
             player.setMediaSource(mediaSource);
             player.prepare();

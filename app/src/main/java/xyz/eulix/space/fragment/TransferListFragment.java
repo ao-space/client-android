@@ -387,7 +387,7 @@ public class TransferListFragment extends AbsFragment<TransferListFragmentPresen
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(TransferListNetworkEvent event) {
-        Logger.d("zfy","onReceive TransferListNetworkEvent");
+        Logger.d("onReceive TransferListNetworkEvent");
         for (int i=0;i<adapterDoing.dataList.size();i++){
             if (adapterDoing.dataList.get(i).state == TransferHelper.STATE_DOING){
                 adapterDoing.notifyItemChanged(i,"refresh_network");
@@ -408,7 +408,7 @@ public class TransferListFragment extends AbsFragment<TransferListFragmentPresen
         for (int i = 0; i < adapterDoing.dataList.size(); i++) {
             TransferItem adapterItem = adapterDoing.dataList.get(i);
             if (!TextUtils.isEmpty(event.mKey) && event.mKey.equals(adapterItem.ext1)) {
-                Logger.d("zfy","onReceive TransferSpeedEvent.TransferSpeed event "+event.mKey);
+                Logger.d("onReceive TransferSpeedEvent.TransferSpeed event "+event.mKey);
                 adapterDoing.appendSpeedMap(event.mKey, event.mSpeed);
                 adapterDoing.notifyItemChanged(i, "refresh_speed");
                 break;
@@ -421,12 +421,12 @@ public class TransferListFragment extends AbsFragment<TransferListFragmentPresen
         if (type != event.transferType) {
             return;
         }
-        Logger.d("zfy", "transfer list receive TransferStateEvent:" + event.keyName + ";state=" + event.state + ";unique:" + event.uniqueTag + ";pageTransferType = " + type);
+        Logger.d("transfer list receive TransferStateEvent:" + event.keyName + ";state=" + event.state + ";unique:" + event.uniqueTag + ";pageTransferType = " + type);
         for (int i = 0; i < adapterDoing.dataList.size(); i++) {
             TransferItem adapterItem = adapterDoing.dataList.get(i);
-            Logger.d("zfy", "adapterItem uniqueTag=" + adapterItem.ext1);
+            Logger.d("adapterItem uniqueTag=" + adapterItem.ext1);
             if (!TextUtils.isEmpty(event.uniqueTag) && event.uniqueTag.equals(adapterItem.ext1)) {
-                Logger.d("zfy", "uniqueTag match:" + event.uniqueTag);
+                Logger.d("uniqueTag match:" + event.uniqueTag);
                 if (event.state == TransferHelper.STATE_FINISH) {
                     //传输完成，删除传输中，新增传输完成
                     adapterDoing.dataList.get(i).state = TransferHelper.STATE_FINISH;
@@ -739,7 +739,7 @@ public class TransferListFragment extends AbsFragment<TransferListFragmentPresen
                 adapterDone.notifyDataSetChanged();
                 break;
             case TitleBarWithSelect.CLICK_EVENT_SELECT_NULL:
-                Logger.d("zfy", "onSelectNone");
+                Logger.d("onSelectNone");
                 presenter.dataDoneSelected.clear();
                 presenter.selectedPositionList.clear();
                 refreshSelectedCount(presenter.dataDoneSelected.size());

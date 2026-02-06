@@ -119,12 +119,14 @@ public class AgentManager {
         String baseUrl = boxDomain;
         if (baseUrl == null) {
             baseUrl = DebugUtil.getEnvironmentServices();
+            Logger.w(TAG, "boxDomain is null, fallback baseUrl=" + Logger.safeUrl(baseUrl));
         } else {
             while ((baseUrl.startsWith(":") || baseUrl.startsWith("/")) && baseUrl.length() > 1) {
                 baseUrl = baseUrl.substring(1);
             }
             if (TextUtils.isEmpty(baseUrl)) {
                 baseUrl = DebugUtil.getEnvironmentServices();
+                Logger.w(TAG, "boxDomain is empty after normalize, fallback baseUrl=" + Logger.safeUrl(baseUrl));
             } else {
                 if (!(baseUrl.startsWith("http://") || baseUrl.startsWith("https://"))) {
                     baseUrl = "https://" + baseUrl;
@@ -134,6 +136,7 @@ public class AgentManager {
                 }
             }
         }
+        Logger.d(TAG, "generateBaseUrl result=" + Logger.safeUrl(baseUrl));
         return baseUrl;
     }
 

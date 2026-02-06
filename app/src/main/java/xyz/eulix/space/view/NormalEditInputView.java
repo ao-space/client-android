@@ -163,7 +163,7 @@ public class NormalEditInputView extends RelativeLayout {
                         }
                     }
                     etPassword.setSelection(s.toString().length());
-                    Logger.d("zfy", "您的输入已超过" + mMaxLength + "位");
+                    Logger.d("您的输入已超过" + mMaxLength + "位");
                 }
                 if (mListener != null) {
                     mListener.onInputChange(etPassword.getText().toString());

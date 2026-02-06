@@ -973,18 +973,18 @@ public class ConstantField {
     }
 
     public static class URL {
-        public static final String BASE_SERVER_URL_RELEASE = "https://services.eulix.xyz/";
+        public static final String BASE_SERVER_URL_RELEASE = "https://ao.space/";
         @Deprecated
         public static final String REGISTER_DEVICE_API = "platform/v1/api/register/device/";
 
         public static final String SERVERS_STUN_DETAIL_V2_API = "v2/platform/servers/stun/detail";
 
-        public static final String EULIX_XYZ_URL = "https://eulix.xyz/";
-        public static final String EULIX_TOP_URL = "https://eulix.top/";
-        public static final String DEV_EULIX_XYZ_URL = "https://dev.eulix.xyz/";
-        public static final String TEST_EULIX_XYZ_URL = "https://test.eulix.xyz/";
-        public static final String QA_EULIX_XYZ_URL = "https://qa.eulix.xyz/";
-        public static final String SIT_EULIX_XYZ_URL = "https://sit.eulix.xyz/";
+        public static final String EULIX_XYZ_URL = "https://ao.space/";
+        public static final String EULIX_TOP_URL = "https://ao.space/";
+        public static final String DEV_EULIX_XYZ_URL = "https://ao.space/";
+        public static final String TEST_EULIX_XYZ_URL = "https://ao.space/";
+        public static final String QA_EULIX_XYZ_URL = "https://ao.space/";
+        public static final String SIT_EULIX_XYZ_URL = "https://ao.space/";
         public static final String AO_SPACE_URL = "https://ao.space/";
         public static final String LOGIN_API = "login";
         public static final String EN_LOGIN_API = "en/login";
@@ -1022,7 +1022,7 @@ public class ConstantField {
         public static final String SEND_MESSAGES_API = "space/v1/api/mailbox/sendmessage";
         public static final String DELETE_MESSAGES_API = "space/v1/api/mailbox/deletemessage";
 
-        public static final String BASE_GATEWAY_URL_DEBUG = "https://mybox.space.eulix.xyz/";
+        public static final String BASE_GATEWAY_URL_DEBUG = "https://ao.space/";
         public static final String SPACE_STATUS_API = "space/status";
         public static final String SPACE_POLL_API = "space/v1/api/gateway/poll";
         public static final String CREATE_AUTH_TOKEN_API = "space/v1/api/gateway/auth/token/create";
@@ -1067,24 +1067,24 @@ public class ConstantField {
         public static final String BIND_REVOKE_API = "agent/v1/api/bind/revoke";
         public static final String BIND_INTERNET_SERVICE_CONFIG_API = "agent/v1/api/bind/internet/service/config";
         public static final String DID_DOCUMENT_API = "agent/v1/api/did/document";
-        public static final String TEST_SERVICE_URL = "https://test.eulix.xyz/";
-        public static final String SERVICE_URL = "https://eulix.xyz/";
-        public static final String SERVICE_TOP_URL = "https://eulix.top/";
-        public static final String DEV_SERVICE_URL = "https://dev.eulix.xyz/";
-        public static final String QA_SERVICE_URL = "https://qa.eulix.xyz/";
-        public static final String SIT_SERVICE_URL = "https://sit.eulix.xyz/";
+        public static final String TEST_SERVICE_URL = "https://ao.space/";
+        public static final String SERVICE_URL = "https://ao.space/";
+        public static final String SERVICE_TOP_URL = "https://ao.space/";
+        public static final String DEV_SERVICE_URL = "https://ao.space/";
+        public static final String QA_SERVICE_URL = "https://ao.space/";
+        public static final String SIT_SERVICE_URL = "https://ao.space/";
         public static final String SERVICE_AO_SPACE_URL = "https://ao.space/";
 
-        public static final String RC_WEB_BASE_URL = "https://eulix.xyz";
-        public static final String RC_SPACE_API = "eulix.xyz";
-        public static final String DEV_WEB_BASE_URL = "https://dev.eulix.xyz";
-        public static final String DEV_SPACE_API = "dev-space.eulix.xyz";
-        public static final String TEST_WEB_BASE_URL = "https://test.eulix.xyz";
-        public static final String TEST_SPACE_API = "test-space.eulix.xyz";
-        public static final String QA_WEB_BASE_URL = "https://qa.eulix.xyz";
-        public static final String QA_SPACE_API = "qa-space.eulix.xyz";
-        public static final String SIT_WEB_BASE_URL = "https://sit.eulix.xyz";
-        public static final String SIT_SPACE_API = "sit-space.eulix.xyz";
+        public static final String RC_WEB_BASE_URL = "https://ao.space";
+        public static final String RC_SPACE_API = "ao.space";
+        public static final String DEV_WEB_BASE_URL = "https://ao.space";
+        public static final String DEV_SPACE_API = "ao.space";
+        public static final String TEST_WEB_BASE_URL = "https://ao.space";
+        public static final String TEST_SPACE_API = "ao.space";
+        public static final String QA_WEB_BASE_URL = "https://ao.space";
+        public static final String QA_SPACE_API = "ao.space";
+        public static final String SIT_WEB_BASE_URL = "https://ao.space";
+        public static final String SIT_SPACE_API = "ao.space";
         public static final String PROD_WEB_BASE_URL = "https://ao.space";
         public static final String PROD_SPACE_API = "ao.space";
 

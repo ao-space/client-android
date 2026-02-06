@@ -16,6 +16,8 @@
 
 package xyz.eulix.space.util;
 
+import android.net.Uri;
+import android.text.TextUtils;
 import android.util.Log;
 
 import xyz.eulix.space.BuildConfig;
@@ -123,5 +125,36 @@ public class Logger {
                 }
             }
         }
+    }
+
+    public static String safeUrl(String rawUrl) {
+        if (TextUtils.isEmpty(rawUrl)) {
+            return "null";
+        }
+        try {
+            Uri uri = Uri.parse(rawUrl);
+            String scheme = uri.getScheme();
+            String host = uri.getHost();
+            if (TextUtils.isEmpty(scheme) || TextUtils.isEmpty(host)) {
+                return rawUrl;
+            }
+            String path = uri.getPath();
+            return scheme + "://" + host + (path == null ? "" : path);
+        } catch (Exception e) {
+            return rawUrl;
+        }
+    }
+
+    public static String maskMiddle(String source, int prefixLength, int suffixLength) {
+        if (source == null) {
+            return "null";
+        }
+        int sourceLength = source.length();
+        if (sourceLength <= prefixLength + suffixLength) {
+            return source;
+        }
+        String prefix = source.substring(0, Math.max(prefixLength, 0));
+        String suffix = source.substring(sourceLength - Math.max(suffixLength, 0));
+        return prefix + "***" + suffix;
     }
 }
